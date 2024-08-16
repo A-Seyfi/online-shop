@@ -1,0 +1,12 @@
+asgiref
+Django
+django-jalali-date
+django-render-partial
+jdatetime
+Pillow
+pytz
+sorl-thumbnail
+sqlparse
+requests
+typing-extensions
+django_widget_tweeks
