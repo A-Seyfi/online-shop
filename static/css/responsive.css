@@ -36,7 +36,13 @@
 
 
 /* sm */
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 767px) and (max-width: 991px) {
+.logo-container .logo img {
+	min-width: 200px;
+	max-width: 200px;
+	min-height: 35px;
+	max-height: 35px;
+}
    
 .shop-menu ul li a{
 	padding-left: 0;
@@ -141,6 +147,24 @@
 	width: 100%;
 }
 
+.logo-container .logo img {
+    min-width: 100px;
+    max-width: 100px;
+    min-height: 25px;
+    max-height: 25px;
+}
+
+.logo-container .nav{
+    margin-right: 10px;
+	font-size: 13px;
+}
+
+
+
+.mainmenu ul li a {
+    font-size: 12pt;
+}
+
 .social-icons ul li a i {
 	padding: 8px 10px;
 }
@@ -158,65 +182,30 @@
 	width: 100%;
 }
 
-.mainmenu{
+#header {
 	width: 100%;
+	position: fixed;
+	z-index: 3;
+	top: 0;
+	left: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
-
-.mainmenu ul li{
-	background: rgba(0, 0, 0, 0.5);
-    padding-top: 15px;
-	padding-bottom: 0;
+.search-container {
+    width: 60%;
 }
-
-.mainmenu ul li:last-child{
-	padding-bottom: 15px;
-}
-
-.mainmenu ul li  a{
-	color: #fff;
-}
-
-.navbar-collapse.in{
-	overflow: inherit;
-}
-
-.mainmenu ul li a.active{
-	padding-left: 15px;
-}
-
-.dropdown .fa-angle-down{
+.header-bottom{
 	display: none;
 }
-
-ul.sub-menu{
-  position: relative;
-  width: auto;
-  display: block;
-  background: transparent;
-  box-shadow: none;
-  top: 0;
+.header-middle-container .nav{
+	display: none;
 }
-
-.sub-menu li{
-	background: transparent;
+.logo-container{
+	justify-content: flex-start;
 }
-
-.mainmenu .navbar-nav li ul.sub-menu li{
-	background: transparent;
-	padding-bottom:0;
-}
-
-.nav.navbar-nav > li:hover > ul.sub-menu{
-  -webkit-animation: none;
-  -moz-animation: none;
-  -ms-animation: none;
-  -o-animation: none;
-  animation: none;
-  box-shadow: none;
-}
-
-.header-bottom{
-	position: relative;
+.search_box input {
+    border-radius: 5vw;
+    background-position: 96%;
 }
 
 .header-bottom .col-sm-3 {
@@ -224,6 +213,10 @@ ul.sub-menu{
 	position: absolute;
 	left: 0;
 	top: 38px;
+}
+
+.mobile-menu{
+    display: flex;
 }
 
 #slider-carousel .item{
@@ -260,10 +253,6 @@ ul.sub-menu{
 	display: inline-block;
 }
 
-.single-widget{
-
-}
-
 .product-information span {
 	display: block;
 }
@@ -275,10 +264,9 @@ ul.sub-menu{
 .well{
 	display: inline-block;
 }
-
 }
 
-/* XS Portrait */
+
 @media (max-width: 480px) {
 
 .contactinfo{
@@ -320,7 +308,6 @@ ul.sub-menu{
 
 .logo{
 	text-align: center;
-	width: 100%;
 }
 
 
@@ -350,32 +337,7 @@ ul.sub-menu{
 	width: 100%;
 }
 
-.mainmenu ul li{
-	background: rgba(0, 0, 0, 0.5);
-    padding-top: 15px;
-	padding-bottom: 0;
-}
 
-.mainmenu ul li:last-child{
-	padding-bottom: 15px;
-}
-
-.mainmenu ul li a {
-	color: #FFF;
-	padding-bottom: 0;
-}
-
-.navbar-collapse.in{
-	overflow: inherit;
-}
-
-.mainmenu ul li a.active{
-	padding-left: 15px;
-}
-
-.dropdown .fa-angle-down{
-	display: none;
-}
 
 ul.sub-menu{
   position: relative;
