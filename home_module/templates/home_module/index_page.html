@@ -21,28 +21,25 @@
 
                             {% for slider in sliders %}
                                 <div class="item {% if forloop.first %} active {% endif %}">
-                                    <div class="col-sm-6">
+                                    <!-- <div class="col-sm-6">
                                         <h2>{{ slider.title }}</h2>
                                         <p>{{ slider.description }}</p>
-                                        <a href="{{ slider.url }}"
-                                           target="_blank"
-                                           class="btn btn-default get">{{ slider.url_title }}</a>
-                                    </div>
+                                        <a href="{{ slider.url }}" target="_blank" class="btn btn-default get">{{ slider.url_title }}</a>
+                                    </div> -->
                                     <div class="col-sm-6">
-                                        <img src="{{ slider.image.url }}" class="girl img-responsive" width="500"
-                                             alt=""/>
+                                        <img src="{{ slider.image.url }}" class="girl img-responsive" width="500" alt=""/>
                                     </div>
                                 </div>
                             {% endfor %}
 
                         </div>
 
-                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                        <!-- <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
                             <i class="fa fa-angle-left"></i>
                         </a>
                         <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
                             <i class="fa fa-angle-right"></i>
-                        </a>
+                        </a> -->
                     </div>
 
                 </div>

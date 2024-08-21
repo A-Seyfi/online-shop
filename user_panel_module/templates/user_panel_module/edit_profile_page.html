@@ -6,14 +6,9 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                {% if current_user.avatar %}
-                    <a class="thumbnail">
-                        <img style="width: 100%" src="{{ current_user.avatar.url }}" alt="">
-                    </a>
-                {% endif %}
+    <div class="container container-user-panel">
+        <div class="row flex">
+            <div class="user-panel-dashboard">
                 {% render_partial 'user_panel_module.views.user_panel_menu_component' %}
             </div>
             <div class="col-md-8">

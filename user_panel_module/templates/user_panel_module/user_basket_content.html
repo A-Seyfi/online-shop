@@ -5,59 +5,61 @@
         <div class="container">
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
-                    <li><a href="#">خانـه</a></li>
+                    <li><a href="{% url 'home_page' %}">خانـه</a></li>
                     <li class="active">پرداخت</li>
                 </ol>
-            </div><!--/breadcrums-->
+            </div>
             <div class="table-responsive cart_info">
                 <table class="table table-condensed">
-                    <thead>
-                    <tr class="cart_menu">
-                        <td class="image">کـالا</td>
-                        <td class="description"></td>
-                        <td class="price">قیمت</td>
-                        <td class="quantity">تعـداد</td>
-                        <td class="total">مجمـوع</td>
-                        <td></td>
-                    </tr>
-                    </thead>
-                    <tbody>
+                    <div class="cart-title">
+                        <div>
+                            <h4>سبد خرید شما</h4>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                        </div>
+                        <h6>{{ order.orderdetail_set.count }} کالا</h6>
+                    </div>
+
                     {% for detail in order.orderdetail_set.all %}
-                        <tr>
+                    <tbody class="cart-detail">
+                        <tr class="product-img">
                             <td class="cart_product">
                                 <a href=""><img src="{{ detail.product.image.url }}" width="75" alt=""></a>
                             </td>
+                        </tr>
+                        
+                        <tr class="product-detail">
                             <td class="cart_description">
                                 <h4><a href="" class="one-line-text">{{ detail.product.title }}</a></h4>
                                 <p>شناسـه : {{ detail.product.id }}</p>
+                                <h4>رنگ : <span>مشکی</span></h4>
                             </td>
-                            <td class="cart_price">
-                                <p>{{ detail.product.price|three_digits_currency }}</p>
-                            </td>
-                            <td class="cart_quantity">
-                                <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up cursor-pointer"
-                                       onclick="changeOrderDetailCount({{ detail.id }}, 'increase')"> + </a>
-                                    <input class="cart_quantity_input" type="text" name="quantity"
-                                           value="{{ detail.count }}"
-                                           autocomplete="off" size="2">
-                                    <a class="cart_quantity_down  cursor-pointer"
-                                       onclick="changeOrderDetailCount({{ detail.id }}, 'decrease')"> - </a>
-                                </div>
-                            </td>
+                        </tr>
+
+                        <tr class="product-price">
                             <td class="cart_total">
                                 <p class="cart_total_price"> {% multiply detail.count detail.product.price %} </p>
                                 {# <p class="cart_total_price"> {{ detail.get_total_price|three_digits_currency }} </p>#}
                             </td>
-                            <td class="cart_delete">
-                                <a class="cart_quantity_delete" onclick="removeOrderDetail({{ detail.id }})"><i
-                                        class="fa fa-times"></i></a>
+
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button">
+                                    <a class="cart_quantity_up cursor-pointer"
+                                       onclick="changeOrderDetailCount({{ detail.id }}, 'increase')"><span class="fa fa-plus"></span></a>
+                                    <input class="cart_quantity_input" type="text" name="quantity"
+                                           value="{{ detail.count }}"
+                                           autocomplete="off" size="5">
+                                    {% if detail.count > 1 %}
+                                        <a class="cart_quantity_down  cursor-pointer"
+                                           onclick="changeOrderDetailCount({{ detail.id }}, 'decrease')"><span class="fa fa-minus"></span></a>
+                                    {% else %}
+                                        <a class="cart_quantity_down  cursor-pointer trash"
+                                        onclick="changeOrderDetailCount({{ detail.id }}, 'decrease')"><span class="fa fa-trash-o"></span></a>
+                                    {% endif %}
+                                </div>
                             </td>
                         </tr>
-                    {% endfor %}
-
-
                     </tbody>
+                    {% endfor %}
                 </table>
             </div>
         </div>
@@ -68,7 +70,9 @@
                 <div class="col-sm-6">
                     <div class="total_area">
                         <ul>
-                            <li>مجمـوع سبـد خریـد <span>{{ sum|three_digits_currency }}</span></li>
+                            <li>قیمت کالاها<span class="product-count"> (4)</span><span>{{ sum|three_digits_currency }}</span></li>
+                            <li class="discount">مجموع تخفیف کالاها<span>230,000 تومان</span></li>
+                            <li>مبلغ قابل پرداخت<span>38,308,00 تومان</span></li>
                         </ul>
                         <a class="btn btn-default check_out" href="{% url 'request_payment' %}">پرداخت</a>
                     </div>
