@@ -79,3 +79,21 @@ function changeOrderDetailCount(detailId, state) {
         }
     });
 }
+
+
+
+const remove_all = document.getElementById('remove_all')
+const more_detail = document.getElementById('more_detail')
+
+more_detail.addEventListener('click', ()=>{
+    if (remove_all.style.display != 'block'){
+        remove_all.style.display = 'block'
+    }
+})
+document.addEventListener('click', function(event) {
+    if (!event.target.closest('#remove_all') && (!event.target.closest('#more_detail'))){
+        if (remove_all.style.display == 'block'){
+            remove_all.style.display = 'none'
+        }
+    }
+});

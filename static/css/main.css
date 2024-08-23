@@ -88,7 +88,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #header {
     background-color: #ffffff;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     padding-top: 20px;
 }
 
@@ -1720,7 +1720,7 @@ h2.title {
 
 .breadcrumbs .breadcrumb {
     background: transparent;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     padding-right: 0;
 }
 
@@ -1768,7 +1768,7 @@ h2.title {
     flex-direction: column;
     padding: 0 10px;
 }
-.cart-title div{
+.cart-title .title-header{
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -1781,6 +1781,32 @@ h2.title {
     cursor:pointer;
 }
 
+.cart-title .more-detail-container{
+    margin-top: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.cart-title #remove_all{
+    width: 165px;
+    height: 45px;
+    padding-right: 15px;
+    align-content: center;
+    font-size: 15px;
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    z-index: 1;
+    border-radius: 0.5vw;
+    background-color: white;
+    box-shadow: 0px 0px 6px -2.5px black;
+    cursor: pointer;
+    display: none;
+}
+.cart-title #remove_all span{
+    margin-left: 10px;
+}
+
 .cart-title h6{
     font-size: 18px;
 }
@@ -1791,6 +1817,7 @@ h2.title {
     padding: 30px 0;
 }
 .cart-detail:first-child{
+    border-top: 2px solid #ddd;
     padding-top: 10px;
 }
 
@@ -1806,6 +1833,7 @@ h2.title {
     flex-direction: column;
     text-align: start;
     align-items: start;
+    white-space: normal;
 }
 .cart-detail .product-detail a{
     width: auto;
@@ -1821,9 +1849,9 @@ h2.title {
 
 .cart-detail .product-price{
     width: 220px;
+    margin-right: 20px;
     display: flex;
     flex-direction: column;
-    align-items: end;
 }
 .cart-detail .product-price .cart_quantity{
     width: 100%;
@@ -1997,7 +2025,7 @@ h2.title {
 
 #do_action {
     width: 35%;
-    margin-top: 58px;
+    margin-top: 38px;
     margin-bottom: 50px;
 }
 

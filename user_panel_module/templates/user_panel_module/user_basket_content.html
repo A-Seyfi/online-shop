@@ -12,9 +12,15 @@
             <div class="table-responsive cart_info">
                 <table class="table table-condensed">
                     <div class="cart-title">
-                        <div>
+                        <div class="title-header">
                             <h4>سبد خرید شما</h4>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                            <div class="more-detail-container">
+                                <svg id="more_detail" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
+                                    <path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                                </svg>
+                                
+                                <div id="remove_all"><span class="fa fa-trash-o"></span>حذف همه</div>
+                            </div>
                         </div>
                         <h6>{{ order.orderdetail_set.count }} کالا</h6>
                     </div>
