@@ -115,6 +115,25 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+.user-basket-link{
+    position: relative;
+}
+.user-basket-link span{
+    width: 19px;
+    height: 17px;
+    border-radius: 0.3vw;
+    position: absolute;
+    top: 25px;
+    right: 0;
+    background: #d81921;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+}
+
+
 .contactinfo ul li a:hover {
     background: inherit;
 }
@@ -651,7 +670,7 @@ ul.sub-menu {
 
 
 #slider {
-    margin-top: -20px;
+    margin-top: -5px;
     padding-bottom: 45px;
 }
 
@@ -1605,13 +1624,12 @@ h2.title {
 
 #form {
     display: block;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     margin-top: 50px;
     overflow: hidden;
-    padding: 50px;
-    background: #fbfbfb;
-    border-radius: 0.05em;
-    border-bottom: solid 3px #d81921;
+    padding: 0px 50px;
+    /* background: #fbfbfb; */
+    border-radius: 0.5em;
 }
 
 #form .col-sm-4, #form .col-sm-1 {
@@ -1632,11 +1650,12 @@ h2.title {
     font-size: 20px;
     font-weight: 300;
     margin-bottom: 30px;
+    text-align: center;
 }
 
 
 .login-form form input, .signup-form form input {
-    background: #F0F0E9;
+    background: #fff;
     border: medium none;
     color: #000;
     display: block;
@@ -1679,11 +1698,15 @@ h2.title {
     padding: 6px 25px;
     width: 100%;
     font-size: 16pt;
+    margin-bottom: 20px;
+    margin-top: 50px;
+    border-radius: 0.5vw;
 }
 
-.login-form label {
+.signup-form p a{
+    color: #d81921;
+} 
 
-}
 
 
 .login-form label input {
