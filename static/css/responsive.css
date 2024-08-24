@@ -132,6 +132,14 @@ body{
 	font-size: 15px;
 }
 
+.user-basket-link span {
+    width: 17px;
+    height: 15px;
+    border-radius: 0.5vw;
+    top: 12px;
+    right: -14px;
+}
+
 #do_action{
 	position: fixed;
 	width: 100%;
@@ -285,6 +293,12 @@ body{
 	min-height: 35px;
 	max-height: 35px;
 }
+
+
+.mobile-menu{
+	height: 10%;
+}
+
    
 .shop-menu ul li a{
 	padding-left: 0;
@@ -412,6 +426,9 @@ body{
 .logo{
 	text-align: center;
 }
+.search_box input {
+	font-size: 11px;
+}
 
 
 .shop-menu ul li {
@@ -446,8 +463,18 @@ body{
 }
 
 .cart-detail .product-price .cart_quantity{
-	width: 40%;
+	width: 35%;
+	height: 40px;
 }
+.cart_quantity_button a {
+	font-size: 20px !important;
+}
+.cart_quantity_input {
+	width: 30%;
+    font-size: 12px;
+}
+
+
 #cart_items .cart_info .cart_total_price {
     font-size: 14pt;
 

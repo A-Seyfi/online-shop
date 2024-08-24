@@ -36,7 +36,7 @@
                 
                 <div class="search-container">
                     <div class="search_box pull-left">
-                        <input type="text" placeholder="جستـجو"/>
+                        <input type="text" placeholder="محصول مورد نظرتان را جستجو کنید ..."/>
                     </div>
                 </div>
                 
@@ -47,8 +47,7 @@
                     <li><a href="{% url 'register_page' %}"><i class="fa fa-user-plus"></i> ثبت نام</a></li>
                     <li><a href="{% url 'login_page' %}"><i class="fa fa-sign-in"></i> ورود</a></li>
                 {% endif %}
-
-                    <li><a href="{% url 'user_basket_page' %}"><i class="fa fa-shopping-cart"></i> سبد خرید</a></li>
+                    <li><a class="user-basket-link" href="{% url 'user_basket_page' %}"><i class="fa fa-shopping-cart"></i> سبد خرید <span>4</span></a></li>
                 </ul>
 
             </div>
@@ -92,7 +91,7 @@
 
         <li><a class="{% if request.resolver_match.url_name == 'product-list' %}active{% endif %}" href="{% url 'product-list' %}">فروشگاه</a></li>
 
-        <li><a href="{% url 'user_basket_page' %}"><i class="fa fa-shopping-cart"></i> سبد خرید</a></li>
+        <li><a class="user-basket-link" href="{% url 'user_basket_page' %}"><i class="fa fa-shopping-cart"></i> سبد خرید <span>4</span></a></li>
 
         {% if request.user.is_authenticated %}
             <li><a href="{% url 'user_panel_dashboard' %}"><i class="fa fa-user"></i> پنل کاربری</a></li>
