@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, Sum
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
@@ -45,8 +45,26 @@ class ProductListView(ListView):
 
         if category_name is not None:
             query = query.filter(category__url_title__iexact=category_name)
-        return query
-
+        
+        sort_by = self.request.GET.get('sort')
+        if sort_by == 'cheap':
+            return query.order_by('price')
+        
+        elif sort_by == 'expensive':
+            return query.order_by('-price')
+        
+        elif sort_by == 'latest':
+            return query.order_by('-id')
+        
+        elif sort_by == 'most_bought':
+            return query.filter(orderdetail__order__is_paid=True).annotate(order_count=Sum('orderdetail__count')).order_by('-order_count')
+        
+        elif sort_by == 'most_visit':
+            return query.annotate(visit_count=Count('productvisit')).order_by('-visit_count')
+        
+        else:
+            return query
+        
 
 class ProductDetailView(DetailView):
     template_name = 'product_module/product_detail.html'
