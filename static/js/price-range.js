@@ -348,6 +348,19 @@
 		})
 	};
 
+	$('.manual-input').on('input', function() {
+		const startP= parseInt($('#start_p').val()) || 0;
+		const endP = parseInt($('#end_p').val()) || 0;
+		$('#sl2').data('slider').setValue([startP, endP]);
+	});
+
+
+	$('#sl2').on('slideStop', function(e) {
+		const values = $(this).data('slider').getValue();
+		$('#start_p').val(values[0]);
+		$('#end_p').val(values[1]);
+	});
+	
 	$.fn.slider.defaults = {
 		min: 0,
 		max: 10,
@@ -363,5 +376,4 @@
 	};
 
 	$.fn.slider.Constructor = Slider;
-
 }( window.jQuery );

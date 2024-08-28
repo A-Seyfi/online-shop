@@ -84,16 +84,42 @@ function changeOrderDetailCount(detailId, state) {
 
 const remove_all = document.getElementById('remove_all')
 const more_detail = document.getElementById('more_detail')
-
-more_detail.addEventListener('click', ()=>{
-    if (remove_all.style.display != 'block'){
-        remove_all.style.display = 'block'
-    }
-})
-document.addEventListener('click', function(event) {
-    if (!event.target.closest('#remove_all') && (!event.target.closest('#more_detail'))){
-        if (remove_all.style.display == 'block'){
-            remove_all.style.display = 'none'
+if (more_detail != null) {
+    more_detail.addEventListener('click', ()=>{
+        if (remove_all.style.display != 'block'){
+            remove_all.style.display = 'block'
         }
-    }
-});
+    })
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('#remove_all') && (!event.target.closest('#more_detail'))){
+            if (remove_all.style.display == 'block'){
+                remove_all.style.display = 'none'
+            }
+        }
+    });
+}
+
+
+
+
+const filter_btn = document.getElementById('filter_btn')
+const shop_product = document.getElementById('shop_product')
+const filter = document.getElementById('filter')
+const back = document.getElementById('back')
+
+if (filter_btn != null) {
+    filter_btn.addEventListener("click", ()=>{
+        back.style.display = 'block'
+
+        filter.style.top = '0%'
+        filter.style.backgroundColor = '#ececeb'
+    })
+}
+
+if (back != null) {
+    back.addEventListener("click", ()=>{
+        filter.style.top = '100%'
+
+        back.style.display = 'none'
+    })
+}

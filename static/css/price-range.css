@@ -1,12 +1,5 @@
-/*!
- * Slider for Bootstrap
- *
- * Copyright 2012 Stefan Petre
- * Licensed under the Apache License v2.0
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- */
 .slider {
+  width: 100% !important;
   display: inline-block;
   vertical-align: middle;
   position: relative;
@@ -98,7 +91,7 @@
 
 .slider-selection {
   -moz-box-sizing: border-box;
-  background: none repeat scroll 0 0 #FE980F;
+  background: none repeat scroll 0 0 #d81921;
   border-radius: 15px;
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15) inset;
   position: absolute;
@@ -120,4 +113,26 @@
 }
 .slider-handle.triangle {
   background: transparent none;
+}
+
+
+.input-con{
+  width: 100%;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  align-items: center;
+}
+.input-con input{
+  width: 70%;
+  padding: 10px;
+  border-radius: 0.5vw;
+  border: none;
+  background-color: #ececeb;
+  font-size: 14px;
+  font-weight: 700;
+}
+.input-con h4{
+  opacity: 70%;
 }
