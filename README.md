@@ -1,1 +1,1 @@
-Laptop online shop
+Laptop online shop.
