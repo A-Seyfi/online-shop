@@ -11,7 +11,7 @@ class Order(models.Model):
     payment_date = models.DateField(null=True, blank=True, verbose_name='تاریخ پرداخت')
 
     def __str__(self):
-        return str(self.user)
+        return f"{self.user} ({self.is_paid}) {self.payment_date}"
 
     def calculate_total_price(self):
         total_amount = 0
@@ -32,6 +32,10 @@ class Order(models.Model):
 class OrderDetail(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='سبد خرید')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
+    color = models.CharField(max_length=50,verbose_name='رنگ', null=True, blank=True)
+    ram = models.CharField(max_length=50, verbose_name='رم', null=True, blank=True)
+    storage = models.CharField(max_length=50, verbose_name='حافظه', null=True, blank=True)
+    warranty = models.CharField(max_length=50, verbose_name='گارانتی', null=True, blank=True)
     final_price = models.IntegerField(null=True, blank=True, verbose_name='قیمت نهایی تکی محصول')
     count = models.IntegerField(verbose_name='تعداد')
 

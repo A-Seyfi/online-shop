@@ -7,4 +7,5 @@ urlpatterns = [
     path('brand/<brand>', views.ProductListView.as_view(), name='product-list-by-brands'),
     path('product-favorite', views.AddProductFavorite.as_view(), name='product-favorite'),
     path('<slug:slug>', views.ProductDetailView.as_view(), name='product-detail'),
+    path('compare/', views.compare_products, name='compare_products'),
 ]
