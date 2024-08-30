@@ -47,7 +47,7 @@
                                     <div class="product-count">{{ products.count }} کالا</div>
                                 </div>
 
-                                <button class="compare">مقایسه</button>
+                                <button type="button" onclick="location.href='{% url 'compare_products' %}'" class="compare">مقایسه</button>
                             </section>
 
                             {% for product in products %}

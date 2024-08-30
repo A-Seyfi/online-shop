@@ -72,19 +72,51 @@
                                     <h2>{{ product.title }}</h2>
                                     <p>شناسـه : {{ product.id }}</p>
                                 </div>
+
                                 <div>
 									<span>
 										<span>قیمت : {{ product.price|three_digits_currency }} </span>
 									</span>
                                     <span>
-                                        <label>تعداد :</label>
-										<input type="number" min="1" value="1"
-                                               class="search_box" id="product-count">
-										<button onclick="addProductToOrder({{ product.id }})"
+                                        <form method="get">
+                                            {% csrf_token %}
+                                            <label for="color">رنگ:</label>
+                                            <select name="color" id="color">
+                                                {% for col in product.color %}
+                                                    <option value="{{ col }}">{{ col }}</option>
+                                                {% endfor %}
+                                            </select>
+                                    
+                                            <label for="ram">حافظه رم:</label>
+                                            <select name="ram" id="ram">
+                                                {% for ram in product.ram_options %}
+                                                    <option value="{{ ram }}">{{ ram }}</option>
+                                                {% endfor %}
+                                            </select>
+                                    
+                                            <label for="storage">حافظه:</label>
+                                            <select name="storage" id="storage">
+                                                {% for storage in product.storage_options %}
+                                                    <option value="{{ storage }}">{{ storage }}</option>
+                                                {% endfor %}
+                                            </select>
+                                    
+                                            <label for="warranty">گارانتی:</label>
+                                            <select name="warranty" id="warranty">
+                                                {% for warranty in product.warranty %}
+                                                    <option value="{{ warranty }}">{{ warranty }}</option>
+                                                {% endfor %}
+                                            </select>
+
+                                            <label>تعداد :</label>
+                                            <input type="number" min="1" value="1"
+                                            class="search_box" id="product-count">
+                                            <button onclick="addProductToOrder({{ product.id }})"
                                                 class="btn btn-fefault cart">
-											<i class="fa fa-shopping-cart"></i>
-											افزودن به سبد خرید
-										</button>
+											    <i class="fa fa-shopping-cart"></i>
+											    افزودن به سبد خرید
+										    </button>
+                                    </form>
 									</span>
                                 </div>
                                 <div>

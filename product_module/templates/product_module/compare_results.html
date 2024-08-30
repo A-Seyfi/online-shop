@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>نتیجه مقایسه</title>
+</head>
+<body>
+    <h1>نتیجه مقایسه</h1>
+    <table>
+        <tr>
+            <th>نام</th>
+            <th>قیمت</th>
+            <th>پردازنده</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.title }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.cpu }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'compare_products' %}">مقایسه محصولات بیشتر</a>
+</body>
+</html>

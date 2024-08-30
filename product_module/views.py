@@ -1,19 +1,20 @@
 from django.db.models import Count, Sum
 from django.http import HttpRequest
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 from site_module.models import SiteBanner
 from utils.http_service import get_client_ip
 from utils.convertors import group_list
 from .models import Product, ProductCategory, ProductBrand, ProductVisit, ProductGallery
+from .forms import ProductCompareForm
 
 
 class ProductListView(ListView):
     template_name = 'product_module/product_list.html'
     model = Product
     context_object_name = 'products'
-    ordering = ['-price']
+    ordering = ['-id']
     paginate_by = 16
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -99,6 +100,21 @@ class AddProductFavorite(View):
         product = Product.objects.get(pk=product_id)
         request.session["product_favorites"] = product_id
         return redirect(product.get_absolute_url())
+
+
+def compare_products(request):
+    if request.method == 'POST':
+        form = ProductCompareForm(request.POST)
+        if form.is_valid():
+            selected_products = form.cleaned_data['products']
+            if len(selected_products) > 4:
+                form.add_error(None, "حداکثر ۴ محصول برای مقایسه انتخاب کنید!")
+            else:
+                return render(request, 'product_module/compare_results.html', {'products': selected_products})
+    else:
+        form = ProductCompareForm()
+
+    return render(request, 'product_module/compare.html', {'form': form})
 
 
 def product_categories_component(request: HttpRequest):

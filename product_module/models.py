@@ -40,7 +40,8 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='قیمت')
     short_description = models.CharField(max_length=360, db_index=True, null=True, verbose_name='توضیحات کوتاه')
     description = models.TextField(verbose_name='توضیحات اصلی', db_index=True)
-    color = models.CharField(max_length=255, verbose_name='رنگ های موجود', null=True, blank=True)
+    color = models.JSONField(verbose_name='رنگ های موجود', null=True, blank=True)
+    warranty = models.JSONField(verbose_name='گارانتی', null=True, blank=True)
 
     #config
     dimensions = models.CharField(max_length=255, verbose_name='ابعاد', null=True, blank=True)
@@ -53,9 +54,9 @@ class Product(models.Model):
 
     gpu = models.CharField(max_length=255, verbose_name='پردازنده‌ گرافیکی', null=True, blank=True)
 
-    ram_capacity = models.CharField(max_length=255, verbose_name='حافظه‌ی رم', null=True, blank=True)
+    ram_options = models.JSONField(verbose_name='حافظه‌ی رم', null=True, blank=True)
     ram_type = models.CharField(max_length=255, verbose_name='نوع حافظه‌ی رم', null=True, blank=True)
-    storage_capacity = models.CharField(max_length=255, verbose_name='حافظه‌ی ذخیره‌سازی', null=True, blank=True)
+    storage_options = models.JSONField(verbose_name='حافظه‌ی ذخیره‌سازی', null=True, blank=True)
     storage_type = models.CharField(max_length=255, verbose_name='نوع حافظه‌ی ذخیره‌سازی', null=True, blank=True)
 
     screen_size = models.CharField(max_length=255, verbose_name='اندازه صفحه‌نمایش', null=True, blank=True)

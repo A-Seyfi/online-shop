@@ -28,6 +28,10 @@ CallbackURL = 'http://127.0.0.1:8000/order/verify-payment/'
 def add_product_to_order(request: HttpRequest):
     product_id = int(request.GET.get('product_id'))
     count = int(request.GET.get('count'))
+    color = request.GET.get('color')
+    ram = request.GET.get('ram')
+    storage = request.GET.get('storage')
+    warranty = request.GET.get('warranty')
     if count < 1:
         # count = 1
         return JsonResponse({
@@ -46,7 +50,16 @@ def add_product_to_order(request: HttpRequest):
                 current_order_detail.count += count
                 current_order_detail.save()
             else:
-                new_detail = OrderDetail(order_id=current_order.id, product_id=product_id, count=count)
+                new_detail = OrderDetail(
+                    order_id=current_order.id, 
+                    product_id=product_id, 
+                    count=count,
+                    color=color,
+                    ram=ram,
+                    storage=storage,
+                    warranty=warranty,
+
+                )
                 new_detail.save()
 
             return JsonResponse({
@@ -59,7 +72,7 @@ def add_product_to_order(request: HttpRequest):
             return JsonResponse({
                 'status': 'not_found',
                 'text': 'محصول مورد نظر یافت نشد',
-                'confirm_button_text': 'مرسییییی',
+                'confirm_button_text': 'باشه ممنونم',
                 'icon': 'error'
             })
     else:
