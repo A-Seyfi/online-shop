@@ -23,3 +23,46 @@ function updatePrice(container, n) {
       });
    }
 }
+
+
+
+function setActiveColor(event) {
+   const links = document.querySelectorAll('.sort');
+   links.forEach(link => {
+       link.classList.remove('active');
+   });
+   event.target.classList.add('active');
+   localStorage.setItem('activeLink', event.target.textContent);
+}
+
+window.onload = () => {
+   const activeLink = localStorage.getItem('activeLink');
+   if (activeLink) {
+       const links = document.querySelectorAll('.sort');
+       links.forEach(link => {
+           if (link.textContent === activeLink) {
+               link.classList.add('active');
+           }
+       });
+   }
+};
+
+const links = document.querySelectorAll('.sort');
+links.forEach(link => {
+   link.addEventListener('click', setActiveColor);
+});
+
+
+
+function clearActiveClass() {
+   links.forEach(link => {
+       link.classList.remove('active');
+   });
+}
+
+document.addEventListener('click', function(event) {
+   if (!event.target.classList.contains('sort')) {
+      clearActiveClass();
+   localStorage.setItem('activeLink', event.target.textContent);
+   }
+});

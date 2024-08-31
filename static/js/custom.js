@@ -25,9 +25,8 @@ function fillParentId(parentId) {
 }
 
 function filterProducts() {
-    const filterPrice = $('#sl2').val();
-    const start_price = filterPrice.split(',')[0];
-    const end_price = filterPrice.split(',')[1];
+    const start_price = $('#start_p').val();
+    const end_price = $('#end_p').val();
     $('#start_price').val(start_price);
     $('#end_price').val(end_price);
     $('#filter_form').submit();

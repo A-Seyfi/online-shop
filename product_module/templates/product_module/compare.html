@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>مقایسه محصولات</title>
-</head>
-<body>
+{% extends 'shared/_layout.html' %}
+
+{% block title %}مقایسه محصولات{% endblock %}
+
+{% block header_references %}
+    <link href="/static/css/compare.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
     <h1>مقایسه محصولات</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">مقایسه</button>
     </form>
-</body>
-</html>
+{% endblock %}
