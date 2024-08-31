@@ -15,9 +15,9 @@
                     {% endif %}
 
                     <div class="laptop-colors">
-                        <div class="color" style="background-color: red;"></div>
-                        <div class="color" style="background-color: black;"></div>
-                        <div class="color" style="background-color: white;"></div>
+                        {% for col in product.color %}
+                            <div class="color" style="background-color: {{ col }};"></div>
+                        {% endfor %}
                     </div>
 
                     <div class="laptop-detail">

@@ -81,11 +81,13 @@
                                         <form method="get">
                                             {% csrf_token %}
                                             <label for="color">رنگ:</label>
-                                            <select name="color" id="color">
-                                                {% for col in product.color %}
-                                                    <option value="{{ col }}">{{ col }}</option>
-                                                {% endfor %}
-                                            </select>
+                                            {% if product.color.count > 1 %}
+                                                <select name="color" id="color">
+                                                    {% for col in product.color %}
+                                                        <option value="{{ col }}">{{ col }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            {% endif %}
                                     
                                             <label for="ram">حافظه رم:</label>
                                             <select name="ram" id="ram">

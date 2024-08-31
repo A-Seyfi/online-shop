@@ -43,57 +43,65 @@ class Product(models.Model):
     color = models.JSONField(verbose_name='رنگ های موجود', null=True, blank=True)
     warranty = models.JSONField(verbose_name='گارانتی', null=True, blank=True)
 
-    #config
     dimensions = models.CharField(max_length=255, verbose_name='ابعاد', null=True, blank=True)
     weight = models.FloatField(verbose_name='وزن (Kg)', null=True, blank=True)
 
-    cpu = models.CharField(max_length=255, verbose_name='پردازنده مرکزی', null=True, blank=True)
+    cpu = models.CharField(max_length=255, verbose_name='سری پردازنده', null=True, blank=True)
     cpu_frequency = models.FloatField(verbose_name='فرکانس کاری پردازنده (GHz)', null=True, blank=True)
-    cpu_cache = models.CharField(max_length=255, verbose_name='حافظه‌ی کش', null=True, blank=True)
+    cpu_cache = models.CharField(max_length=255, verbose_name='حافظه‌ی کش (MB)', null=True, blank=True)
+    cpu_core = models.CharField(max_length=255, verbose_name='تعداد هسته', null=True, blank=True)
     cpu_info = models.TextField(verbose_name='اطلاعات تکمیلی پردازنده', null=True, blank=True)
 
-    gpu = models.CharField(max_length=255, verbose_name='پردازنده‌ گرافیکی', null=True, blank=True)
-
-    ram_options = models.JSONField(verbose_name='حافظه‌ی رم', null=True, blank=True)
-    ram_type = models.CharField(max_length=255, verbose_name='نوع حافظه‌ی رم', null=True, blank=True)
-    storage_options = models.JSONField(verbose_name='حافظه‌ی ذخیره‌سازی', null=True, blank=True)
-    storage_type = models.CharField(max_length=255, verbose_name='نوع حافظه‌ی ذخیره‌سازی', null=True, blank=True)
-
-    screen_size = models.CharField(max_length=255, verbose_name='اندازه صفحه‌نمایش', null=True, blank=True)
-    resolution = models.CharField(max_length=255, verbose_name='رزولوشن', null=True, blank=True)
+    screen_size = models.CharField(max_length=255, verbose_name='ابعاد صفحه‌نمایش', null=True, blank=True)
+    resolution = models.CharField(max_length=255, verbose_name='وضوح تصویر', null=True, blank=True)
     panel_type = models.CharField(max_length=255, verbose_name='نوع پنل', null=True, blank=True)
     refresh_rate = models.CharField(max_length=255, verbose_name='نرخ نوسازی تصویر', null=True, blank=True)
     screen_cover = models.CharField(max_length=255, verbose_name='پوشش صفحه نمایش', null=True, blank=True)
-    touch_screen = models.BooleanField(verbose_name='صفحه‌نمایش لمسی', null=True, blank=True)
+    touch_screen = models.BooleanField(verbose_name='صفحه‌نمایش لمسی', default=False)
     additional_display_features = models.TextField(verbose_name='سایر ویژگی‌های نمایشگر', null=True, blank=True)
 
-    network_port = models.CharField(max_length=255, verbose_name='پورت شبکه', null=True, blank=True)
-    wireless_network = models.CharField(max_length=255, verbose_name='شبکه‌ی بی‌سیم', null=True, blank=True)
-    bluetooth = models.CharField(max_length=255, verbose_name='بلوتوث', null=True, blank=True)
-    wireless_communication_info = models.TextField(verbose_name='توضیحات ارتباطات بی‌سیم', null=True, blank=True)
-    
-    vga_port = models.BooleanField(verbose_name='VGA', default=False)
-    hdmi_port = models.BooleanField(verbose_name='HDMI', default=False)
-    dvi_port = models.BooleanField(verbose_name='DVI', default=False)
-    
+    ram_options = models.JSONField(verbose_name='ظرفیت حافظه‌ی رم', null=True, blank=True)
+    ram_type = models.CharField(max_length=255, verbose_name='نوع حافظه‌ی رم', null=True, blank=True)
+    ram_bus = models.CharField(max_length=255, verbose_name='باس رم (MHz)', null=True, blank=True)
+    ram_upgradable = models.BooleanField(verbose_name='قابلیت ارتقای رم', default=False)
+
+    hdd_memory = models.JSONField(verbose_name='ظرفیت حافظه HDD', null=True, blank=True)
+    ssd_memory = models.JSONField(verbose_name='ظرفیت حافظه SSD', null=True, blank=True)
+    internal_memory = models.CharField(max_length=255, verbose_name='ظرفیت حافظه داخلی', null=True, blank=True)
+    internal_memory_upgradable = models.BooleanField(verbose_name='قابلیت ارتقا حافظه داخلی', default=False)
+
+    gpu_manufacturer = models.CharField(max_length=255, verbose_name='سازنده پردازنده‌ گرافیکی', null=True, blank=True)
+    gpu_model = models.CharField(max_length=255, verbose_name='مدل پردازنده‌ گرافیکی', null=True, blank=True)
+    gpu_type = models.CharField(max_length=255, verbose_name='نوع پردازنده‌ گرافیکی', null=True, blank=True)
+    gpu_memory = models.CharField(max_length=255, verbose_name='حافظه پردازنده‌ گرافیکی', null=True, blank=True)
+    gpu_ram_type = models.CharField(max_length=255, verbose_name='نوع رم پردازنده‌ گرافیکی', null=True, blank=True)
+
+    wifi_network = models.BooleanField(verbose_name='شبکه Wi-Fi', default=False)
+    wireless_communication_info = models.TextField(verbose_name='توضیحات شبکه Wi-Fi', null=True, blank=True)
+    bluetooth = models.BooleanField(verbose_name='بلوتوث', default=False)
+    bluetooth_info = models.CharField(max_length=255, verbose_name='توضیحات بلوتوث', null=True, blank=True)
+    lan = models.BooleanField(verbose_name='درگاه LAN', default=False)
     usb_3_ports_count = models.PositiveIntegerField(verbose_name='تعداد درگاه USB 3.0 Type A و بالاتر', null=True, blank=True)
     usb_2_ports_count = models.PositiveIntegerField(verbose_name='تعداد درگاه USB 2.0 Type A', null=True, blank=True)
     usb_c_ports_count = models.PositiveIntegerField(verbose_name='تعداد درگاه USB Type C', null=True, blank=True)
-    
+    vga_port = models.BooleanField(verbose_name='VGA', default=False)
+    hdmi_port = models.BooleanField(verbose_name='HDMI', default=False)
+    card_reader = models.BooleanField(verbose_name='درگاه کارت‌خوان', default=False)
     thunderbolt_support = models.BooleanField(verbose_name='پشتیبانی از تاندربولت', default=False)
     headphone_microphone_jack = models.BooleanField(verbose_name='جک هدفون/میکروفن', default=False)
-
-    battery_capacity = models.CharField(max_length=255, verbose_name='حجم باتری', null=True, blank=True)
-    charger_info = models.CharField(max_length=255, verbose_name='شارژر', null=True, blank=True)
-
-    optical_drive = models.BooleanField(verbose_name='درایو نوری', default=False)
-    speakers_info = models.CharField(max_length=255, verbose_name='اسپیکر', null=True, blank=True)
-    webcam_info = models.CharField(max_length=255, verbose_name='وبکم', null=True, blank=True)
-    webcam_description = models.TextField(verbose_name='توضیحات وبکم', null=True, blank=True)
     
+    
+
+    battery = models.CharField(max_length=255, verbose_name='حجم باتری', null=True, blank=True)
+    battery_charge = models.CharField(max_length=255, verbose_name='شارژدهی باتری', null=True, blank=True)
+    charger_power = models.CharField(max_length=255, verbose_name='توان شارژر', null=True, blank=True)
+
+    speakers_info = models.CharField(max_length=255, verbose_name='اسپیکر', null=True, blank=True)
+    webcam = models.BooleanField(verbose_name='وبکم', default=False)
+    webcam_description = models.TextField(verbose_name='توضیحات وبکم', null=True, blank=True)
+    optical_drive = models.BooleanField(verbose_name='درایو نوری', default=False)
     backlit_keyboard = models.BooleanField(verbose_name='کیبورد با نور پس‌زمینه', default=False)
     fingerprint_sensor = models.BooleanField(verbose_name='حسگر اثر انگشت', default=False)
-    card_reader = models.BooleanField(verbose_name='کارت‌خوان', default=False)
     
     alternative_name = models.CharField(max_length=255, verbose_name='نام دیگر', null=True, blank=True)
 

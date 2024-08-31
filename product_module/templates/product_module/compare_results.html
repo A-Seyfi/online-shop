@@ -1,25 +1,514 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>نتیجه مقایسه</title>
-</head>
-<body>
-    <h1>نتیجه مقایسه</h1>
-    <table>
-        <tr>
-            <th>نام</th>
-            <th>قیمت</th>
-            <th>پردازنده</th>
-        </tr>
-        {% for product in products %}
-        <tr>
-            <td>{{ product.title }}</td>
-            <td>{{ product.price }}</td>
-            <td>{{ product.cpu }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <a href="{% url 'compare_products' %}">مقایسه محصولات بیشتر</a>
-</body>
-</html>
+{% extends 'shared/_layout.html' %}
+{% load thumbnail %}
+{% load poll_extras %}
+
+{% block title %}نتیجه مقایسه{% endblock %}
+
+{% block header_references %}
+    <link href="/static/css/compare.css" rel="stylesheet">
+{% endblock %}
+
+{% block footer_references %}
+    <script src="/static/js/compare.js"></script>
+{% endblock %}
+
+{% block content %}
+    <section id="compare_menu" class="compare-con compare-menu">
+        <div class="products-compare">
+            {% for product in products %}
+                <div class="product-menu">
+                    {% if product.image %}
+                        {% thumbnail product.image "268x250" quality=90 crop='center' as im %}
+                            <img src="{{ im.url }}">
+                        {% endthumbnail %}
+                    {% else %}
+                        <img src="/static/images/shop/product.jpg" alt="">
+                    {% endif %}
+
+                    <p>{{ product.title }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="compare-con">
+        <div class="products-compare">
+            {% for product in products %}
+                <div class="compared-product-link">
+                    <div class="compared-product">
+                        <div class="compared-product-image-wrapper">
+                            <div class="compared-productinfo">
+                                {% if product.image %}
+                                    {% thumbnail product.image "268x250" quality=90 crop='center' as im %}
+                                        <img src="{{ im.url }}">
+                                    {% endthumbnail %}
+                                {% else %}
+                                    <img src="/static/images/shop/product.jpg" alt="">
+                                {% endif %}
+
+                                <p>{{ product.title }}</p>
+                                <h2>{{ product.price }} <span>تومان</span></h2>
+                                <a href="{{ product.get_absolute_url }}">مشاهده و خرید<span class="fa fa-angle-left"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+    
+            {% if products|length < 4 %}
+                <div class="more-product-c compared-product-link">
+                    <a href="{{ product.get_absolute_url }}">مقایسه محصولات بیشتر <span class="fa fa-arrow-left"></span></a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+
+
+    <section class="compare-detail-section">
+        <div class="detail-title">مشخصات فیزیکی</div>
+    
+        <div class="compare-result-detail-con">
+            <div class="compare-result-detail">
+                <h3>ابعاد</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.dimensions }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>وزن</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.weight }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    
+    
+        <div class="detail-title">پردازنده</div>
+    
+        <div class="compare-result-detail-con">
+            <div class="compare-result-detail">
+                <h3>پردازنده مرکزی</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.cpu }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>فرکانس کاری پردازنده</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.cpu_frequency }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>حافظه کش</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.cpu_cache }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>تعداد هسته</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.cpu_core }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>اطلاعات تکمیلی پردازنده</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.cpu_info }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    
+    
+        <div class="detail-title">مشخصات صفحه نمایشگر</div>
+    
+        <div class="compare-result-detail-con">
+            <div class="compare-result-detail">
+                <h3>ابعاد صفحه نمایش</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.screen_size }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>وضوح تصویر</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.resolution }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>نوع پنل</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.panel_type }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>نرخ نو سازی تصویر</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.refresh_rate }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>پوشش صفحه نمایشگر</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.screen_cover }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>صفحه نمایش لمسی</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.touch_screen }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>سایر ویژگی های نمایشگر</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.additional_display_features }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="detail-title">حافظه RAM</div>
+    
+        <div class="compare-result-detail-con">
+            <div class="compare-result-detail">
+                <h3>ظرفیت حافظه RAM</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.ram_options }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>نوع حافظه RAM</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.ram_type }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>باس رم</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.ram_bus }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>قابلیت ارتقا رم</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.ram_upgradable }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="detail-title">حافظه داخلی</div>
+    
+        <div class="compare-result-detail-con">
+            <div class="compare-result-detail">
+                <h3>ظرفیت حافظه HDD</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.hdd_memory }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>ظرفیت حافظه SSD</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.ssd_memory }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>ظرفیت حافظه داخلی</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.internal_memory }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>قابلیت ارتقا حافظه داخلی</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.internal_memory_upgradable }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="detail-title">پردازنده گرافیکی</div>
+    
+        <div class="compare-result-detail-con">
+            <div class="compare-result-detail">
+                <h3>سازنده پردازنده گرافیکی</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.gpu_manufacturer }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>مدل پردازنده گرافیکی</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.gpu_model }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>نوع پردازنده گرافیکی</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.gpu_type }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>حافظه پردازنده گرافیکی</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.gpu_memory }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>نوع رم پردازنده گرافیکی</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.gpu_ram_type }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="detail-title">اتصالات و شبکه‌ها</div>
+    
+        <div class="compare-result-detail-con">
+            <div class="compare-result-detail">
+                <h3>شبکه Wi-Fi</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.wifi_network }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>توضیحات شبکه Wi-Fi</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.wireless_communication_info }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>بلوتوث</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.bluetooth }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>توضیحات بلوتوث</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.bluetooth_info }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>درگاه LAN</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.lan }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>تعداد درگاه USB 3.0 Type A و بالاتر</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.usb_3_ports_count }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>تعداد درگاه USB 2.0 Type A</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.usb_2_ports_count }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>تعداد درگاه USB Type C</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.usb_c_ports_count }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>درگاه VGA</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.vga_port }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>درگاه HDMI</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.hdmi_port }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>درگاه کارت خوان</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                    <div class="value">{{ product.card_reader }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>پشتیبانی از Thunderbolt</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                    <div class="value">{{ product.thunderbolt_support }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>جک هدفون / میکروفن</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.headphone_microphone_jack }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="detail-title">مشخصات باتری</div>
+    
+        <div class="compare-result-detail-con">
+            <div class="compare-result-detail">
+                <h3>حجم باتری</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.battery }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>شارژدهی باتری</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.battery_charge }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>توان شارژر</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.charger_power }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="detail-title">سایر قابلیت ها</div>
+    
+        <div class="compare-result-detail-con">
+            <div class="compare-result-detail">
+                <h3>اسپیکر</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.speakers_info }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>وبکم</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.webcam }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>توضیحات وبکم</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.webcam_description }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>درایو نوری</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.optical_drive }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>کیبورد با نور پس زمینه</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.backlit_keyboard }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>حسگر اثرانگشت</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.fingerprint_sensor }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
