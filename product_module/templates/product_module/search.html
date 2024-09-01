@@ -1,0 +1,20 @@
+{% extends 'shared/_layout.html' %}
+{% load thumbnail %}
+{% load render_partial %}
+
+{% block title %}نتایج جستجو{% endblock %}
+{% block content %}
+    <h1>نتایج جستجو برای: "{{ query }}"</h1>
+
+    {% if results %}
+        <ul>
+            {% for product in results %}
+                <li>
+                {% include 'includes/product_item_partial.html' with product=product col_size=4 %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>محصولی یافت نشد.</p>
+    {% endif %}
+{% endblock %}

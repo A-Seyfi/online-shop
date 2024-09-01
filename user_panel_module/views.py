@@ -95,6 +95,11 @@ def user_basket(request: HttpRequest):
     }
     return render(request, 'user_panel_module/user_basket.html', context)
 
+@login_required
+def order_count(request: HttpRequest):
+    current_order, created = Order.objects.prefetch_related('orderdetail_set').get_or_create(is_paid=False, user_id=request.user.id)
+
+    return {'order': current_order}
 
 @login_required
 def remove_order_detail(request):

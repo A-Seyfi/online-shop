@@ -36,7 +36,10 @@
                 
                 <div class="search-container">
                     <div class="search_box pull-left">
-                        <input type="text" placeholder="محصول مورد نظرتان را جستجو کنید ..."/>
+                        <form method="GET" action="{% url 'search' %}">
+                            <input type="text" name="q" placeholder="محصول مورد نظرتان را جستجو کنید ...">
+                            <button type="submit">جستجو</button>
+                        </form>
                     </div>
                 </div>
                 
@@ -47,7 +50,10 @@
                     <li><a href="{% url 'register_page' %}"><i class="fa fa-user-plus"></i> ثبت نام</a></li>
                     <li><a href="{% url 'login_page' %}"><i class="fa fa-sign-in"></i> ورود</a></li>
                 {% endif %}
-                    <li><a class="user-basket-link" href="{% url 'user_basket_page' %}"><i class="fa fa-shopping-cart"></i> سبد خرید <span>4</span></a></li>
+
+                {% if request.user.is_authenticated %}
+                    <li><a class="user-basket-link" href="{% url 'user_basket_page' %}"><i class="fa fa-shopping-cart"></i> سبد خرید <span>{{ order.orderdetail_set.count }}</span></a></li>
+                {% endif %}
                 </ul>
 
             </div>

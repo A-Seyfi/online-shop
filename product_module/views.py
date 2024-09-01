@@ -117,6 +117,15 @@ def compare_products(request):
     return render(request, 'product_module/compare.html', {'form': form})
 
 
+def search(request):
+    query = request.GET.get('q')
+    results = []
+    if query:
+        results = Product.objects.filter(description__icontains=query) | Product.objects.filter(title__icontains=query).order_by("-id")
+
+    return render(request, 'product_module/search.html', {'results': results, 'query': query})
+
+
 def product_categories_component(request: HttpRequest):
     product_categories = ProductCategory.objects.filter(is_active=True, is_delete=False)
     context = {

@@ -81,32 +81,38 @@
                                         <form method="get">
                                             {% csrf_token %}
                                             <label for="color">رنگ:</label>
-                                            {% if product.color.count > 1 %}
-                                                <select name="color" id="color">
-                                                    {% for col in product.color %}
+                                            <select name="color" id="color">
+                                                {% for col in product.color %}
+                                                    {% if product.color %}
                                                         <option value="{{ col }}">{{ col }}</option>
-                                                    {% endfor %}
+                                                    {% endif %}
+                                                {% endfor %}
                                                 </select>
-                                            {% endif %}
-                                    
+                                            
                                             <label for="ram">حافظه رم:</label>
                                             <select name="ram" id="ram">
                                                 {% for ram in product.ram_options %}
+                                                {% if product.ram_options %}
                                                     <option value="{{ ram }}">{{ ram }}</option>
+                                                {% endif %}
                                                 {% endfor %}
                                             </select>
                                     
                                             <label for="storage">حافظه:</label>
                                             <select name="storage" id="storage">
                                                 {% for storage in product.storage_options %}
+                                                {% if product.storage_options %}
                                                     <option value="{{ storage }}">{{ storage }}</option>
+                                                {% endif %}
                                                 {% endfor %}
                                             </select>
                                     
                                             <label for="warranty">گارانتی:</label>
                                             <select name="warranty" id="warranty">
                                                 {% for warranty in product.warranty %}
+                                                {% if product.warranty %}
                                                     <option value="{{ warranty }}">{{ warranty }}</option>
+                                                {% endif %}
                                                 {% endfor %}
                                             </select>
 
