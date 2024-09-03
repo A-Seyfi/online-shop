@@ -16,7 +16,7 @@
             <div class="row">
 
                 <div id="shop_product" class="col-sm-9 padding-right shop-products-container">
-                    {% if products %}
+                    {% if products or results %}
                         <div class="features_items">
                             <section class="shop-header">
                                 <button id="filter_btn" class="filter-btn">
@@ -37,11 +37,11 @@
 
 
                                     <ul>
-                                        <li><a class="sort" href="?sort=cheap">ارزان ترین</a></li>
-                                        <li><a class="sort" href="?sort=expensive">گران ترین</a></li>
-                                        <li><a class="sort" href="?sort=latest">جدید ترین</a></li>
-                                        <li><a class="sort" href="?sort=most_bought">پرفروش ترین</a></li>
-                                        <li><a class="sort" href="?sort=most_visit">پر بازدید ترین</a></li>
+                                        <li><a class="sort" href="&sort=cheap">ارزان ترین</a></li>
+                                        <li><a class="sort" href="&sort=expensive">گران ترین</a></li>
+                                        <li><a class="sort" href="&sort=latest">جدید ترین</a></li>
+                                        <li><a class="sort" href="&sort=most_bought">پرفروش ترین</a></li>
+                                        <li><a class="sort" href="&sort=most_visit">پر بازدید ترین</a></li>
                                     </ul>
 
                                     <div class="product-count">{{ products.count }} کالا</div>
@@ -50,9 +50,15 @@
                                 <button type="button" onclick="location.href='{% url 'compare_products' %}'" class="compare">مقایسه</button>
                             </section>
 
-                            {% for product in products %}
-                                {% include 'includes/product_item_partial.html' with product=product col_size=4 %}
-                            {% endfor %}
+                            {% if results %}
+                                {% for product in results %}
+                                    {% include 'includes/product_item_partial.html' with product=product col_size=4 %}
+                                {% endfor %}
+                            {% else %}
+                                {% for product in products %}
+                                    {% include 'includes/product_item_partial.html' with product=product col_size=4 %}
+                                {% endfor %}
+                            {% endif %}
                             <div class="clearfix"></div>
                             <ul class="pagination">
                                 {% if page_obj.has_previous %}

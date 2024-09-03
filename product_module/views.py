@@ -8,6 +8,8 @@ from utils.http_service import get_client_ip
 from utils.convertors import group_list
 from .models import Product, ProductCategory, ProductBrand, ProductVisit, ProductGallery
 from .forms import ProductCompareForm
+from fuzzywuzzy import process
+from fuzzywuzzy import fuzz
 
 
 class ProductListView(ListView):
@@ -115,6 +117,48 @@ def compare_products(request):
         form = ProductCompareForm()
 
     return render(request, 'product_module/compare.html', {'form': form})
+
+
+def fuzzy_search(query, threshold=15):
+    products = Product.objects.all()
+
+    titles = products.values_list('title', flat=True)
+    matched_titles = process.extract(query, titles, limit=None, scorer=fuzz.token_set_ratio)
+    filtered_titles = [(title, score) for title, score in matched_titles if score >= threshold]
+
+    brands = products.values_list('brand', flat=True)
+    matched_brands = process.extract(query, brands, limit=None, scorer=fuzz.token_set_ratio)
+    filtered_brands = [(brand, score) for brand, score in matched_brands if score >= threshold]
+
+    cpus = products.values_list('cpu', flat=True)
+    matched_cpus = process.extract(query, cpus, limit=None, scorer=fuzz.token_set_ratio)
+    filtered_cpus = [(cpu, score) for cpu, score in matched_cpus if score >= threshold]
+
+    filtered_products = products.filter(title__in=[title for title, score in filtered_titles]) | products.filter(cpu__in=[cpu for cpu, score in filtered_cpus]) | products.filter(brand__in=[brand for brand, score in filtered_brands])
+
+    product_scores = []
+    for product in filtered_products:
+        title_score = next((score for title, score in filtered_titles if title == product.title), None)
+        brand_score = next((score for brand, score in filtered_brands if brand == product.brand), None)
+        cpu_score = next((score for cpu, score in filtered_cpus if cpu == product.cpu), None)
+
+        max_score = max(title_score or 0, cpu_score or 0, brand_score or 0)
+        product_scores.append((product, max_score))
+
+    product_scores.sort(key=lambda x: x[1], reverse=True)
+    sorted_products = [product for product, score in product_scores]
+
+    print(filtered_products)
+    return sorted_products
+
+
+def search(request):
+    query = request.GET.get('q', '')
+    results = []
+    if query:
+        results = fuzzy_search(query)
+
+    return render(request, 'product_module/product_list.html', {'results': results, 'query': query})
 
 
 def product_categories_component(request: HttpRequest):

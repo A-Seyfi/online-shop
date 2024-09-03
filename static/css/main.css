@@ -329,6 +329,19 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     height: 100%;
 }
+.search_box form{
+    display: flex;
+}
+.search_box button{
+    width: 43px;
+    text-align: center;
+    align-content: center;
+    margin-left: 10px;
+    border-style: none;
+    border-radius: 20px;
+    background-color: #dddddd;
+    color: #404040;
+}
 .search_box input {
     text-align: right;
     background: #dddddd;
@@ -339,12 +352,12 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
     height: 37px;
     outline: medium none;
-    padding-right: 40px;
+    padding-right: 10px;
     width: 100%;
-    background-image: url(../images/home/searchicon.png);
+    /* background-image: url(../images/home/searchicon.png);
     background-size: 18px 18px;
     background-repeat: no-repeat;
-    background-position: 98%;
+    background-position: 98%; */
 }
 
 .mobile-menu{
@@ -423,195 +436,86 @@ ul.sub-menu {
 **************************/
 
 #footer {
-    background: #F0F0E9;
-}
-
-
-.footer-top .container {
-    border-bottom: 1px solid #E0E0DA;
-    padding-bottom: 20px;
-}
-
-.footer-Before {
-    padding: 30px 0px 20px;
-    background: #3A3A3A;
-    color: #fcfcfc;
-}
-
-.footer-Before h3 {
-    font-size: 16pt;
-}
-
-.block-news {
-    padding: 0 50px;
-    margin-bottom: 0px;
-}
-
-.companyinfo {
-    margin-top: 30px;
-}
-
-.companyinfo h2 {
-    color: #B4B1AB;
-    font-family: abel;
-    font-size: 27px;
-    text-transform: uppercase;
-}
-
-.companyinfo h2 span {
-    color: #d81921;
-}
-
-.companyinfo p {
-    color: #B3B3AD;
-    font-family: 'BYekan', sans-serif;
-    font-size: 10pt;
-    font-weight: normal;
-    text-align: justify;
-}
-
-.footer-top .col-sm-3 {
+    width: 98%;
+    margin: 0 auto 1% auto;
+    border-radius: 0.5vw;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #474747;
+}
+#footer ul{
+    margin: 0;
 }
 
-.video-gallery {
-    margin-top: 57px;
-    position: inherit;
+.footer-top{
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #919191;
 }
 
-.video-gallery a img {
-    height: 100%;
-    width: 100%;
+.footer-top .footer-logo-con{
+    padding: 20px;
+    border-radius: 0.5vw;
+    background-color: #e3e3e3;
+}
+.footer-top .footer-logo-con div img{
+    width: 150px;
 }
 
-.iframe-img {
-    position: relative;
-    display: block;
-    height: 61px;
-    margin-bottom: 10px;
-    border: 2px solid #CCCCC6;
-    border-radius: 3px;
+.footer-top ul{
+    display: flex;
+    flex-direction: column;
 }
-
-.overlay-icon {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 61px;
-    background: #d81921;
-    border-radius: 3px;
-    color: #FFF;
+.footer-top ul li{
+    color: white;
     font-size: 20px;
-    line-height: 0;
-    display: block;
-    opacity: 0;
-    -webkit-transition: 300ms;
-    -moz-transition: 300ms;
-    -o-transition: 300ms;
-    transition: 300ms;
+    text-align: end;
+}
+.footer-top ul li span{
+    margin-right: 10px;
+    font-size: 25px;
 }
 
-.overlay-icon i {
-    position: relative;
-    top: 50%;
-    margin-top: -20px;
-}
-
-.video-gallery a:hover .overlay-icon {
-    opacity: 1;
-}
-
-.video-gallery p {
-    color: #8C8C88;
-    font-family: 'BYekan', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    margin-bottom: 0px;
-}
-
-.video-gallery h2 {
-    color: #8c8c88;
-    font-family: 'BYekan', sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    text-transform: uppercase;
-    margin-top: 0px;
-}
-
-
-.address {
-    margin-top: 30px;
-    position: relative;
-    overflow: hidden;
-}
-
-.address img {
-    width: 100%;
-}
-
-.address p {
-    color: #666663;
-    font-family: 'BYekan', sans-serif;
-    font-size: 14px;
-    font-weight: 300;
-    left: 25px;
-    position: absolute;
-    top: 50px;
-}
 
 .footer-widget {
-    margin-bottom: 68px;
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 100px;
+    margin-top: 40px;
 }
 
-.footer-widget .container {
-    border-top: 1px solid #FFFFFF;
-    padding-top: 15px;
+.footer-widget h2 {
+    color: white;
+    margin-top: 0;
+    margin-bottom: 20px;
 }
 
-.single-widget h2 {
-    color: #666663;
-    font-family: 'BYekan', sans-serif;
+.footer-widget ul li{
+    margin-bottom: 10px;
+}
+.footer-widget ul li a{
+    color: #e3e3e3;
     font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 22px;
-    text-transform: uppercase;
 }
 
-.single-widget h2 i {
-    margin-right: 15px;
-}
-
-.single-widget ul li a {
-    color: #8C8C88;
-    font-family: 'BYekan', sans-serif;
-    font-size: 14px;
-    font-weight: 300;
-    padding: 5px 0;
-}
-
-.single-widget ul li a i {
-    margin-right: 18px;
-}
-
-.single-widget ul li a:hover {
-    background: none;
-    color: #d81921;
+.footer-widget .footer-social-media ul{
+    display: flex;
+    justify-content: space-around;
 }
 
 .newslatter {
     float: left;
 }
 
-.block-news h3 {
-    float: right;
-    margin: 0px !important;
-    padding-top: 7px;
-    padding-bottom: 3px;
-}
-
 .searchform input {
     border: 1px solid #DDDDDD;
-    color: #CCCCC6;
+    color: white;
     font-family: 'BYekan', sans-serif;
     font-size: 10pt;
     margin-top: 0;
@@ -632,7 +536,7 @@ ul.sub-menu {
 }
 
 .searchform button i {
-    color: #FFFFFF;
+    color: white;
     font-size: 20px;
 }
 
@@ -642,7 +546,7 @@ ul.sub-menu {
 }
 
 .searchform p {
-    color: #8C8C88;
+    color: white;
     font-family: 'BYekan', sans-serif;
     font-size: 14px;
     font-weight: 300;
@@ -650,21 +554,17 @@ ul.sub-menu {
 }
 
 .footer-bottom {
-    background: #D6D6D0;
-    padding-top: 10px;
+    width: 100%;
+    background: #2b2b2b;
 }
 
 .footer-bottom p {
-    color: #363432;
+    color: white;
     font-family: 'BYekan', sans-serif;
     font-weight: 300;
-    margin-left: 15px;
-}
-
-.footer-bottom p span a {
-    color: #d81921;
-    font-style: italic;
-    text-decoration: underline;
+    font-size: 18px;
+    text-align: center;
+    margin: 15px 0;
 }
 
 
@@ -802,9 +702,12 @@ ul.sub-menu {
 }
 
 .filter .filter-title a{
+    color: white;
+    background-color: #d81921;
+    padding: 7px 10px;
+    border-radius: 0.5vw;
+    font-size: 15px;
     margin: 0;
-    font-size: 14px;
-    color: #d81921;
 }
 .filter .filter-title a span{
     margin-left: 5px;
@@ -1112,7 +1015,7 @@ h2.title {
 }
 
 .productinfo h2 {
-    color: #d81921;
+    color: #000;
     font-family: 'BYekan', sans-serif;
     font-size: 20px;
     font-weight: 600;

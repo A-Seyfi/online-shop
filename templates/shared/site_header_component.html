@@ -36,7 +36,10 @@
                 
                 <div class="search-container">
                     <div class="search_box pull-left">
-                        <input type="text" placeholder="محصول مورد نظرتان را جستجو کنید ..."/>
+                        <form method="GET" action="{% url 'search' %}">
+                            <button type="submit"><span class="fa fa-search"></span></button>
+                            <input type="text" name="q" placeholder="محصول مورد نظرتان را جستجو کنید ...">
+                        </form>
                     </div>
                 </div>
                 
