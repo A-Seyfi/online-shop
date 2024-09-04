@@ -1,9 +1,6 @@
 from django.contrib import admin
 from django.http import HttpRequest
-
 from . import models
-
-# Register your models here.
 from .models import Article
 
 

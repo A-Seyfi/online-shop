@@ -3,7 +3,6 @@ from account_module.models import User
 from product_module.models import Product
 
 
-# Create your models here.
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')

@@ -1,8 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
-
 class SiteSetting(models.Model):
     site_name = models.CharField(max_length=200, verbose_name='نام سایت')
     site_url = models.CharField(max_length=200, verbose_name='دامنه سایت')

@@ -3,7 +3,6 @@ from django.urls import reverse
 from account_module.models import User
 
 
-# Create your models here.
 
 class ProductCategory(models.Model):
     title = models.CharField(max_length=300, db_index=True, verbose_name='عنوان')

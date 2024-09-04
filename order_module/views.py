@@ -1,5 +1,4 @@
 import time
-
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, JsonResponse, HttpResponse
 from django.urls import reverse
@@ -9,8 +8,6 @@ from .models import Order, OrderDetail
 from django.shortcuts import redirect, render
 import requests
 import json
-
-# Create your views here.
 
 
 MERCHANT = 'test'

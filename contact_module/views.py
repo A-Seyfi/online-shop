@@ -1,9 +1,7 @@
 from django.views.generic import ListView
-
 from site_module.models import SiteSetting
 from .forms import ContactUsModelForm
 from django.views.generic.edit import CreateView
-
 from .models import UserProfile
 
 

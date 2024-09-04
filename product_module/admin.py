@@ -2,8 +2,6 @@ from django.contrib import admin
 from . import models
 
 
-# Register your models here.
-
 class ProductAdmin(admin.ModelAdmin):
     list_filter = ['category', 'brand', 'is_active']
     list_display = ['title', 'price', 'is_active', 'is_delete']

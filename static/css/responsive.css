@@ -6,7 +6,6 @@
 		align-items: center;
 	}
 	
-	
 	.shop-product-link {
 		width: 33.33%;
 	}
@@ -19,6 +18,30 @@
 	
 	.product-image-wrapper {
 		height: 390px;
+	}
+
+
+	/* about us page */
+	.about{
+		flex-wrap: wrap;
+    	height: auto;
+	}
+	.about img{
+		width: 40%;
+    	margin-left: 10px;
+	}
+	.about p{
+		width: 40%;
+	}
+	.about address{
+		width: 100%;
+	}
+	.about address ul{
+		flex-direction: row;
+		padding-bottom: 0;
+	}
+	.about address ul li{
+		width: fit-content;
 	}
 }
 	
@@ -420,15 +443,22 @@
 		padding-left: 15px;
 	}
 	
-	
 	.laptop-colors{
 		height: 2.5%;
 		margin-top: 30px;
 	}
 	
-	
 	.category-products .panel-default .panel-heading .panel-title a {
 		font-size: 12px;
+	}
+
+
+	/* about us page */
+    .about p {
+        width: 50%;
+    }
+	.about-address {
+		height: 300px;
 	}
 }
 	
@@ -511,16 +541,6 @@
 	
 	.companyinfo h2{
 		font-size: 20px;
-	}
-	
-	.address {
-		margin-top: 48px;
-		margin-left: 20px;
-	}
-	
-	.address p {
-		font-size: 12px;
-		top: 5px;
 	}
 	
 	.user-panel-dashboard{
@@ -643,6 +663,41 @@
 	
 	.pagination li a {
 		border-radius: 1vw !important;
+	}
+
+
+	/* about us page */
+    .about address ul {
+        flex-direction: column;
+		align-items: unset;
+    }
+    .about address ul li:nth-child(2){
+        margin: 10px auto;
+    }
+    .about address ul li:nth-child(3){
+        margin-right: auto;
+    }
+
+	.about-address .google-map {
+		width: 55%;
+	}
+
+	.support{
+		padding-top: 20px;
+	}
+	.support h3{
+		font-size: 20px;
+	}
+	.support button{
+		padding: 10px 20px;
+	}
+	.support button h4{
+		font-size: 17px;
+	}
+	.support button div {
+		width: 35px;
+		height: 25px;
+		margin-left: 5px;
 	}
 }
 	
@@ -968,6 +1023,46 @@
 	
 	.pagination li a {
 		border-radius: 2vw !important;
+	}
+
+
+	/* about us page */
+	.about img {
+        width: 100%;
+	}
+	.about p{
+    	width: 100%;
+		margin-top: 10px;
+	}
+    .about address ul li {
+        width: 100%;
+    }
+
+	.about-address{
+    	height: 400px;
+		flex-direction: column;
+	}
+	.about-address .address{
+		width: 100%;
+    	margin-bottom: 10px;
+	}
+	.about-address .google-map {
+		width: 100%;
+	}
+	.about-address .google-map a {
+		margin-top: 10px;
+	}
+
+	.support{
+		flex-direction: column;
+    	padding-bottom: 10px;
+    	padding-top: 10px;
+	}
+	.support h3{
+		font-size: 16px;
+	}
+	.support button{
+		margin-top: 10px;
 	}
 
 

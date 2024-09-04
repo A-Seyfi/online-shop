@@ -7,54 +7,48 @@
 
 
 {% block content %}
-    <div id="contact-page" class="container">
+    <div id="contact-page" class="about-page-con">
         <div class="bg">
+            <div class="about">
+                <img src="../../../static/images/home/about.jpg" alt="">
+                <p>{{ site_setting.about_us_text }}</p>
+                <address>
+                    <ul>
+                        <li>تلفن تماس : <span>{{ site_setting.phone }}</span></li>
+                        {% if site_setting.fax %}
+                            <li>فکس : <span>{{ site_setting.fax }}</span></li>
+                        {% endif %}
+                        {% if site_setting.email %}
+                            <li>ایمیـل : <span>{{ site_setting.email }}</span></li>
+                        {% endif %}
+                    </ul>
+                </address>
+            </div>
 
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="contact-info">
-                        <h2 class="title text-center">لوگـو شرکت</h2>
-                        <img src="{{ site_setting.site_logo.url }}" class="img-responsive">
-                    </div>
+            <div class="about-address">
+                <div class="address">
+                    <h3>آدرس ما</h3>
+                    <p>{{ site_setting.address }}</p>
                 </div>
-                <div class="col-sm-8">
-                    <div class="about">
-                        <h2 class="title text-center">دربـاره ما</h2>
-                        <p class="about-desc">
-                            {{ site_setting.about_us_text }}
-                        </p>
-                    </div>
+                <div class="google-map">
+                    <img src="../../../static/images/home/Map.jpg" alt="">
+                    <a href="">مشاهده در Google Mapp</a>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-12 about-address">
-                    <address>
-                        <p>
-                            {{ site_setting.address }}|
-                            تلفن تماس : {{ site_setting.phone }} |
-                            {% if site_setting.fax %}
-                                فکس : {{ site_setting.fax }} |
-                            {% endif %}
-                            {% if site_setting.email %}
-                                ایمیـل : {{ site_setting.email }}
-                            {% endif %}
-                        </p>
-                    </address>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="container">
-                    <div class="col-sm-12" style="overflow: hidden; margin-bottom: 40px"><h2 class="title text-center">
-                        مـا اینجـا هستیـم ... </h2>
-                        <div id="gmap" class="contact-map">
-                            <img src="{% static 'images/home/Map.jpg' %}" alt="Map">
+            <div class="support">
+                <h3>اگر به پشتیبانی نیازدارید ، به بخش پشتیبانی مراجعه کنید.</h3>
+                <button>
+                    <a href="{% url 'contact_us_page' %}">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M12 2C6.486 2 2 6.486 2 12v4.143C2 17.167 2.897 18 4 18h1a1 1 0 0 0 1-1v-5.143a1 1 0 0 0-1-1h-.908C4.648 6.987 7.978 4 12 4s7.352 2.987 7.908 6.857H19a1 1 0 0 0-1 1V18c0 1.103-.897 2-2 2h-2v-1h-4v3h6c2.206 0 4-1.794 4-4 1.103 0 2-.833 2-1.857V12c0-5.514-4.486-10-10-10z"/>
+                            </svg>
                         </div>
-                    </div>
-                </div>
+                        <h4>پشتیبانی</h4>
+                    </a>
+                </button>
             </div>
-
         </div>
     </div>
 {% endblock %}

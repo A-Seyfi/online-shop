@@ -1,7 +1,6 @@
 from django import forms
 from django.core import validators
 from django.core.exceptions import ValidationError
-
 from account_module.models import User
 
 
