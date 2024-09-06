@@ -7,27 +7,27 @@
 {% endblock %}
 
 {% block content %}
-    <section id="slider">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
+    <section id="slider" style="width: 100%;display: flex;">
+        <!-- <div class="container"> -->
+            <!-- <div class="row"> -->
+                <div class="col-sm-12" style="padding: 0;width: 100%;">
                     <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                        {% comment %} <ol class="carousel-indicators">
+                        <!-- {% comment %} <ol class="carousel-indicators">
                             <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
                             <li data-target="#slider-carousel" data-slide-to="1"></li>
-                        </ol>{% endcomment %}
+                        </ol>{% endcomment %} -->
 
                         <div class="carousel-inner">
 
                             {% for slider in sliders %}
-                                <div class="item {% if forloop.first %} active {% endif %}">
+                                <div class="item {% if forloop.first %} active {% endif %}" style="display: flex;padding: 0;">
                                     <!-- <div class="col-sm-6">
                                         <h2>{{ slider.title }}</h2>
                                         <p>{{ slider.description }}</p>
                                         <a href="{{ slider.url }}" target="_blank" class="btn btn-default get">{{ slider.url_title }}</a>
                                     </div> -->
-                                    <div class="col-sm-6">
-                                        <img src="{{ slider.image.url }}" class="girl img-responsive" width="500" alt=""/>
+                                    <div class="col-sm-6" style="width: 100%;padding: 0;display: flex;">
+                                        <img src="{{ slider.image.url }}" class="slider-img img-responsive" width="500" alt=""/>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -43,9 +43,88 @@
                     </div>
 
                 </div>
+            <!-- </div>
+        </div> -->
+    </section>
+
+    <section class="brands-slider-con">
+        <div class="brand-slides" id="brand_slides">
+            <div class="barnd-slide">
+                <a href="">
+                    <div>
+                        <img src="../../../static/images/home/girl2.jpg" alt="">
+                    </div>
+                    <h4>HP</h4>
+                </a>
+            </div>
+            <div class="barnd-slide">
+                <a href="">
+                    <div>
+                        <img src="../../../static/images/home/girl2.jpg" alt="">
+                    </div>
+                    <h4>HP</h4>
+                </a>
+            </div>
+            <div class="barnd-slide">
+                <a href="">
+                    <div>
+                        <img src="../../../static/images/home/girl2.jpg" alt="">
+                    </div>
+                    <h4>HP</h4>
+                </a>
+            </div>
+            <div class="barnd-slide">
+                <a href="">
+                    <div>
+                        <img src="../../../static/images/home/girl2.jpg" alt="">
+                    </div>
+                    <h4>HP</h4>
+                </a>
+            </div>
+            <div class="barnd-slide">
+                <a href="">
+                    <div>
+                        <img src="../../../static/images/home/girl2.jpg" alt="">
+                    </div>
+                    <h4>HP</h4>
+                </a>
+            </div>
+            <div class="barnd-slide">
+                <a href="">
+                    <div>
+                        <img src="../../../static/images/home/girl2.jpg" alt="">
+                    </div>
+                    <h4>HP</h4>
+                </a>
+            </div>
+            <div class="barnd-slide">
+                <a href="">
+                    <div>
+                        <img src="../../../static/images/home/girl2.jpg" alt="">
+                    </div>
+                    <h4>HP</h4>
+                </a>
+            </div>
+            <div class="barnd-slide">
+                <a href="">
+                    <div>
+                        <img src="../../../static/images/home/girl2.jpg" alt="">
+                    </div>
+                    <h4>HP</h4>
+                </a>
+            </div>
+            <div class="barnd-slide">
+                <a href="">
+                    <div>
+                        <img src="../../../static/images/home/Gallery.jpg" alt="">
+                    </div>
+                    <h4>HP</h4>
+                </a>
             </div>
         </div>
     </section>
+
+
 
     <section>
         <div class="container">

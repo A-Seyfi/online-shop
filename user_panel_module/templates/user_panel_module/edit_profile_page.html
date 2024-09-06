@@ -2,7 +2,7 @@
 {% load render_partial %}
 
 {% block title %}
-    ویرایش اطلاعات کاربری
+    اطلاعات کاربری
 {% endblock %}
 
 {% block content %}
@@ -11,8 +11,8 @@
             <div class="user-panel-dashboard">
                 {% render_partial 'user_panel_module.views.user_panel_menu_component' %}
             </div>
-            <div class="col-md-8">
-                <form enctype="multipart/form-data" action="{% url 'edit_profile_page' %}" method="post">
+            <div class="prof-temp profile-detail">
+                <form enctype="multipart/form-data" action="{% url 'profile_page' %}" method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <button type="submit" class="btn btn-success">ثبت</button>

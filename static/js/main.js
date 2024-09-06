@@ -66,3 +66,23 @@ document.addEventListener('click', function(event) {
    localStorage.setItem('activeLink', event.target.textContent);
    }
 });
+
+
+
+
+
+
+/* brand slider */
+const brand_slides = document.getElementById('brand_slides')
+
+const lastSlide = document.querySelectorAll('.barnd-slide');
+const lastDiv = lastSlide[lastSlide.length - 1];
+const lastDivPositionX = lastDiv.getBoundingClientRect().left + window.scrollX;
+
+setInterval(()=>{
+   brand_slides.style.transform = `translateX(${-lastDivPositionX}px)`
+},20000)
+
+setInterval(()=>{
+   brand_slides.style.transform = `translateX(0)`
+}, 40000)

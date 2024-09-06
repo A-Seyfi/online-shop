@@ -45,7 +45,7 @@
                 
                 <ul class="nav navbar-nav">
                 {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'user_panel_dashboard' %}"><i class="fa fa-user"></i> پنل کاربری</a></li>
+                    <li><a href="{% url 'profile_page' %}"><i class="fa fa-user"></i> پنل کاربری</a></li>
                 {% else %}
                     <li><a href="{% url 'register_page' %}"><i class="fa fa-user-plus"></i> ثبت نام</a></li>
                     <li><a href="{% url 'login_page' %}"><i class="fa fa-sign-in"></i> ورود</a></li>
@@ -97,7 +97,7 @@
         <li><a class="user-basket-link" href="{% url 'user_basket_page' %}"><i class="fa fa-shopping-cart"></i> سبد خرید <span>4</span></a></li>
 
         {% if request.user.is_authenticated %}
-            <li><a href="{% url 'user_panel_dashboard' %}"><i class="fa fa-user"></i> پنل کاربری</a></li>
+            <li><a href="{% url 'profile_page' %}"><i class="fa fa-user"></i> پنل کاربری</a></li>
         {% else %}
             <li><a href="{% url 'register_page' %}">ثبت نام</a></li>
             <li><a href="{% url 'login_page' %}"><i class="fa fa-sign-in"></i> ورود</a></li>

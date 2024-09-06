@@ -438,7 +438,7 @@ ul.sub-menu {
 #footer {
     width: 98%;
     margin: 0 auto 1% auto;
-    border-radius: 0.5vw;
+    border-radius: 10px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -597,13 +597,59 @@ ul.sub-menu {
     top: 52%;
 }
 
-.girl {
+.slider-img {
     margin-right: 0;
     min-width: 100%;
     max-width: 100%;
-    min-height: 350px;
-    max-height: 350px;
+    min-height: 450px;
+    max-height: 450px;
 }
+
+
+
+
+
+/* brands slider*/
+.brands-slider-con {
+    width: 98%;
+    position: relative;
+    margin: 10px auto;
+    padding: 10px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.brand-slides {
+    height: 100%;
+    display: flex;
+    /* animation: slide 7s linear infinite; */
+    transition: all 20s;
+}
+
+.barnd-slide {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+.barnd-slide div{
+    height: 80%;
+    display: flex;
+    padding: 10px;
+}
+.barnd-slide div img{
+    width: 220px;
+    height: 220px;
+    border-radius: 120px;
+}
+.barnd-slide h4{
+    height: 20%;
+    margin-bottom: 0;
+    text-align: center;
+    align-content: center;
+}
+
+
 
 .item h1 {
     color: #B4B1AB;
@@ -1824,12 +1870,13 @@ h2.title {
 }
 
 .user-panel-dashboard{
+    width: 20%;
     text-align: center;
     font-size: 15px;
 }
 
 .user-panel-dashboard ul{
-    height: 280px;
+    height: 360px;
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
@@ -1855,6 +1902,49 @@ h2.title {
     align-items: center;
 }
 
+
+.prof-temp{
+    width: 70%;
+    padding: 0 15px;
+}
+
+
+.profile-detail {
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.profile-detail form{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.profile-detail form p:nth-child(2){
+    width: 45%;
+}
+.profile-detail form p:nth-child(3){
+    width: 45%;
+}
+.profile-detail form p:nth-child(4){
+    width: 100%;
+}
+.profile-detail form p:nth-child(5){
+    width: 100%;
+}
+.profile-detail .btn{
+    padding: 10px 50px;
+}
+
+
+.change-pass p{
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+.change-pass .btn{
+    padding: 10px 50px;
+}
 
 
 /*************************
@@ -2439,8 +2529,6 @@ h2.title {
     margin-left: 10px
 }
 
-.user_info > li > span {
-}
 
 .chose_area input, select, textarea {
     background: #F0F0E9;
@@ -2709,9 +2797,6 @@ h2.title {
     margin-bottom: 17px;
 }
 
-.single-blog-post > a {
-}
-
 .blog-post-area
 .single-blog-post a img {
     border: 1px solid #F7F7F0;
@@ -2919,7 +3004,6 @@ h2.title {
 
 .socials-share li {
     display: inline-block;
-    float: right;
     /* margin-left: 10px;
     border: solid 1px #eaeaea; */
     padding: 5px 10px;

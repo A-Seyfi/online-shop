@@ -12,13 +12,9 @@ from django.contrib.auth import logout
 from django.utils.decorators import method_decorator
 
 
-@method_decorator(login_required, name='dispatch')
-class UserPanelDashboardPage(TemplateView):
-    template_name = 'user_panel_module/user_panel_dashboard_page.html'
-
 
 @method_decorator(login_required, name='dispatch')
-class EditUserProfilePage(View):
+class UserPanelDashboardPage(View):
     def get(self, request: HttpRequest):
         current_user = User.objects.filter(id=request.user.id).first()
         edit_form = EditProfileModelForm(instance=current_user)

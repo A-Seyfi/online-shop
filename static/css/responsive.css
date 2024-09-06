@@ -157,10 +157,6 @@
 	
 
 	/* footer */
-	#footer {
-		border-radius: 1vw;
-	}
-
 	.footer-top .footer-logo-con {
 		padding: 12px;
 		border-radius: 1vw;
@@ -699,6 +695,19 @@
 		height: 25px;
 		margin-left: 5px;
 	}
+
+
+
+	/* profile */
+	/* .user-panel-dashboard{
+		width: 100%;
+		font-size: 18px;
+		display: none;
+	}
+	.prof-temp{
+		width: 100%;
+		display: none;
+	} */
 }
 	
 	
@@ -1133,6 +1142,15 @@
 
 	.footer-bottom p{
 		font-size: 14px;
+	}
+
+
+	/* profile */
+	.profile-detail form p:nth-child(2){
+		width: 100%;
+	}
+	.profile-detail form p:nth-child(3){
+		width: 100%;
 	}
 }
 	

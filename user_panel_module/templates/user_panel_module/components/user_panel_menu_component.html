@@ -1,17 +1,20 @@
 <ul class="list-group">
-    <li class="list-group-item">
-        <a href="{% url 'user_panel_dashboard' %}">پنل کاربری</a>
+    <li id="first_item" class="list-group-item user_panel_cat">
+        <a href="{% url 'profile_page' %}">اطلاعات کاربری</a>
     </li>
-    <li class="list-group-item">
-        <a href="{% url 'edit_profile_page' %}">ویرایش اطلاعات</a>
+    <li class="list-group-item user_panel_cat">
+        <a href="">آدرس ها</a>
     </li>
-    <li class="list-group-item">
+    <li class="list-group-item user_panel_cat">
+        <a href="">لیست علاقه مندی ها</a>
+    </li>
+    <li class="list-group-item user_panel_cat">
         <a href="{% url 'user_shopping_page' %}">لیست خرید های قبلی</a>
     </li>
-    <li class="list-group-item">
+    <li class="list-group-item user_panel_cat">
         <a href="{% url 'change_password_page' %}">تغییر کلمه عبور</a>
     </li>
-    <li class="list-group-item">
+    <li class="list-group-item user_panel_cat">
         <a href="{% url 'logout_page' %}">خروج از حساب کاربری</a>
     </li>
 </ul>
