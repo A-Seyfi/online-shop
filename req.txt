@@ -10,3 +10,5 @@ sqlparse
 requests
 typing-extensions
 django_widget_tweeks
+fuzzywuzzy 
+python-Levenshtein

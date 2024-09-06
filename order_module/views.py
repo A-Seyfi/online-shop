@@ -5,6 +5,7 @@ from django.urls import reverse
 
 from product_module.models import Product
 from .models import Order, OrderDetail
+from product_module.models import Color, RAM, Storage, Warranty
 from django.shortcuts import redirect, render
 import requests
 import json
@@ -25,10 +26,14 @@ CallbackURL = 'http://127.0.0.1:8000/order/verify-payment/'
 def add_product_to_order(request: HttpRequest):
     product_id = int(request.GET.get('product_id'))
     count = int(request.GET.get('count'))
-    color = request.GET.get('color')
-    ram = request.GET.get('ram')
-    storage = request.GET.get('storage')
-    warranty = request.GET.get('warranty')
+    color_id = int(request.GET.get('color'))
+    color = Color.objects.get(id=color_id)
+    ram_id = int(request.GET.get('ram'))
+    ram = RAM.objects.get(id=ram_id)
+    storage_id = int(request.GET.get('storage'))
+    storage = Storage.objects.get(id=storage_id)
+    warranty_id = int(request.GET.get('warranty'))
+    warranty = Warranty.objects.get(id=warranty_id)
     if count < 1:
         # count = 1
         return JsonResponse({

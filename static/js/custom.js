@@ -44,10 +44,12 @@ function showLargeImage(imageSrc) {
 
 function addProductToOrder(productId) {
     const productCount = $('#product-count').val();
-    const productColor = $('#color').val();
-    const productRam = $('#ram').val();
-    const productStorage = $('#storage').val();
-    const productWarrany = $('#warranty').val();
+    const productColor = $('#id_color').val();
+    const productRam = $('#id_ram').val();
+    const productStorage = $('#id_storage').val();
+    const productWarrany = $('#id_warranty').val();
+    console.log(productId);
+    console.log("test log")
     $.get('/order/add-to-order?product_id=' + productId + '&count=' + productCount + '&color=' + productColor + '&ram=' + productRam + '&storage=' + productStorage + '&warranty=' + productWarrany).then(res => {
         Swal.fire({
             title: 'اعلان',

@@ -39,8 +39,6 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='قیمت')
     short_description = models.CharField(max_length=360, db_index=True, null=True, verbose_name='توضیحات کوتاه')
     description = models.TextField(verbose_name='توضیحات اصلی', db_index=True)
-    color = models.JSONField(verbose_name='رنگ های موجود', null=True, blank=True)
-    warranty = models.JSONField(verbose_name='گارانتی', null=True, blank=True)
 
     dimensions = models.CharField(max_length=255, verbose_name='ابعاد', null=True, blank=True)
     weight = models.FloatField(verbose_name='وزن (Kg)', null=True, blank=True)
@@ -59,13 +57,10 @@ class Product(models.Model):
     touch_screen = models.BooleanField(verbose_name='صفحه‌نمایش لمسی', default=False)
     additional_display_features = models.TextField(verbose_name='سایر ویژگی‌های نمایشگر', null=True, blank=True)
 
-    ram_options = models.JSONField(verbose_name='ظرفیت حافظه‌ی رم', null=True, blank=True)
     ram_type = models.CharField(max_length=255, verbose_name='نوع حافظه‌ی رم', null=True, blank=True)
     ram_bus = models.CharField(max_length=255, verbose_name='باس رم (MHz)', null=True, blank=True)
     ram_upgradable = models.BooleanField(verbose_name='قابلیت ارتقای رم', default=False)
 
-    hdd_memory = models.JSONField(verbose_name='ظرفیت حافظه HDD', null=True, blank=True)
-    ssd_memory = models.JSONField(verbose_name='ظرفیت حافظه SSD', null=True, blank=True)
     internal_memory = models.CharField(max_length=255, verbose_name='ظرفیت حافظه داخلی', null=True, blank=True)
     internal_memory_upgradable = models.BooleanField(verbose_name='قابلیت ارتقا حافظه داخلی', default=False)
 
@@ -121,6 +116,54 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'محصول'
         verbose_name_plural = 'محصولات'
+
+
+class Color(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصول")
+    name = models.CharField(max_length=20, verbose_name="رنگ")
+    price_increase = models.IntegerField(verbose_name="افزایش قیمت به ازای انتخاب")
+
+    def __str__(self):
+        return f'رنگ({self.name}) - محصول({self.product.alternative_name}) - کد انتخاب({self.id}) - افزایش قیمت({self.price_increase})'
+
+    class Meta:
+        verbose_name = 'رنگ محصول'
+        verbose_name_plural = 'رنگ های محصولات'
+
+class RAM(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصول")
+    size = models.CharField(max_length=10, verbose_name="ظرفیت رم")
+    price_increase = models.IntegerField(verbose_name="افزایش قیمت به ازای انتخاب")
+
+    def __str__(self):
+        return f'ظرفیت رم({self.size}) - محصول({self.product.alternative_name}) - کد انتخاب({self.id}) - افزایش قیمت({self.price_increase})'
+
+    class Meta:
+        verbose_name = 'حافظه رم محصول'
+        verbose_name_plural = 'حافظه رم محصولات'
+
+class Storage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصول", )
+    size = models.CharField(max_length=10, verbose_name="ظرفیت حافظه")
+    price_increase = models.IntegerField(verbose_name="افزایش قیمت به ازای انتخاب")
+
+    def __str__(self):
+        return f'ظرفیت حافظه({self.size}) - محصول({self.product.alternative_name}) - کد انتخاب({self.id}) - افزایش قیمت({self.price_increase})'
+    class Meta:
+        verbose_name = 'حافظه محصول'
+        verbose_name_plural = 'حافظه محصولات'
+
+class Warranty(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصول")
+    duration = models.CharField(max_length=150, verbose_name="گارانتی")
+    price_increase = models.IntegerField(verbose_name="افزایش قیمت به ازای انتخاب")
+    
+    def __str__(self):
+        return f'گارانتی({self.duration}) - محصول({self.product.alternative_name}) - کد انتخاب({self.id}) - افزایش قیمت({self.price_increase})'
+
+    class Meta:
+        verbose_name = 'گارانتی'
+        verbose_name_plural = 'گارانتی ها'
 
 
 class ProductTag(models.Model):

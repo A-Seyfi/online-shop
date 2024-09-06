@@ -1,6 +1,6 @@
 from django.db import models
 from account_module.models import User
-from product_module.models import Product
+from product_module.models import Product, Color, RAM, Storage, Warranty
 
 
 
@@ -16,10 +16,20 @@ class Order(models.Model):
         total_amount = 0
         if self.is_paid:
             for order_detail in self.orderdetail_set.all():
-                total_amount += order_detail.final_price * order_detail.count
+                print(type(order_detail.color), order_detail.color)
+            for order_detail in self.orderdetail_set.all():
+                total_amount += (int(order_detail.final_price) * int(order_detail.count) +
+                                 int(order_detail.color.price_increase) + 
+                                 int(order_detail.ram.price_increase) + 
+                                 int(order_detail.storage.price_increase) + 
+                                 int(order_detail.warranty.price_increase))
         else:
             for order_detail in self.orderdetail_set.all():
-                total_amount += order_detail.product.price * order_detail.count
+                total_amount += (order_detail.product.price * order_detail.count +
+                                 int(order_detail.color.price_increase) + 
+                                 int(order_detail.ram.price_increase) + 
+                                 int(order_detail.storage.price_increase) + 
+                                 int(order_detail.warranty.price_increase))
 
         return total_amount
 
@@ -31,10 +41,10 @@ class Order(models.Model):
 class OrderDetail(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='سبد خرید')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
-    color = models.CharField(max_length=50,verbose_name='رنگ', null=True, blank=True)
-    ram = models.CharField(max_length=50, verbose_name='رم', null=True, blank=True)
-    storage = models.CharField(max_length=50, verbose_name='حافظه', null=True, blank=True)
-    warranty = models.CharField(max_length=50, verbose_name='گارانتی', null=True, blank=True)
+    color = models.ForeignKey(Color, on_delete=models.CASCADE, max_length=50,verbose_name='رنگ', null=True, blank=True)
+    ram = models.ForeignKey(RAM, on_delete=models.CASCADE, max_length=50, verbose_name='رم', null=True, blank=True)
+    storage = models.ForeignKey(Storage, on_delete=models.CASCADE, max_length=50, verbose_name='حافظه', null=True, blank=True)
+    warranty = models.ForeignKey(Warranty, on_delete=models.CASCADE, max_length=50, verbose_name='گارانتی', null=True, blank=True)
     final_price = models.IntegerField(null=True, blank=True, verbose_name='قیمت نهایی تکی محصول')
     count = models.IntegerField(verbose_name='تعداد')
 
