@@ -7,7 +7,7 @@ from site_module.models import SiteBanner
 from utils.http_service import get_client_ip
 from utils.convertors import group_list
 from .models import Product, ProductCategory, ProductBrand, ProductVisit, ProductGallery
-from .forms import ProductCompareForm
+from .forms import ProductCompareForm, LaptopSelectionForm
 from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
 
@@ -76,6 +76,7 @@ class ProductDetailView(DetailView):
         loaded_product = self.object
         request = self.request
         favorite_product_id = request.session.get("product_favorites")
+        context['form'] = LaptopSelectionForm(product_id=self.object.id)
         context['is_favorite'] = favorite_product_id == str(loaded_product.id)
         context['banners'] = SiteBanner.objects.filter(is_active=True, position__iexact=SiteBanner.SiteBannerPositions.product_detail)
         galleries = list(ProductGallery.objects.filter(product_id=loaded_product.id).all())
@@ -94,6 +95,22 @@ class ProductDetailView(DetailView):
             new_visit.save()
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = LaptopSelectionForm(request.POST)
+
+        if form.is_valid():
+            total_price = form.cleaned_data['color'].price_increase + \
+                          form.cleaned_data['ram'].price_increase + \
+                          form.cleaned_data['storage'].price_increase + \
+                          form.cleaned_data['warranty'].price_increase
+            print(total_price)
+
+            return render(request, self.template_name, {'form': form, 'total_price': total_price})
+
+        return self.get(request, *args, **kwargs)
+
 
 
 class AddProductFavorite(View):
