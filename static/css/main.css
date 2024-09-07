@@ -575,7 +575,6 @@ ul.sub-menu {
 
 #slider {
     margin-top: -5px;
-    padding-bottom: 45px;
 }
 
 .carousel-indicators li {
@@ -611,26 +610,24 @@ ul.sub-menu {
 
 /* brands slider*/
 .brands-slider-con {
-    width: 98%;
+    width: 100%;
     position: relative;
-    margin: 10px auto;
+    margin: 0 auto 0 auto;
     padding: 10px;
     overflow: hidden;
-    border-radius: 10px;
     background-color: white;
 }
 
 .brand-slides {
     height: 100%;
     display: flex;
-    /* animation: slide 7s linear infinite; */
     transition: all 20s;
 }
 
 .barnd-slide {
     display: flex;
     flex-direction: column;
-    margin-left: 30px;
+    margin-left: 60px;
 }
 .barnd-slide div{
     height: 80%;
@@ -638,8 +635,8 @@ ul.sub-menu {
     padding: 10px;
 }
 .barnd-slide div img{
-    width: 220px;
-    height: 220px;
+    width: 160px;
+    height: 160px;
     border-radius: 120px;
 }
 .barnd-slide h4{
