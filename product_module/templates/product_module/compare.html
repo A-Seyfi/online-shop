@@ -10,7 +10,14 @@
     <h1>مقایسه محصولات</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">مقایسه</button>
+        <ul>
+            {% for product in products %}
+                <li>
+                    <input type="checkbox" name="products" value="{{ product.id }}">
+                    {% include 'includes/product_item_partial.html' with product=product col_size=4 %}
+                </li>
+                {% endfor %}
+        </ul>
+        <button type="submit">مقایسه محصولات</button>
     </form>
 {% endblock %}

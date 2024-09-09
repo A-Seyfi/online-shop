@@ -48,80 +48,20 @@
     </section>
 
     <section class="brands-slider-con">
-        <div class="brand-slides" id="brand_slides">
-            <div class="barnd-slide">
-                <a href="">
-                    <div>
-                        <img src="../../../static/images/home/girl2.jpg" alt="">
+        {% if brands %}
+            {% for brand in brands %}
+                <div class="brand-slides" id="brand_slides">
+                    <div class="barnd-slide">
+                        <a href="{% url 'product-list-by-brands' brand=brand.url_title %}">
+                            <div>
+                                <img src="{{ brand.image.url }}" alt="">
+                            </div>
+                            <h4>{{ brand.title }}</h4>
+                        </a>
                     </div>
-                    <h4>HP</h4>
-                </a>
-            </div>
-            <div class="barnd-slide">
-                <a href="">
-                    <div>
-                        <img src="../../../static/images/home/girl2.jpg" alt="">
-                    </div>
-                    <h4>HP</h4>
-                </a>
-            </div>
-            <div class="barnd-slide">
-                <a href="">
-                    <div>
-                        <img src="../../../static/images/home/girl2.jpg" alt="">
-                    </div>
-                    <h4>HP</h4>
-                </a>
-            </div>
-            <div class="barnd-slide">
-                <a href="">
-                    <div>
-                        <img src="../../../static/images/home/girl2.jpg" alt="">
-                    </div>
-                    <h4>HP</h4>
-                </a>
-            </div>
-            <div class="barnd-slide">
-                <a href="">
-                    <div>
-                        <img src="../../../static/images/home/girl2.jpg" alt="">
-                    </div>
-                    <h4>HP</h4>
-                </a>
-            </div>
-            <div class="barnd-slide">
-                <a href="">
-                    <div>
-                        <img src="../../../static/images/home/girl2.jpg" alt="">
-                    </div>
-                    <h4>HP</h4>
-                </a>
-            </div>
-            <div class="barnd-slide">
-                <a href="">
-                    <div>
-                        <img src="../../../static/images/home/girl2.jpg" alt="">
-                    </div>
-                    <h4>HP</h4>
-                </a>
-            </div>
-            <div class="barnd-slide">
-                <a href="">
-                    <div>
-                        <img src="../../../static/images/home/girl2.jpg" alt="">
-                    </div>
-                    <h4>HP</h4>
-                </a>
-            </div>
-            <div class="barnd-slide">
-                <a href="">
-                    <div>
-                        <img src="../../../static/images/home/Gallery.jpg" alt="">
-                    </div>
-                    <h4>HP</h4>
-                </a>
-            </div>
-        </div>
+                </div>
+            {% endfor %}
+        {% endif %}
     </section>
 
 

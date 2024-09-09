@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.views import View
 from django.views.generic import TemplateView, ListView
 from account_module.models import User
+from product_module.models import Favorite
 from order_module.models import Order, OrderDetail
 from .forms import EditProfileModelForm, ChangePasswordForm
 from django.contrib.auth import logout
@@ -35,6 +36,12 @@ class UserPanelDashboardPage(View):
             'current_user': current_user
         }
         return render(request, 'user_panel_module/edit_profile_page.html', context)
+
+
+@login_required
+def favorites_list(request):
+    favorites = Favorite.objects.filter(user=request.user).select_related('product')
+    return render(request, 'user_panel_module/favorite_list.html', {'favorites': favorites})
 
 
 @method_decorator(login_required, name='dispatch')
