@@ -25,7 +25,7 @@
                         <h6>{{ order.orderdetail_set.count }} کالا</h6>
                     </div>
 
-                    {% for detail in order.orderdetail_set.all %}
+                {% for detail in order.orderdetail_set.all %}
                     <tbody class="cart-detail">
                         <tr class="product-img">
                             <td class="cart_product">
@@ -37,7 +37,10 @@
                             <td class="cart_description">
                                 <h4><a href="" class="one-line-text">{{ detail.product.title }}</a></h4>
                                 <p>شناسـه : {{ detail.product.id }}</p>
-                                <h4>رنگ : <span>مشکی</span></h4>
+                                    <h4>{{ options.color }}</h4>
+                                    <h4>{{ options.ram }}</h4>
+                                    <h4>{{ options.storage }}</h4>
+                                    <h4>{{ options.warranty }}</h4>
                             </td>
                         </tr>
 
@@ -76,8 +79,7 @@
                 <div class="col-sm-6">
                     <div class="total_area">
                         <ul>
-                            <li>قیمت کالاها<span class="product-count"> (4)</span><span>{{ sum|three_digits_currency }}</span></li>
-                            <li class="discount">مجموع تخفیف کالاها<span>230,000 تومان</span></li>
+                            <li>قیمت کالاها<span class="product-count"> ({{ total_items.orderdetail_set.count }})</span><span>{{ sum|three_digits_currency }}</span></li>
                             <li>مبلغ قابل پرداخت<span>38,308,00 تومان</span></li>
                         </ul>
                         <a class="btn btn-default check_out" href="{% url 'request_payment' %}">پرداخت</a>
