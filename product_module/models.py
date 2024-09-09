@@ -38,13 +38,16 @@ class Product(models.Model):
     image = models.ImageField(upload_to='images/products', null=True, blank=True, verbose_name='تصویر محصول')
     brand = models.ForeignKey(ProductBrand, on_delete=models.CASCADE, verbose_name='برند', null=True, blank=True)
     price = models.IntegerField(verbose_name='قیمت')
+    customization = models.BooleanField(verbose_name='قابل کاستوم شدن', default=False)
     short_description = models.CharField(max_length=360, db_index=True, null=True, verbose_name='توضیحات کوتاه')
     description = models.TextField(verbose_name='توضیحات اصلی', db_index=True)
 
     dimensions = models.CharField(max_length=255, verbose_name='ابعاد', null=True, blank=True)
     weight = models.FloatField(verbose_name='وزن (Kg)', null=True, blank=True)
 
+    cpu_processor = models.CharField(max_length=255, verbose_name='سازنده پردازنده', null=True, blank=True)
     cpu = models.CharField(max_length=255, verbose_name='سری پردازنده', null=True, blank=True)
+    cpu_model = models.CharField(max_length=255, verbose_name='مدل پردازنده', null=True, blank=True)
     cpu_frequency = models.FloatField(verbose_name='فرکانس کاری پردازنده (GHz)', null=True, blank=True)
     cpu_cache = models.CharField(max_length=255, verbose_name='حافظه‌ی کش (MB)', null=True, blank=True)
     cpu_core = models.CharField(max_length=255, verbose_name='تعداد هسته', null=True, blank=True)

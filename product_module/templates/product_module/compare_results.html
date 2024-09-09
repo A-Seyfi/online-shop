@@ -57,7 +57,7 @@
     
             {% if products|length < 4 %}
                 <div class="more-product-c compared-product-link">
-                    <a href="{% url 'compare_products' %}">مقایسه محصولات بیشتر <span class="fa fa-arrow-left"></span></a>
+                    <a href="{{ product.get_absolute_url }}">مقایسه محصولات بیشتر <span class="fa fa-arrow-left"></span></a>
                 </div>
             {% endif %}
         </div>
@@ -92,10 +92,26 @@
     
         <div class="compare-result-detail-con">
             <div class="compare-result-detail">
-                <h3>پردازنده مرکزی</h3>
+                <h3>سازنده پردازنده</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                    <div class="value">{{ product.cpu_processor }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>سری پردازنده</h3>
                 <div class="section-detail">
                     {% for product in products %}
                         <div class="value">{{ product.cpu }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="compare-result-detail">
+                <h3>مدل پردازنده</h3>
+                <div class="section-detail">
+                    {% for product in products %}
+                        <div class="value">{{ product.cpu_model }}</div>
                     {% endfor %}
                 </div>
             </div>
