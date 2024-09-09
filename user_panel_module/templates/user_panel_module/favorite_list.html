@@ -1,0 +1,22 @@
+{% extends 'shared/_layout.html' %}
+{% load render_partial %}
+{% load poll_extras %}
+
+{% block title %}
+    لیست خرید های من
+{% endblock %}
+
+{% block content %}
+    <div class="container container-user-panel">
+        <div class="row flex">
+            <div class="user-panel-dashboard">
+                {% render_partial 'user_panel_module.views.user_panel_menu_component' %}
+            </div>
+
+            {% for favorite in favorites %}
+                <li>{{ favorite.product.title }} - {{ favorite.product.price }} تومان</li>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

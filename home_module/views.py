@@ -2,6 +2,7 @@ from django.db.models import Count, Sum
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from product_module.models import Product, ProductCategory
+from order_module.models import Order
 from site_module.models import SiteSetting, FooterLinkBox, Slider
 from utils.convertors import group_list
 
@@ -44,6 +45,15 @@ def site_header_component(request):
         'site_setting': setting
     }
     return render(request, 'shared/site_header_component.html', context)
+
+
+def header_context(request):
+    if request.user.is_authenticated:
+        current_order, created = Order.objects.prefetch_related('orderdetail_set').get_or_create(is_paid=False, user_id=request.user.id)
+    else:
+        current_order = 0
+
+    return {'total_items': current_order}
 
 
 def site_footer_component(request):

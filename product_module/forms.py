@@ -1,13 +1,5 @@
 from django import forms
-from .models import Product, Color, RAM, Storage, Warranty
-
-class ProductCompareForm(forms.Form):
-    products = forms.ModelMultipleChoiceField(
-        queryset=Product.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=True,
-        label="محصولی برای مقایسه انتخاب کنید",
-    )
+from .models import Color, RAM, Storage, Warranty
 
 class LaptopSelectionForm(forms.Form):
     color = forms.ModelChoiceField(queryset=Color.objects.none(), label="رنگ محصول")

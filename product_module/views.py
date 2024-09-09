@@ -3,11 +3,12 @@ from django.http import HttpRequest
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
+from django.contrib.auth.decorators import login_required
 from site_module.models import SiteBanner
 from utils.http_service import get_client_ip
 from utils.convertors import group_list
-from .models import Product, ProductCategory, ProductBrand, ProductVisit, ProductGallery
-from .forms import ProductCompareForm, LaptopSelectionForm
+from .models import Product, ProductCategory, ProductBrand, ProductVisit, ProductGallery, Favorite
+from .forms import LaptopSelectionForm
 from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
 
@@ -112,28 +113,28 @@ class ProductDetailView(DetailView):
         return self.get(request, *args, **kwargs)
 
 
-
-class AddProductFavorite(View):
-    def post(self, request):
-        product_id = request.POST["product_id"]
-        product = Product.objects.get(pk=product_id)
-        request.session["product_favorites"] = product_id
-        return redirect(product.get_absolute_url())
+@login_required
+def add_to_favorites(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    Favorite.objects.get_or_create(user=request.user, product=product)
+    return redirect('favorites_list')
 
 
 def compare_products(request):
-    if request.method == 'POST':
-        form = ProductCompareForm(request.POST)
-        if form.is_valid():
-            selected_products = form.cleaned_data['products']
-            if len(selected_products) > 4:
-                form.add_error(None, "حداکثر ۴ محصول برای مقایسه انتخاب کنید!")
-            else:
-                return render(request, 'product_module/compare_results.html', {'products': selected_products})
-    else:
-        form = ProductCompareForm()
+    products = Product.objects.all()
 
-    return render(request, 'product_module/compare.html', {'form': form})
+    if request.method == 'POST':
+        selected_products = request.POST.getlist('products')
+        request.session['selected_products'] = selected_products[:4]  # maximum 4 product
+        return redirect('compare_result')
+
+    return render(request, 'product_module/compare.html', {'products': products})
+
+def compare_result(request):
+    selected_product_ids = request.session.get('selected_products', [])
+    products = Product.objects.filter(id__in=selected_product_ids)
+
+    return render(request, 'product_module/compare_results.html', {'products': products})
 
 
 def fuzzy_search(query, threshold=15):
@@ -192,3 +193,9 @@ def product_brands_component(request: HttpRequest):
         'brands': product_brands
     }
     return render(request, 'product_module/components/product_brands_component.html', context)
+
+
+def header_brand_component(request: HttpRequest):
+    product_brands = ProductBrand.objects.filter(is_active=True)
+
+    return {'brands': product_brands}

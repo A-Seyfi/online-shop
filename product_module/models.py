@@ -20,6 +20,7 @@ class ProductCategory(models.Model):
 
 class ProductBrand(models.Model):
     title = models.CharField(max_length=300, verbose_name='نام برند', db_index=True)
+    image = models.ImageField(upload_to='images/products', null=True, blank=True, verbose_name='تصویر برند')
     url_title = models.CharField(max_length=300, verbose_name='نام در url', db_index=True)
     is_active = models.BooleanField(verbose_name='فعال / غیرفعال')
 
@@ -164,6 +165,18 @@ class Warranty(models.Model):
     class Meta:
         verbose_name = 'گارانتی'
         verbose_name_plural = 'گارانتی ها'
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="کاربر")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصولات مورد علاقه")
+
+    def __str__(self):
+        return f"{self.user}"
+
+    class Meta:
+        verbose_name = 'مورد علاقه'
+        verbose_name_plural = 'محصولات مورد علاقه'
 
 
 class ProductTag(models.Model):

@@ -98,6 +98,16 @@
 									</span>
                                 </div>
                                 <div>
+                                    {% if user.is_authenticated %}
+                                        <form action="{% url 'add_to_favorites' product.id %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit">افزودن به علاقه‌مندی‌ها</button>
+                                        </form>
+                                    {% else %}
+                                        <p>برای افزودن به علاقه‌مندی‌ها باید وارد حساب کاربری خود شوید.</p>
+                                    {% endif %}
+                                </div>
+                                <div>
                                     <p><b>موجـودی :</b> در انبـار موجود می باشد</p>
 
                                     {% if product.brand %}
