@@ -59,11 +59,9 @@ h1, h2, h3, h4, h5, h6 {
 .flex{
     display: flex;
 }
-
 .active{
     color: #d81921;
 }
-
 /*************************
 *******Header CSS******
 **************************/
@@ -586,6 +584,7 @@ ul.sub-menu {
 }
 
 .item {
+    display: flex !important;
     padding-left: 100px;
 }
 
@@ -1052,6 +1051,23 @@ h2.title {
     height: 100%;
 }
 
+.compare-check{
+    padding: 15px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.compare-check input{
+    margin: 0;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+}
+.compare-check label{
+    margin: 0;
+    font-size: 16px;
+}
+
 .new, .sale {
     position: absolute;
     top: 0;
@@ -1238,33 +1254,6 @@ h2.title {
     color: #d81921;
 }
 
-.category-tab {
-    overflow: hidden;
-}
-
-.category-tab ul {
-    background: #40403E;
-    border-bottom: 1px solid #d81921;
-    list-style: none outside none;
-    margin: 0 0 30px;
-    padding: 0;
-    width: 100%;
-}
-
-.category-tab ul li a {
-    border: 0 none;
-    border-radius: 0;
-    color: #B3AFA8;
-    display: block;
-    font-family: 'BYekan', sans-serif;
-    font-size: 14px;
-    text-transform: uppercase;
-}
-
-.category-tab ul li a:hover {
-    background: #d81921;
-    color: #fff;
-}
 
 .nav-tabs li.active a, .nav-tabs li.active a:hover, .nav-tabs li.active a:focus {
     -moz-border-bottom-colors: none;
@@ -1292,6 +1281,21 @@ h2.title {
 
 .recommended_items {
     overflow: hidden;
+    margin-bottom: 40px;
+}
+.recommended_items h2.title{
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 5px 0;
+    border-radius: 10px;
+    color: white;
+    background-color: #d81921;
+}
+
+#recommended-item-carousel .rcmnd-product{
+    padding: 10px;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
 }
 
 #recommended-item-carousel .carousel-inner .item {
@@ -1584,7 +1588,7 @@ h2.title {
 }
 
 .img-pd-section{
-    width: 35%;
+    width: fit-content;
     height: fit-content;
     padding: 10px;
     display: flex;
@@ -1626,7 +1630,7 @@ h2.title {
 
 #similar-product {
     width: 400px;
-    margin-top: 40px;
+    margin-top: 30px;
     overflow:hidden;
 }
 #similar-product .carousel-inner {
@@ -1686,7 +1690,7 @@ h2.title {
 .product-information {
     background: #fdfdfd;
     overflow: hidden;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     padding-top: 10px;
     position: relative;
 }
@@ -1694,7 +1698,7 @@ h2.title {
 .price-custom-sec{
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .price-custom-sec .pd-custom{
     width: 55%;
@@ -1703,6 +1707,8 @@ h2.title {
 .pd-custom .pd-color-con{
     display: flex;
     flex-direction: column;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #d3d3d3;
 }
 .pd-custom .pd-color-con .c-title{
     margin-bottom: 30px;
@@ -1713,21 +1719,67 @@ h2.title {
     padding-right: 3px;
 }
 .pd-custom .pd-color-con .pd-colors .pd-color{
-    width: 30px;
+    width: fit-content;
     height: 30px;
-    border-radius: 20px;
+    display: flex;
+    align-items: center;
     overflow: hidden;
-    padding: 4px;
-    align-content: center;
-    box-shadow: 0px 0px 6px -1.5px black;
+    padding: 10px;
+    border-radius: 20px;
     margin-left: 10px;
+    border: 1px solid;
 }
 .pd-custom .pd-color-con .pd-colors .pd-color span{
-    width: 100%;
-    height: 100%;
-    background-color: black;
+    width: 20px;
+    height: 20px;
     margin: 0;
-    border-radius: 20px;
+    margin-left: 10px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.pd-custom .main-detail{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-top: 30px;
+    margin-right: 3px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px -1.5px black;
+}
+.pd-custom .main-detail h3{
+    text-align: center;
+    width: 100%;
+}
+
+.pd-custom .main-detail ul{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    margin: 0;
+    width: 100%;
+}
+.pd-custom .main-detail ul li {
+    padding: 13px 5px;
+    font-size: 13px;
+    color: #8f8f8f;
+    border-top: 1px solid #d3d3d3;
+}
+.pd-custom .main-detail ul li span{
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+}
+
+.pd-custom .main-detail button{
+    width: fit-content;
+    padding: 7px 15px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: #d81921;
 }
 
 .pd-price{
@@ -1743,10 +1795,12 @@ h2.title {
     background-color: #f4f4f4;
 }
 .pd-price div{
-    font-size: 16px;
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+}
+.pd-price div span:first-child{
+    font-size: 16px;
 }
 
 .pd-price .warranty{
@@ -1762,7 +1816,7 @@ h2.title {
     fill: #00a041;
 }
 
-.pd-price div span:first-child{
+.pd-price div span:nth-child(2){
     font-size: 20px;
     margin-right: auto;
     font-weight: bold;
@@ -1866,7 +1920,6 @@ h2.title {
     margin-top: 15px;
 }
 
-
 .cart {
     width: 100%;
     background: #d81921;
@@ -1882,16 +1935,116 @@ h2.title {
 
 
 .shop-details-tab {
-    border: 1px solid #F7F7F0;
-    margin-bottom: 75px;
-    margin-left: 15px;
-    margin-right: 15px;
     padding-bottom: 10px;
 }
 
-.shop-details-tab .col-sm-12 {
-    padding-left: 0;
-    padding-right: 0;
+
+.category-tab {
+    overflow: hidden;
+}
+
+.shop-details-tab .tabs-con {
+    height: 50px;
+    margin-bottom: 10px;
+}
+.shop-details-tab .tabs-con .tabs{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 0 15px;
+    border-radius: 10px;
+    background-color: white;
+    list-style: none outside none;
+}
+.shop-details-tab .tabs-con .tabs li{
+    margin-left: 30px;
+    align-content: center;
+}
+.shop-details-tab .tabs-con .tabs li a{
+    border: 0 none;
+    border-radius: 0;
+    color: #000;
+    display: block;
+    font-family: 'BYekan', sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    align-content: center;
+    text-decoration: none !important;
+}
+.shop-details-tab .tabs-con .tabs li.active{
+    border-bottom: 3px solid #d81921;
+}
+.shop-details-tab .tabs-con .tabs li.active a{
+    color: #d81921;
+}
+
+.shop-details-tab .tab-content{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+.shop-details-tab .tab-content .content-sec{
+    width: 55%;
+}
+
+.shop-details-tab .tab-content #pfd-price{
+    margin: 0;
+    position: sticky;
+    top: 10px;
+}
+
+.shop-details-tab .tab-content #details{
+    height: fit-content;
+}
+#details h3{
+    margin: 0;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    background-color: #d81921;
+}
+
+#details ul{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 0 0;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #d3d3d3;
+}
+#details ul li{
+    padding: 10px;
+    font-size: 14px;
+    color: #727272;
+    border-bottom: 1px solid #d3d3d3;
+}
+#details ul li:last-child{
+    border-bottom: none;
+}
+#details ul li span{
+    font-size: 18px;
+    margin-right: 20px;
+    color: black;
+}
+
+#details button{
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
+    background:none;
+    border-style: none;
+}
+#details button span{
+    margin-right: 10px;
 }
 
 

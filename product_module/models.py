@@ -88,8 +88,6 @@ class Product(models.Model):
     thunderbolt_support = models.BooleanField(verbose_name='پشتیبانی از تاندربولت', default=False)
     headphone_microphone_jack = models.BooleanField(verbose_name='جک هدفون/میکروفن', default=False)
     
-    
-
     battery = models.CharField(max_length=255, verbose_name='حجم باتری', null=True, blank=True)
     battery_charge = models.CharField(max_length=255, verbose_name='شارژدهی باتری', null=True, blank=True)
     charger_power = models.CharField(max_length=255, verbose_name='توان شارژر', null=True, blank=True)

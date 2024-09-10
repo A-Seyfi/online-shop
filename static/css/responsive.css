@@ -203,7 +203,7 @@
 		width: 100%;
 		background-color: white;
 		z-index: 3;
-		bottom: 7.9%;
+		bottom: 75px;
 		margin: 0;
 	}
 	
@@ -456,6 +456,11 @@
 	.about-address {
 		height: 300px;
 	}
+
+
+
+	/* product detail */
+
 }
 	
 	
@@ -465,10 +470,6 @@
 		max-width: 200px;
 		min-height: 35px;
 		max-height: 35px;
-	}
-	
-	.mobile-menu{
-		height: 10%;
 	}
 	
 	.shop-menu ul li a{
@@ -1011,7 +1012,7 @@
 	}
 	
 	.mobile-mode .mobile-mode-picture{
-		width: 30%;
+		width: fit-content;
 	}
 	.mobile-mode .mobile-mode-detail{
 		width: 70%;

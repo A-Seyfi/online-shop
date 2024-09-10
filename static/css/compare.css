@@ -1,4 +1,8 @@
 /* compare results */
+.compare-title{
+    text-align: center;
+}
+
 #compare_menu{
     display: none;
 }
@@ -143,11 +147,17 @@
 }
 
 .product-image-wrapper {
-    margin: 0;
+    height: 460px;
 }
-
-
-
+@media (max-width: 991px) {
+    .product-image-wrapper {
+        height: 220px;
+    }
+    .mobile-mode-detail h2 {
+        margin: 0;
+        margin-top: 10px;
+    }
+}
 
 .compare-detail-section{
     width: 98%;

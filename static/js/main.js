@@ -47,12 +47,12 @@ window.onload = () => {
    }
 };
 
+
+
 const links = document.querySelectorAll('.sort');
 links.forEach(link => {
    link.addEventListener('click', setActiveColor);
 });
-
-
 
 function clearActiveClass() {
    links.forEach(link => {
@@ -70,20 +70,21 @@ document.addEventListener('click', function(event) {
 
 
 
-
-
 /* brand slider */
 const brand_slides = document.getElementById('brand_slides')
 const lastSlide = document.querySelectorAll('.barnd-slide');
 const lastDiv = lastSlide[lastSlide.length - 1];
-const lastDivPositionX = lastDiv.getBoundingClientRect().left + window.scrollX;
 
-setInterval(()=>{
-   brand_slides.style.transition = 'all 20s'
-   brand_slides.style.transform = `translateX(${-lastDivPositionX + 20}px)`
-},1)
+if(lastDiv){
+   const lastDivPositionX = lastDiv.getBoundingClientRect().left + window.scrollX;
 
-setInterval(()=>{
-   brand_slides.style.transition = 'none'
-   brand_slides.style.transform = `translateX(0)`
-}, 10000)
+   setInterval(()=>{
+      brand_slides.style.transition = 'all 20s'
+      brand_slides.style.transform = `translateX(${-lastDivPositionX + 20}px)`
+   },1)
+   
+   setInterval(()=>{
+      brand_slides.style.transition = 'none'
+      brand_slides.style.transform = `translateX(0)`
+   }, 10000)
+}

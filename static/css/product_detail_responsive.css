@@ -1,0 +1,239 @@
+@media (max-width: 1200px) {
+    .cart{
+        font-size: 14px;
+    }
+    .cart i {
+        margin-left: 5px;
+    }
+}
+
+
+@media (max-width: 991px) {
+    body{
+        margin-bottom: 140px;
+    }
+    
+    .view-product img {
+        width: 350px;
+        height: 310px;
+    }
+    
+    #similar-product {
+        width: 300px;
+        margin-bottom: 0;
+    }
+    #similar-product .carousel-inner img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .price-custom-sec .pd-custom {
+        width: 100%;
+    }
+    .pd-custom .pd-color-con {
+        flex-direction: row;
+        align-items: center;
+    }
+    .pd-custom .pd-color-con .c-title {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        margin-left: 40px;
+    }
+    .pd-custom .pd-color-con .c-title span{
+        margin-right: 10px;
+    }
+    
+    .pd-custom .main-detail {
+        margin-left: 3px;
+    }
+    .pd-custom .main-detail ul li {
+        padding: 13px 5px;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .shop-details-tab .tab-content .content-sec {
+        width: 100%;
+    }
+    #details ul li {
+        font-size: 18px;
+    }
+    #details ul li span {
+        font-size: 24px;
+    }
+    
+	.pd-price{
+        width: 100%;
+        height: 60px;
+        flex-direction: row;
+        align-items: center;
+		margin: 0;
+        border: none;
+        border-radius: 0;
+        position: fixed;
+		z-index: 3;
+		bottom: 75px;
+        left: 0;
+		background-color: white;
+    }
+    .pd-price .price{
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0;
+    }
+    .pd-price div span:first-child{
+        margin-left: 15px;
+        text-align: center;
+        opacity: 1;
+        color: black;
+    }
+    .pd-price div span:nth-child(2){
+        color: black;
+        font-size: 25px;
+        margin: 0;
+        opacity: 1;
+    }
+    .pd-price div span:last-child{
+        color: black;
+        font-size: 20px;
+        margin: 0;
+        opacity: 1;
+    }
+    
+    .pd-price .warranty{
+        display: none;
+    }
+    .pd-price button {
+        width: 55%;
+        margin: 0;
+        font-size: 18px;
+        padding: 10px 15px;
+        border-radius: 2vw;
+        align-content: center;
+    }
+    
+    #pfd-price{
+        display: none;
+    }
+}
+
+
+@media (max-width: 768px){
+    .product-details {
+        flex-direction: column;
+    }
+    
+    .img-pd-section {
+        width: 100%;
+    }
+    
+    .detail-section {
+        width: 100%;
+    }
+    
+    .pd-price div span:first-child {
+        width: 100%;
+        margin: 0;
+    }
+    .pd-price div span:nth-child(2) {
+        font-size: 20px;
+    }
+    .pd-price div span:last-child {
+        font-size: 15px;
+    }
+
+    .pd-price button {
+        width: fit-content;
+        height: fit-content;
+        font-size: 15px;
+        padding: 10px;
+    }
+    
+    #details ul li {
+        font-size: 16px;
+    }
+    #details ul li span {
+        font-size: 20px;
+        margin-right: auto;
+    }
+}
+
+
+
+@media (max-width: 480px){
+    .product-information h2 {
+        font-size: 17px;
+    }
+
+    .product-information {
+        margin-top: 0;
+        text-align: start;
+    }
+
+    .fav-comment button{
+        font-size: 12px;
+    }
+
+    .recommended_items h2.title {
+        font-size: 18px;
+    }
+
+    .shop-details-tab .tabs-con .tabs li a {
+        font-size: 15px;
+    }
+
+    #details h3 {
+        font-size: 18px;
+    }
+    #details ul li span {
+        font-size: 18px;
+    }
+    #details button {
+        font-size: 16px;
+    }
+}
+
+
+
+@media (max-width: 400px){
+    .view-product img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #similar-product {
+        width: 100%;
+        margin-top: 10px;
+    }
+    #similar-product .carousel-inner img {
+        width: 53px;
+        height: 53px;
+    }
+
+    .pd-custom .pd-color-con {
+        flex-direction: column;
+        align-items: unset;
+    }
+    .pd-custom .pd-color-con .c-title {
+        margin-bottom: 15px;
+        margin-left: 0;
+    }
+
+    .recommended_items h2.title {
+        font-size: 16px;
+    }
+
+    #details h3 {
+        font-size: 16px;
+    }
+
+    #details ul li {
+        font-size: 14px;
+    }
+    #details ul li span {
+        font-size: 16px;
+    }
+    
+}

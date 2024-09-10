@@ -1,6 +1,7 @@
 {% extends 'shared/_layout.html' %}
 {% load render_partial %}
 {% load poll_extras %}
+{% load thumbnail %}
 
 {% block title %}
     {{ product.title }}
@@ -8,11 +9,13 @@
 
 {% block header_references %}
     <link href="/static/lib/image-lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="/static/css/product_detail_responsive.css" rel="stylesheet">
 {% endblock %}
 
 {% block footer_references %}
     <script src="/static/lib/image-lightbox/js/lightbox.min.js"></script>
     {#    <script src="/static/lib/image-lightbox/js/lightbox-plus-jquery.min.js"></script>#}
+    <script src="/static/js/product_detail.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -25,21 +28,24 @@
                             <div class="view-product">
                                 {% if product.image %}
                                     <img src="{{ product.image.url }}" alt="" id="main_image">
+                                    <h3>
+                                        <a id="show_large_image_modal" href="{{ product.image.url }}"
+                                           data-lightbox="product-image">
+                                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 5h5V3H3v7h2zm5 14H5v-5H3v7h7zm11-5h-2v5h-5v2h7zm-2-4h2V3h-7v2h5z"/></svg>
+                                        </a>
+                                    </h3>
                                 {% else %}
                                     <img src="/static/images/product-details/1.jpg" alt="" id="main_image">
                                 {% endif %}
-                                <h3>
-                                    <a id="show_large_image_modal" href="{{ product.image.url }}"
-                                       data-lightbox="product-image">
-                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 5h5V3H3v7h2zm5 14H5v-5H3v7h7zm11-5h-2v5h-5v2h7zm-2-4h2V3h-7v2h5z"/></svg>
-                                    </a>
-                                </h3>
                             </div>
                             <div id="similar-product" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
-                                    <a onclick="showLargeImage('{{ product.image.url }}')">
-                                        <img src="{{ product.image.url }}" width="70" height="70" alt="">
-                                    </a>
+                                    {% if product.image %}
+                                        <a onclick="showLargeImage('{{ product.image.url }}')">
+                                            <img src="{{ product.image.url }}" width="70" height="70" alt="">
+                                        </a>
+                                    {% endif %}
+
                                     {% for gallery in product_galleries %}
                                     <a onclick="showLargeImage('{{ gallery.image.url }}')">
                                         <img src="{{ gallery.image.url }}" width="70" height="70" alt="">
@@ -60,7 +66,7 @@
                                                 <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"/></svg>افزودن به علاقه‌مندی‌ها</button>
                                             </form>
                                         {% endif %}
-                                        <button class="comment">دیدگاه ها<span>(5)</span></button>
+                                        <button id="comment" class="comment">نظرات کاربران<span>(5)</span></button>
                                     </div>
                                 </div>
 
@@ -69,9 +75,22 @@
                                         <div class="pd-color-con">
                                             <h4 class="c-title">رنگ : <span>مشکی</span></h4>
                                             <div class="pd-colors">
-                                                <div class="pd-color"><span></span></div>
-                                                <div class="pd-color"><span></span></div>
+                                                <div class="pd-color"><span style="background-color: black;"></span>مشکی</div>
+                                                <div class="pd-color"><span style="background-color: red;"></span>قرمز</div>
                                             </div>
+                                        </div>
+
+                                        <div class="main-detail">
+                                            <h3>مشخصات اصلی</h3>
+                                            <ul>
+                                                <li>سازنده پردازنده : <span>{{ product.cpu_processor }}</span></li>
+                                                <li>سری پردازنده : <span>{{ product.cpu }}</span></li>
+                                                <li>ظرفیت حافظه RAM : <span>test</span></li>
+                                                <li>ظرفیت حافظه داخلی : <span>{{ product.internal_memory }}</span></li>
+                                                <li>سازنده پردازنده گرافیکی : <span>{{ product.gpu_manufacturer }}</span></li>
+                                                <li>ابعاد نمایشگر : <span>{{ product.screen_size }}</span></li>
+                                            </ul>
+                                            <button id="more_pd">سایر مشخصات</button>
                                         </div>
 
                                         {% if product.customization %}
@@ -87,7 +106,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.995 6.9a.998.998 0 0 0-.548-.795l-8-4a1 1 0 0 0-.895 0l-8 4a1.002 1.002 0 0 0-.547.795c-.011.107-.961 10.767 8.589 15.014a.987.987 0 0 0 .812 0c9.55-4.247 8.6-14.906 8.589-15.014zM12 19.897C5.231 16.625 4.911 9.642 4.966 7.635L12 4.118l7.029 3.515c.037 1.989-.328 9.018-7.029 12.264z"/><path d="m11 12.586-2.293-2.293-1.414 1.414L11 15.414l5.707-5.707-1.414-1.414z"/></svg>
                                             <span>گارانتی ۱۸ ماهه امرتات</span>
                                         </div>
-                                        <div class="price">قیمت کالا <span>{{ product.price }}</span><span>تومان</span></div>
+                                        <div class="price"><span>قیمت کالا</span><span>{{ product.price }}</span><span>تومان</span></div>
                                         <button type="submit" onclick="addProductToOrder({{ product.id }})" class="btn btn-fefault cart">
                                             <i class="fa fa-shopping-cart"></i>افزودن به سبد خرید
                                         </button>
@@ -104,7 +123,7 @@
                             <h2 class="title text-center">محصولات مرتبط</h2>
 
                             <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
+                                <div class="rcmnd-product carousel-inner">
                                     {% for group in related_products %}
                                         <div class="item {% if forloop.first %}active{% endif %}">
                                             {% for product in group %}
@@ -128,59 +147,162 @@
                     {% endif %}
 
 
-                    <div class="category-tab shop-details-tab"><!--category-tab-->
-                        <div class="col-sm-12">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a href="#details" data-toggle="tab">مشخصات</a></li>
-                                <li><a href="#reviews" data-toggle="tab">نظرات (5)</a></li>
-                                <li><a href="#test" data-toggle="tab">test</a></li>
-                                {% comment %}<li><a href="#reviews" data-toggle="tab">نظرات (5)</a></li>{% endcomment %}
+                    <div class="category-tab shop-details-tab" id="category_tab"><!--category-tab-->
+                        <div class="tabs-con">
+                            <ul class="tabs">
+                                <li class="active"><a id="pd_tab" href="#details" data-toggle="tab">مشخصات</a></li>
+                                <li ><a id="comment_tab"href="#reviews" data-toggle="tab">نظرات ({{ comments_count }})</a></li>
                             </ul>
                         </div>
+
                         <div class="tab-content">
-                            <div class="tab-pane fade active in" id="details">
-                                <div class="col-md-12">
-                                    {{ product.description | safe }}
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade in" id="test">
-                                <div class="col-md-12">
-                                    kvhbhksrbhsrb
-                                    {{ product.description | safe }}
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="reviews">
-                                <div class="col-sm-12">
-                                    <ul>
-                                        <li><a href=""><i class="fa fa-user"></i>مشتـری 1</a></li>
-                                        <li><a href=""><i class="fa fa-clock-o"></i>12:41 ب . ظ</a></li>
-                                        <li><a href=""><i class="fa fa-calendar-o"></i>29 تیـر 1397</a></li>
+                            <div class="content-sec">
+                                <div class="tab-pane fade active in" id="details"><!--  detail tab -->
+                                    <h3>مشخصات کالا</h3>
+                                    <ul id="detail_list">
+                                        <li>دسته بندی : <span>{{ product.category }}</span></li>
+                                        <li>برند : <span>{{ product.brand }}</span></li>
+                                        <li>ابعاد : <span>{{ product.dimensions }}</span></li>
+                                        <li>وزن : <span>{{ product.weight }}</span></li>
+                                        <li id="item_5">سازنده پردازنده : <span>{{ product.cpu_processor }}</span></li>
+                                        <li>سری پردازنده : <span>{{ product.cpu }}</span></li>
+                                        <li>مدل پردازنده : <span>{{ product.cpu_model }}</span></li>
+                                        <li>فرکانس کاری پردازنده (GHz) : <span>{{ product.cpu_frequency }}</span></li>
+                                        <li>حافظه‌ی کش (MB) : <span>{{ product.cpu_cache }}</span></li>
+                                        <li>تعداد هسته : <span>{{ product.cpu_core }}</span></li>
+                                        <li>اطلاعات تکمیلی پردازنده : <span>{{ product.cpu_info }}</span></li>
+                                        <li>ابعاد صفحه نمایش : <span>{{ product.screen_size }}</span></li>
+                                        <li>وضوح تصویر : <span>{{ product.resolution }}</span></li>
+                                        <li>نوع پنل : <span>{{ product.panel_type }}</span></li>
+                                        <li>نرخ نوسازی تصویر : <span>{{ product.refresh_rate }}</span></li>
+                                        <li>پوشش صفحه نمایش : <span>{{ product.screen_cover }}</span></li>
+                                        <li>صفحه نمایش لمسی : <span>{{ product.touch_screen }}</span></li>
+                                        <li>سایر ویژگی نمایشگر : <span>{{ product.additional_display_features }}</span></li>
+                                        <li>نوع حافظه رم : <span>{{ product.ram_type }}</span></li>
+                                        <li>باس رم (MHz) : <span>{{ product.ram_bus }}</span></li>
+                                        <li>قابلیت ارتقا رم : <span>{{ product.ram_upgradable }}</span></li>
+                                        <li>ظرفیت حافظه داخلی : <span>{{ product.internal_memory }}</span></li>
+                                        <li>قابلیت ارتقا حافظه داخلی : <span>{{ product.internal_memory_upgradable }}</span></li>
+                                        <li>سازنده پردازنده گرافیکی : <span>{{ product.gpu_manufacturer }}</span></li>
+                                        <li>مدل پردازنده گرافیکی : <span>{{ product.gpu_model }}</span></li>
+                                        <li>نوع پردازنده گرافیکی : <span>{{ product.gpu_type }}</span></li>
+                                        <li>حافظه پردازنده گرافیکی : <span>{{ product.gpu_memory }}</span></li>
+                                        <li>نوع رم پردازنده گرافیکی : <span>{{ product.gpu_ram_type }}</span></li>
+                                        <li>شبکه Wi-Fi : <span>{{ product.wifi_network }}</span></li>
+                                        <li>توضیحات شبکه Wi-Fi : <span>{{ product.wireless_communication_info }}</span></li>
+                                        <li>بلوتوث : <span>{{ product.bluetooth }}</span></li>
+                                        <li>توضیحات بلوتوث : <span>{{ product.bluetooth_info }}</span></li>
+                                        <li>LAN : <span>{{ product.lan }}</span></li>
+                                        <li>تعداد درگاه USB 3.0 Type A و بالاتر : <span>{{ product.usb_3_ports_count }}</span></li>
+                                        <li>تعداد درگاه USB 2.0 Type A : <span>{{ product.usb_2_ports_count }}</span></li>
+                                        <li>تعداد درگاه USB Type C : <span>{{ product.usb_c_ports_count }}</span></li>
+                                        <li>VGA : <span>{{ product.vga_port }}</span></li>
+                                        <li>HDMI : <span>{{ product.hdmi_port }}</span></li>
+                                        <li>درگاه کارت خوان : <span>{{ product.card_reader }}</span></li>
+                                        <li>پشتیبانی از تاندربولت : <span>{{ product.thunderbolt_support }}</span></li>
+                                        <li>جک هدفون/میکروفن : <span>{{ product.headphone_microphone_jack }}</span></li>
+                                        <li>حجم باتری : <span>{{ product.battery }}</span></li>
+                                        <li>شارژدهی باتری : <span>{{ product.battery_charge }}</span></li>
+                                        <li>توان شارژر : <span>{{ product.charger_power }}</span></li>
+                                        <li>اسپیکر : <span>{{ product.speakers_info }}</span></li>
+                                        <li>وبکم : <span>{{ product.webcam }}</span></li>
+                                        <li>توضیحات وبکم : <span>{{ product.webcam_description }}</span></li>
+                                        <li>درایو نوری : <span>{{ product.optical_drive }}</span></li>
+                                        <li>کیبورد با نور پس زمینه : <span>{{ product.backlit_keyboard }}</span></li>
+                                        <li>حسگر اثر انگشت : <span>{{ product.fingerprint_sensor }}</span></li>
                                     </ul>
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ازلورملورم
-                                        ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                        گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و
-                                        برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                                        کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان
-                                        جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه
-                                        ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.</p>
-                                    <p><b>نظـر خود را بنویسیـد</b></p>
+                                    
+                                    <button id="toggleButton">نمایش بیشتر<span class="fa fa-chevron-down"></span></button>
+                                </div>
+    
 
-                                    <form action="#">
-										<span>
-											<input type="text" placeholder="نام و نام خانوادگـی">
-											<input type="email" placeholder="آدرس ایمیـل">
-										</span>
-                                        <textarea name=""></textarea>
-                                        <b>رتبـه : </b> <img src="/static/images/product-details/rating.png" alt="">
-                                        <button type="button" class="btn btn-default pull-left">
-                                            ارسـال
-                                        </button>
-                                    </form>
+
+
+                                <div class="tab-pane fade" id="reviews"> <!--  comment tab -->
+                                    <div class="response-area" id="comments_area">
+                                        <h2> نظرات ({{ comments_count }})</h2>
+                                        <ul class="media-list">
+                                            {% for comment in comments %}
+                                                <li class="media" id="single_comment_box_{{ comment.id }}">
+                                                    <a class="pull-right" href="#">
+                                                        <img class="media-object" src="/static/images/blog/Customer.jpg" alt="">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <ul class="sinlge-post-meta">
+                                                            <li><i class="fa fa-user"></i>{{ comment.user }}</li>
+                                                            <li><i class="fa fa-clock-o"></i> {{ comment.create_date | time }}</li>
+                                                            <li>
+                                                                <i class="fa fa-calendar"></i> {{ comment.create_date|show_jalali_date }}
+                                                            </li>
+                                                        </ul>
+                                                        <p>
+                                                            {{ comment.text }}
+                                                        </p>
+                                                        <a class="btn btn-primary" onclick="fillParentId({{ comment.id }})"><i
+                                                                class="fa fa-reply"></i>پاسـخ</a>
+                                                    </div>
+                                                </li>
+                
+                                                {% for sub_comment in comment.articlecomment_set.all %}
+                                                    <li class="media second-media" id="single_comment_box_{{ comment.id }}">
+                                                        <a class="pull-right" href="#">
+                                                            <img class="media-object" src="/static/images/blog/Customer.jpg" alt="">
+                                                        </a>
+                                                        <div class="media-body">
+                                                            <ul class="sinlge-post-meta">
+                                                                <li><i class="fa fa-user"></i>{{ sub_comment.user }}</li>
+                                                                <li><i class="fa fa-clock-o"></i> {{ sub_comment.create_date | time }}
+                                                                </li>
+                                                                <li>
+                                                                    <i class="fa fa-calendar"></i> {{ sub_comment.create_date|show_jalali_date }}
+                                                                </li>
+                                                            </ul>
+                                                            <p>
+                                                                {{ sub_comment.text }}
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            {% endfor %}
+                
+                                        </ul>
+                                    </div><!--/Response-area-->
+                                    <div class="replay-box" id="comment_form">
+                                        {% if request.user.is_authenticated %}
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <h2>نظـر خود را بنویسیـد</h2>
+                                                    <div class="text-area">
+                                                        <input type="hidden" id="parent_id" value="">
+                                                        <div class="blank-arrow">
+                                                            <label>متن پیام</label>
+                                                        </div>
+                                                        <span>*</span>
+                                                        <textarea name="message" rows="11" id="commentText"></textarea>
+                                                        <a class="btn btn-primary" onclick="sendArticleComment({{ article.id }})">ارسـال
+                                                            نظـر</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="alert alert-warning">
+                                                برای درج نظر می بایست <a href="{% url 'login_page' %}">لاگین</a> کنید
+                                            </div>
+                                        {% endif %}
+                                    </div><!--/Repaly Box-->
                                 </div>
                             </div>
 
+                            <div class="pd-price" id="pfd-price">
+                                <div class="warranty">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.995 6.9a.998.998 0 0 0-.548-.795l-8-4a1 1 0 0 0-.895 0l-8 4a1.002 1.002 0 0 0-.547.795c-.011.107-.961 10.767 8.589 15.014a.987.987 0 0 0 .812 0c9.55-4.247 8.6-14.906 8.589-15.014zM12 19.897C5.231 16.625 4.911 9.642 4.966 7.635L12 4.118l7.029 3.515c.037 1.989-.328 9.018-7.029 12.264z"/><path d="m11 12.586-2.293-2.293-1.414 1.414L11 15.414l5.707-5.707-1.414-1.414z"/></svg>
+                                    <span>گارانتی ۱۸ ماهه امرتات</span>
+                                </div>
+                                <div class="price">قیمت کالا <span>{{ product.price }}</span><span>تومان</span></div>
+                                <button type="submit" onclick="addProductToOrder({{ product.id }})" class="btn btn-fefault cart">
+                                    <i class="fa fa-shopping-cart"></i>افزودن به سبد خرید
+                                </button>
+                            </div>
                         </div>
                     </div><!--/category-tab-->
                 </div>
