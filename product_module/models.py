@@ -126,7 +126,7 @@ class Color(models.Model):
     price_increase = models.IntegerField(verbose_name="افزایش قیمت به ازای انتخاب")
 
     def __str__(self):
-        return f'رنگ({self.name}) - محصول({self.product.alternative_name}) - کد انتخاب({self.id}) - افزایش قیمت({self.price_increase})'
+        return f'رنگ: {self.name} - افزایش قیمت: {self.price_increase}'
 
     class Meta:
         verbose_name = 'رنگ محصول'
@@ -138,7 +138,7 @@ class RAM(models.Model):
     price_increase = models.IntegerField(verbose_name="افزایش قیمت به ازای انتخاب")
 
     def __str__(self):
-        return f'ظرفیت رم({self.size}) - محصول({self.product.alternative_name}) - کد انتخاب({self.id}) - افزایش قیمت({self.price_increase})'
+        return f'رم: {self.size} - افزایش قیمت: {self.price_increase}'
 
     class Meta:
         verbose_name = 'حافظه رم محصول'
@@ -150,7 +150,8 @@ class Storage(models.Model):
     price_increase = models.IntegerField(verbose_name="افزایش قیمت به ازای انتخاب")
 
     def __str__(self):
-        return f'ظرفیت حافظه({self.size}) - محصول({self.product.alternative_name}) - کد انتخاب({self.id}) - افزایش قیمت({self.price_increase})'
+        return f'حافظه: {self.size} - افزایش قیمت: {self.price_increase}'
+
     class Meta:
         verbose_name = 'حافظه محصول'
         verbose_name_plural = 'حافظه محصولات'
@@ -161,8 +162,8 @@ class Warranty(models.Model):
     price_increase = models.IntegerField(verbose_name="افزایش قیمت به ازای انتخاب")
     
     def __str__(self):
-        return f'گارانتی({self.duration}) - محصول({self.product.alternative_name}) - کد انتخاب({self.id}) - افزایش قیمت({self.price_increase})'
-
+        return f'گارانتی: {self.duration} - افزایش قیمت: {self.price_increase}'
+        
     class Meta:
         verbose_name = 'گارانتی'
         verbose_name_plural = 'گارانتی ها'

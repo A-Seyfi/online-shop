@@ -1799,7 +1799,12 @@ h2.title {
     align-items: center;
     margin-bottom: 10px;
 }
-.pd-price div span:first-child{
+.pd-price .price span:first-child{
+    font-size: 20px;
+    margin-right: auto;
+    font-weight: bold;
+}
+.pd-price .price span:last-child{
     font-size: 16px;
 }
 
@@ -1816,11 +1821,6 @@ h2.title {
     fill: #00a041;
 }
 
-.pd-price div span:nth-child(2){
-    font-size: 20px;
-    margin-right: auto;
-    font-weight: bold;
-}
 .pd-price .price span{
     font-size: 12px;
     opacity: 80%;
