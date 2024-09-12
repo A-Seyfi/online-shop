@@ -46,7 +46,7 @@ class OrderDetail(models.Model):
     storage = models.ForeignKey(Storage, on_delete=models.CASCADE, max_length=50, verbose_name='حافظه', null=True, blank=True)
     warranty = models.ForeignKey(Warranty, on_delete=models.CASCADE, max_length=50, verbose_name='گارانتی', null=True, blank=True)
     final_price = models.IntegerField(null=True, blank=True, verbose_name='قیمت نهایی تکی محصول')
-    count = models.IntegerField(verbose_name='تعداد')
+    count = models.IntegerField(verbose_name='تعداد', default=1)
 
     def get_total_price(self):
         return self.count * self.product.price

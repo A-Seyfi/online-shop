@@ -50,7 +50,10 @@
                     <li><a href="{% url 'register_page' %}"><i class="fa fa-user-plus"></i> ثبت نام</a></li>
                     <li><a href="{% url 'login_page' %}"><i class="fa fa-sign-in"></i> ورود</a></li>
                 {% endif %}
+                {% if total_items %}
                     <li><a class="user-basket-link" href="{% url 'user_basket_page' %}"><i class="fa fa-shopping-cart"></i> سبد خرید <span>{{ total_items.orderdetail_set.count }}</span></a></li>
+                {% endif %}
+
                 </ul>
 
             </div>

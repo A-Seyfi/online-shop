@@ -37,10 +37,14 @@
                             <td class="cart_description">
                                 <h4><a href="" class="one-line-text">{{ detail.product.title }}</a></h4>
                                 <p>شناسـه : {{ detail.product.id }}</p>
+                                {% if options %}
                                     <h4>{{ options.color }}</h4>
                                     <h4>{{ options.ram }}</h4>
                                     <h4>{{ options.storage }}</h4>
                                     <h4>{{ options.warranty }}</h4>
+                                {% else %}
+                                <h2>سبد خرید خالی است</h2>
+                                {% endif %}
                             </td>
                         </tr>
 

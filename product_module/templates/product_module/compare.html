@@ -92,52 +92,12 @@
                                     <svg id="back" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"/></svg>
                                     فیلتر ها
                                 </h3>
-                                <a href="{% url 'product-list' %}"><span class="fa fa-trash-o"></span>حذف فیلتر ها</a>
+                                <a href="{% url 'compare_products' %}"><span class="fa fa-trash-o"></span>حذف فیلتر ها</a>
                             </div>
 
-                            {% render_partial 'product_module.views.product_categories_component' %}
-                            {% render_partial 'product_module.views.product_brands_component' %}
-
-
-                            <div class="price-range">
-                                <h2>فیلتـر قیمـت</h2>
-
-                                <div class="input-con">
-                                    <label for="start_p">از :</label>
-                                    <input type="number" id="start_p" class="manual-input" value="{{ start_price }}" min="0" max="{{ db_max_price }}" step="100000">
-                                    <h4>تومان</h4>
-                                </div>
-
-                                <div class="input-con">
-                                    <label for="end_p">تا :</label>
-                                    <input type="number" id="end_p" class="manual-input" value="{{ end_price }}" min="0" max="{{ db_max_price }}" step="100000">
-                                    <h4>تومان</h4>
-                                </div>
-
-                                <div class="well">
-                                    <input
-                                        type="text"
-                                        class="span2"
-                                        value="{{ start_price }},{{ end_price }}"
-                                        data-slider-min="0"
-                                        data-slider-max="{{ db_max_price }}"
-                                        data-slider-step="1000"
-                                        data-slider-value="[{{ start_price }},{{ end_price }}]"
-                                        id="sl2">
-
-
-                                    <br/>
-                                    <b>{{ db_max_price }}</b> <b class="pull-left">0</b>
-                                </div>
-                            </div>
-                            <div style="display: flex; justify-content: center;">
-                                <form action="" method="get" id="filter_form">
-                                    <input type="hidden" name="page" id="page" value="{{ page_obj.number }}">
-                                    <input type="hidden" name="start_price" id="start_price" value="{{ start_price }}">
-                                    <input type="hidden" name="end_price" id="end_price" value="{{ end_price }}">
-                                </form>
-                                <button class="btn btn-success btn-block" onclick="filterProducts()">فیلتر</button>
-                            </div>
+                            {% render_partial 'product_module.views.compare_categories_component' %}
+                            {% render_partial 'product_module.views.compare_brands_component' %}
+                            
                         </div>
                     </div>
 
