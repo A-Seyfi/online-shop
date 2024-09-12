@@ -120,15 +120,49 @@ def add_to_favorites(request, product_id):
     return redirect('favorites_list')
 
 
-def compare_products(request):
+class CompareListView(ListView):
+    template_name = 'product_module/compare.html'
+    model = Product
+    context_object_name = 'products'
+    ordering = ['-id']
+    paginate_by = 16
     products = Product.objects.all()
 
-    if request.method == 'POST':
+    def post(self, request):
         selected_products = request.POST.getlist('products')
         request.session['selected_products'] = selected_products[:4]  # maximum 4 product
         return redirect('compare_result')
+    
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CompareListView, self).get_context_data()
+        query = Product.objects.all()
+        product: Product = query.order_by('-price').first()
+        context['banners'] = SiteBanner.objects.filter(is_active=True, position__iexact=SiteBanner.SiteBannerPositions.product_list)
+        return context
 
-    return render(request, 'product_module/compare.html', {'products': products})
+    def get_queryset(self):
+        query = super(CompareListView, self).get_queryset()
+        category_name = self.kwargs.get('cat')
+        brand_name = self.kwargs.get('brand')
+        request: HttpRequest = self.request
+
+        sort_by = self.request.GET.get('sort')
+        if sort_by == 'cheap':
+            return query.order_by('price')
+        
+        elif sort_by == 'expensive':
+            return query.order_by('-price')
+        
+        elif sort_by == 'latest':
+            return query.order_by('-id')
+        
+        elif sort_by == 'most_bought':
+            return query.filter(orderdetail__order__is_paid=True).annotate(order_count=Sum('orderdetail__count')).order_by('-order_count')
+        
+        elif sort_by == 'most_visit':
+            return query.annotate(visit_count=Count('productvisit')).order_by('-visit_count')
+        return query
+
 
 def compare_result(request):
     selected_product_ids = request.session.get('selected_products', [])
@@ -193,6 +227,22 @@ def product_brands_component(request: HttpRequest):
         'brands': product_brands
     }
     return render(request, 'product_module/components/product_brands_component.html', context)
+
+
+def compare_categories_component(request: HttpRequest):
+    product_categories = ProductCategory.objects.filter(is_active=True, is_delete=False)
+    context = {
+        'categories': product_categories
+    }
+    return render(request, 'product_module/components/compare_categories_component.html', context)
+
+
+def compare_brands_component(request: HttpRequest):
+    product_brands = ProductBrand.objects.annotate(products_count=Count('product')).filter(is_active=True)
+    context = {
+        'brands': product_brands
+    }
+    return render(request, 'product_module/components/compare_brands_component.html', context)
 
 
 def header_brand_component(request: HttpRequest):

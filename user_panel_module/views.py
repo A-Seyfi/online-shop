@@ -90,15 +90,23 @@ def user_panel_menu_component(request: HttpRequest):
 @login_required
 def user_basket(request: HttpRequest):
     current_order, created = Order.objects.prefetch_related('orderdetail_set').get_or_create(is_paid=False, user_id=request.user.id)
-    options, created = OrderDetail.objects.get_or_create(order=current_order)
     total_amount = current_order.calculate_total_price()
+    if current_order.orderdetail_set.exists():
+       for item in current_order.orderdetail_set.all():
+           options, created = OrderDetail.objects.get_or_create(
+               order=current_order,
+               product=item.product,
+               defaults={'count': item.count}
+           )
+    else:
+       options = ""
 
     context = {
         'order': current_order,
         'sum': total_amount,
         'options' : options,
     }
-    print(options.count)
+    
     return render(request, 'user_panel_module/user_basket.html', context)
 
 
