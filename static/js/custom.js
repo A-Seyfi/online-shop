@@ -1,12 +1,7 @@
-function sendArticleComment(articleId) {
+function sendProductComment(productId) {
     var comment = $('#commentText').val();
     var parentId = $('#parent_id').val();
-    console.log(parentId);
-    $.get('/articles/add-article-comment', {
-        article_comment: comment,
-        article_id: articleId,
-        parent_id: parentId
-    }).then(res => {
+    $.get('/products/add-product-comment?product_id=' + productId + '&product_comment=' + comment + '&parent_id=' + parentId).then(res => {
         $('#comments_area').html(res);
         $('#commentText').val('');
         $('#parent_id').val('');
@@ -48,8 +43,6 @@ function addProductToOrder(productId) {
     const productRam = $('#id_ram').val();
     const productStorage = $('#id_storage').val();
     const productWarrany = $('#id_warranty').val();
-    console.log(productId);
-    console.log("test log")
     $.get('/order/add-to-order?product_id=' + productId + '&count=' + productCount + '&color=' + productColor + '&ram=' + productRam + '&storage=' + productStorage + '&warranty=' + productWarrany).then(res => {
         Swal.fire({
             title: 'اعلان',

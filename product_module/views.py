@@ -1,5 +1,5 @@
 from django.db.models import Count, Sum
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from site_module.models import SiteBanner
 from utils.http_service import get_client_ip
 from utils.convertors import group_list
-from .models import Product, ProductCategory, ProductBrand, ProductVisit, ProductGallery, Favorite
+from .models import Product, ProductCategory, ProductBrand, ProductVisit, ProductGallery, Favorite, ProductComment
 from .forms import LaptopSelectionForm
 from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
@@ -82,6 +82,8 @@ class ProductDetailView(DetailView):
         context['banners'] = SiteBanner.objects.filter(is_active=True, position__iexact=SiteBanner.SiteBannerPositions.product_detail)
         galleries = list(ProductGallery.objects.filter(product_id=loaded_product.id).all())
         galleries.insert(0, loaded_product)
+        context['comments'] = ProductComment.objects.filter(product_id=self.object.id, parent=None).order_by('-create_date').prefetch_related('productcomment_set')
+        context['comments_count'] = ProductComment.objects.filter(product_id=self.object.id).count()
         context['product_galleries'] = ProductGallery.objects.all()
         context['related_products'] = group_list(list(Product.objects.filter(brand_id=loaded_product.brand_id).exclude(pk=loaded_product.id).all()[:12]), 3)
         user_ip = get_client_ip(self.request)
@@ -249,3 +251,20 @@ def header_brand_component(request: HttpRequest):
     product_brands = ProductBrand.objects.filter(is_active=True)
 
     return {'brands': product_brands}
+
+
+def add_product_comment(request: HttpRequest):
+    if request.user.is_authenticated:
+        product_id = request.GET.get('product_id')
+        product_comment = request.GET.get('product_comment')
+        parent_id = request.GET.get('parent_id')
+        new_comment = ProductComment(product_id=product_id, text=product_comment, user_id=request.user.id, parent_id=parent_id)
+        new_comment.save()
+        context = {
+            'comments': ProductComment.objects.filter(product_id=product_id, parent=None).order_by('-create_date').prefetch_related('productcomment_set'),
+            'comments_count': ProductComment.objects.filter(product_id=product_id).count()
+        }
+
+        return render(request, 'product_module/components/product_comments_partial.html', context)
+
+    return HttpResponse('response')

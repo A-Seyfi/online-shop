@@ -8,6 +8,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ['price', 'is_active']
 
 
+
 admin.site.register(models.Product, ProductAdmin)
 admin.site.register(models.Color)
 admin.site.register(models.RAM)
@@ -18,3 +19,4 @@ admin.site.register(models.ProductTag)
 admin.site.register(models.ProductBrand)
 admin.site.register(models.ProductVisit)
 admin.site.register(models.ProductGallery)
+admin.site.register(models.ProductComment)
