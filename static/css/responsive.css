@@ -460,7 +460,16 @@
 
 
 	/* product detail */
+	#related-item-carousel .carousel-inner{
+		overflow-x: scroll;
+	}
+	#related-item-carousel .carousel-inner .item{
+		overflow-x: scroll;
+	}
 
+	.recommended-item-control{
+		display: none;
+	}
 }
 	
 	

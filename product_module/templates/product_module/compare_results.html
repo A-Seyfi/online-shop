@@ -47,7 +47,7 @@
                                 {% endif %}
 
                                 <p>{{ product.title }}</p>
-                                <h2>{{ product.price }} <span>تومان</span></h2>
+                                <h2>{{ product.price | three_digits_currency }}</h2>
                                 <a href="{{ product.get_absolute_url }}">مشاهده و خرید<span class="fa fa-angle-left"></span></a>
                             </div>
                         </div>

@@ -70,21 +70,28 @@
                                     </div>
                                 </div>
 
-                                <div class="price-custom-sec">
-                                    <div class="pd-custom">
-                                        <form method="post">
+                                <div class="details-sec">
+                                    <div class="pd-color-sec">
+                                        <form style="display: none;" method="post">
                                             {% csrf_token %}
                                             {{ form.as_p }}
                                         </form>
 
-                                        <label>تعداد :</label>
-										<input type="number" min="1" value="1" id="product-count">
+                                        <div class="pd-color-con">
+                                            <!-- <h4 class="c-title"><span id="color_val"></span></h4> -->
+                                            <div class="pd-colors">
+                                                <div id="custom_color" class="product-custom">
+                                                    <h2>رنگ محصول</h2>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="main-detail">
                                             <h3>مشخصات اصلی</h3>
                                             <ul>
                                                 <li>سازنده پردازنده : <span>{{ product.cpu_processor }}</span></li>
                                                 <li>سری پردازنده : <span>{{ product.cpu }}</span></li>
+                                                <li>ظرفیت حافظه RAM : <span id="ram_val"></span></li>
                                                 <li>سازنده پردازنده گرافیکی : <span>{{ product.gpu_manufacturer }}</span></li>
                                                 <li>ابعاد نمایشگر : <span>{{ product.screen_size }}</span></li>
                                             </ul>
@@ -93,15 +100,43 @@
 
 									</div>
 
-                                    <div class="pd-price">
-                                        <div class="warranty">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.995 6.9a.998.998 0 0 0-.548-.795l-8-4a1 1 0 0 0-.895 0l-8 4a1.002 1.002 0 0 0-.547.795c-.011.107-.961 10.767 8.589 15.014a.987.987 0 0 0 .812 0c9.55-4.247 8.6-14.906 8.589-15.014zM12 19.897C5.231 16.625 4.911 9.642 4.966 7.635L12 4.118l7.029 3.515c.037 1.989-.328 9.018-7.029 12.264z"/><path d="m11 12.586-2.293-2.293-1.414 1.414L11 15.414l5.707-5.707-1.414-1.414z"/></svg>
-                                            <span>گارانتی اصالت و سلامت فیزیکی کالا</span>
+                                    <div class="price-custom">
+                                        <div class="pd-price">
+                                            <div class="warranty">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.995 6.9a.998.998 0 0 0-.548-.795l-8-4a1 1 0 0 0-.895 0l-8 4a1.002 1.002 0 0 0-.547.795c-.011.107-.961 10.767 8.589 15.014a.987.987 0 0 0 .812 0c9.55-4.247 8.6-14.906 8.589-15.014zM12 19.897C5.231 16.625 4.911 9.642 4.966 7.635L12 4.118l7.029 3.515c.037 1.989-.328 9.018-7.029 12.264z"/><path d="m11 12.586-2.293-2.293-1.414 1.414L11 15.414l5.707-5.707-1.414-1.414z"/></svg>
+                                                <span>گارانتی 18 ماهه امرتات</span>
+                                            </div>
+
+                                            <div class="p-count">
+                                                <label>تعداد :</label>
+                                                <input type="number" min="1" value="1" id="product-count">
+                                            </div>
+
+                                            <div class="price"><span>قیمت کالا</span><span>{{ product.price | three_digits_currency }}</span></div>
+
+                                            <button type="submit" onclick="addProductToOrder({{ product.id }})" class="btn btn-fefault cart">
+                                                <i class="fa fa-shopping-cart"></i>افزودن به سبد خرید
+                                            </button>
                                         </div>
-                                        <div class="price"><span>قیمت کالا</span><span>{{ product.price }}</span><span>تومان</span></div>
-                                        <button type="submit" onclick="addProductToOrder({{ product.id }})" class="btn btn-fefault cart">
-                                            <i class="fa fa-shopping-cart"></i>افزودن به سبد خرید
-                                        </button>
+
+                                        
+                                        <hr>
+                                        
+                                        <div id="custom_ram" class="product-custom">
+                                            <h2>رم محصول</h2>
+                                        </div>
+                                        
+                                        <hr>
+                                        
+                                        <div id="custom_storage" class="product-custom">
+                                            <h2>حافظه محصول</h2>
+                                        </div>
+                                        
+                                        <hr>
+
+                                        <div id="custom_warranty" class="product-custom">
+                                            <h2>گارانتی محصول</h2>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -111,11 +146,10 @@
 
 
                     {% if related_products %}
-                        <div class="recommended_items"><!--recommended_items-->
+                        <div class="product_items">
                             <h2 class="title text-center">محصولات مرتبط</h2>
-
-                            <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-                                <div class="rcmnd-product carousel-inner">
+                            <div id="related-item-carousel" class="product-item-carousel carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
                                     {% for group in related_products %}
                                         <div class="item {% if forloop.first %}active{% endif %}">
                                             {% for product in group %}
@@ -124,18 +158,14 @@
                                         </div>
                                     {% endfor %}
                                 </div>
-                                {% if related_products|length > 1 %}
-                                    <a class="left recommended-item-control" href="#recommended-item-carousel"
-                                       data-slide="prev">
-                                        <i class="fa fa-angle-left"></i>
-                                    </a>
-                                    <a class="right recommended-item-control" href="#recommended-item-carousel"
-                                       data-slide="next">
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                {% endif %}
+                                <a class="left recommended-item-control" href="#related-item-carousel" data-slide="prev">
+                                    <i class="fa fa-angle-left"></i>
+                                </a>
+                                <a class="right recommended-item-control" href="#related-item-carousel" data-slide="next">
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
                             </div>
-                        </div><!--/recommended_items-->
+                        </div>
                     {% endif %}
 
 
@@ -143,7 +173,7 @@
                         <div class="tabs-con">
                             <ul class="tabs">
                                 <li class="active"><a id="pd_tab" href="#details" data-toggle="tab">مشخصات</a></li>
-                                <li ><a id="comment_tab"href="#reviews" data-toggle="tab">نظرات ({{ comments_count }})</a></li>
+                                <li ><a id="comment_tab"href="#comments" data-toggle="tab">نظرات ({{ comments_count }})</a></li>
                             </ul>
                         </div>
 
@@ -210,85 +240,67 @@
 
 
                     <!--Comments-->
-                    <div class="response-area" id="comments_area">
-                        <h2> نظرات ({{ comments_count }})</h2>
-                        <ul class="media-list">
-                            {% for comment in comments %}
-                                <li class="media" id="single_comment_box_{{ comment.id }}">
-                                    <a class="pull-right" href="#">
-                                        <img class="media-object" src="/static/images/blog/Customer.jpg" alt="">
-                                    </a>
-                                    <div class="media-body">
-                                        <ul class="sinlge-post-meta">
-                                            <li><i class="fa fa-user"></i>{{ comment.user }}</li>
-                                            <li><i class="fa fa-clock-o"></i> {{ comment.create_date | time }}</li>
-                                            <li>
-                                                <i class="fa fa-calendar"></i> {{ comment.create_date|show_jalali_date }}
-                                            </li>
+                                <div class="tab-pane fade" id="comments">
+                                    <div class="response-area" id="comments_area">
+                                        <h2> نظرات ({{ comments_count }})</h2>
+                                        <ul class="media-list">
+                                            {% for comment in comments %}
+                                                <li class="media first-media" id="single_comment_box_{{ comment.id }}">
+                                                    <div class="media-body">
+                                                        <ul class="sinlge-post-meta">
+                                                            <li><i class="fa fa-user"></i>{{ comment.user }}</li>
+                                                            <li><i class="fa fa-clock-o"></i> {{ comment.create_date | time }}</li>
+                                                            <li>
+                                                                <i class="fa fa-calendar"></i> {{ comment.create_date|show_jalali_date }}
+                                                            </li>
+                                                        </ul>
+                                                        <p>
+                                                            {{ comment.text }}
+                                                        </p>
+                                                        <a class="btn btn-primary" onclick="fillParentId({{ comment.id }})">پاسـخ<i class="fa fa-reply"></i></a>
+                                                    </div>
+                                                </li>
+
+                                                {% for sub_comment in comment.productcomment_set.all %}
+                                                    <li class="media second-media" id="single_comment_box_{{ comment.id }}">
+                                                        <div class="media-body">
+                                                            <ul class="sinlge-post-meta">
+                                                                <li><i class="fa fa-user"></i>{{ sub_comment.user }}</li>
+                                                                <li><i class="fa fa-clock-o"></i> {{ sub_comment.create_date | time }}
+                                                                </li>
+                                                                <li>
+                                                                    <i class="fa fa-calendar"></i> {{ sub_comment.create_date|show_jalali_date }}
+                                                                </li>
+                                                            </ul>
+                                                            <p>
+                                                                {{ sub_comment.text }}
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            {% endfor %}
                                         </ul>
-                                        <p>
-                                            {{ comment.text }}
-                                        </p>
-                                        <a class="btn btn-primary" onclick="fillParentId({{ comment.id }})"><i
-                                                class="fa fa-reply"></i>پاسـخ</a>
-                                    </div>
-                                </li>
-
-                                {% for sub_comment in comment.productcomment_set.all %}
-                                    <li class="media second-media" id="single_comment_box_{{ comment.id }}">
-                                        <a class="pull-right" href="#">
-                                            <img class="media-object" src="/static/images/blog/Customer.jpg" alt="">
-                                        </a>
-                                        <div class="media-body">
-                                            <ul class="sinlge-post-meta">
-                                                <li><i class="fa fa-user"></i>{{ sub_comment.user }}</li>
-                                                <li><i class="fa fa-clock-o"></i> {{ sub_comment.create_date | time }}
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-calendar"></i> {{ sub_comment.create_date|show_jalali_date }}
-                                                </li>
-                                            </ul>
-                                            <p>
-                                                {{ sub_comment.text }}
-                                            </p>
-                                        </div>
-                                    </li>
-                                {% endfor %}
-                            {% endfor %}
-
-                        </ul>
-                    </div><!--/Response-area-->
-                    <div class="replay-box" id="comment_form">
-                        {% if request.user.is_authenticated %}
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h2>نظـر خود را بنویسیـد</h2>
-                                    <div class="text-area">
-                                        <input type="hidden" id="parent_id" value="">
-                                        <div class="blank-arrow">
-                                            <label>متن پیام</label>
-                                        </div>
-                                        <span>*</span>
-                                        <textarea name="message" rows="11" id="commentText"></textarea>
-                                        <a class="btn btn-primary" onclick="sendProductComment({{ product.id }})">ارسـال
-                                            نظـر</a>
-                                    </div>
+                                    </div><!--/Response-area-->
+                                    <div class="replay-box" id="comment_form">
+                                        {% if request.user.is_authenticated %}
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <h2>نظـر خود را بنویسیـد</h2>
+                                                    <div class="text-area">
+                                                        <input type="hidden" id="parent_id" value="">
+                                                        <span>*</span>
+                                                        <textarea name="message" rows="11" id="commentText"></textarea>
+                                                        <a class="btn btn-primary" onclick="sendProductComment({{ product.id }})">ارسـال نظـر</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="alert alert-warning">
+                                                برای درج نظر می بایست <a href="{% url 'login_page' %}">لاگین</a> کنید
+                                            </div>
+                                        {% endif %}
+                                    </div><!--/Repaly Box-->
                                 </div>
-                            </div>
-                        {% else %}
-                            <div class="alert alert-warning">
-                                برای درج نظر می بایست <a href="{% url 'login_page' %}">لاگین</a> کنید
-                            </div>
-                        {% endif %}
-                    </div><!--/Repaly Box-->
-                </div>
-    
-                                <div class="col-sm-3">
-                                    <div class="left-sidebar">
-                                        {% render_partial 'product_module.views.product_categories_component' %}
-                                    </div>
-                                </div>
-
                             </div>
 
                             <div class="pd-price" id="pfd-price">
@@ -296,7 +308,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.995 6.9a.998.998 0 0 0-.548-.795l-8-4a1 1 0 0 0-.895 0l-8 4a1.002 1.002 0 0 0-.547.795c-.011.107-.961 10.767 8.589 15.014a.987.987 0 0 0 .812 0c9.55-4.247 8.6-14.906 8.589-15.014zM12 19.897C5.231 16.625 4.911 9.642 4.966 7.635L12 4.118l7.029 3.515c.037 1.989-.328 9.018-7.029 12.264z"/><path d="m11 12.586-2.293-2.293-1.414 1.414L11 15.414l5.707-5.707-1.414-1.414z"/></svg>
                                     <span>گارانتی ۱۸ ماهه امرتات</span>
                                 </div>
-                                <div class="price">قیمت کالا <span>{{ product.price }}</span><span>تومان</span></div>
+                                <div class="price">قیمت کالا <span>{{ product.price | three_digits_currency }}</div>
                                 <button type="submit" onclick="addProductToOrder({{ product.id }})" class="btn btn-fefault cart">
                                     <i class="fa fa-shopping-cart"></i>افزودن به سبد خرید
                                 </button>

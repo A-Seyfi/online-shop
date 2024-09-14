@@ -26,28 +26,23 @@
         width: 60px;
         height: 60px;
     }
+
+    .details-sec {
+        flex-direction: column;
+    }
     
-    .price-custom-sec .pd-custom {
+    .details-sec .pd-color-sec {
         width: 100%;
     }
-    .pd-custom .pd-color-con {
-        flex-direction: row;
-        align-items: center;
-    }
-    .pd-custom .pd-color-con .c-title {
-        display: flex;
-        align-items: center;
-        margin: 0;
-        margin-left: 40px;
-    }
-    .pd-custom .pd-color-con .c-title span{
-        margin-right: 10px;
+
+    .details-sec .price-custom {
+        width: 100%;
     }
     
-    .pd-custom .main-detail {
+    .pd-color-sec .main-detail {
         margin-left: 3px;
     }
-    .pd-custom .main-detail ul li {
+    .pd-color-sec .main-detail ul li {
         padding: 13px 5px;
         font-size: 13px;
         display: flex;
@@ -105,6 +100,10 @@
     .pd-price .warranty{
         display: none;
     }
+    .pd-price .p-count{
+        display: none;
+    }
+
     .pd-price button {
         width: 55%;
         margin: 0;
@@ -140,8 +139,9 @@
     .pd-price div span:nth-child(2) {
         font-size: 20px;
     }
-    .pd-price div span:last-child {
-        font-size: 15px;
+    .pd-price .price span:last-child {
+        margin-right: 0 !important;
+        font-size: 15px !important;
     }
 
     .pd-price button {
@@ -212,11 +212,11 @@
         height: 53px;
     }
 
-    .pd-custom .pd-color-con {
+    .pd-color-sec .pd-color-con {
         flex-direction: column;
         align-items: unset;
     }
-    .pd-custom .pd-color-con .c-title {
+    .pd-color-sec .pd-color-con .c-title {
         margin-bottom: 15px;
         margin-left: 0;
     }

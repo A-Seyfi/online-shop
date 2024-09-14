@@ -97,7 +97,7 @@
 
         <li><a class="{% if request.resolver_match.url_name == 'product-list' %}active{% endif %}" href="{% url 'product-list' %}">فروشگاه</a></li>
 
-        <li><a class="user-basket-link" href="{% url 'user_basket_page' %}"><i class="fa fa-shopping-cart"></i> سبد خرید <span>4</span></a></li>
+        <li><a class="user-basket-link" href="{% url 'user_basket_page' %}"><i class="fa fa-shopping-cart"></i> سبد خرید <span>{{ total_items.orderdetail_set.count }}</span></a></li>
 
         {% if request.user.is_authenticated %}
             <li><a href="{% url 'profile_page' %}"><i class="fa fa-user"></i> پنل کاربری</a></li>

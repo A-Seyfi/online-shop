@@ -3,10 +3,7 @@
 <h2> نظرات ({{ comments_count }})</h2>
 <ul class="media-list">
     {% for comment in comments %}
-        <li class="media" id="single_comment_box_{{ comment.id }}">
-            <a class="pull-right" href="#">
-                <img class="media-object" src="/static/images/blog/Customer.jpg" alt="">
-            </a>
+        <li class="media first-media" id="single_comment_box_{{ comment.id }}">
             <div class="media-body">
                 <ul class="sinlge-post-meta">
                     <li><i class="fa fa-user"></i>{{ comment.user }}</li>
@@ -25,9 +22,6 @@
 
         {% for sub_comment in comment.productcomment_set.all %}
             <li class="media second-media" id="single_comment_box_{{ comment.id }}">
-                <a class="pull-right" href="#">
-                    <img class="media-object" src="/static/images/blog/Customer.jpg" alt="">
-                </a>
                 <div class="media-body">
                     <ul class="sinlge-post-meta">
                         <li><i class="fa fa-user"></i>{{ sub_comment.user }}</li>
