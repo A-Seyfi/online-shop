@@ -53,10 +53,8 @@ class ActivateAccountView(View):
                 user.is_active = True
                 user.email_active_code = get_random_string(72)
                 user.save()
-                # todo: show success message to user
                 return redirect(reverse('login_page'))
             else:
-                # todo: show your account was activated message to user
                 pass
 
         raise Http404

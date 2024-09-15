@@ -5,6 +5,7 @@ class SiteSetting(models.Model):
     site_name = models.CharField(max_length=200, verbose_name='نام سایت')
     site_url = models.CharField(max_length=200, verbose_name='دامنه سایت')
     address = models.CharField(max_length=200, verbose_name='آدرس')
+    map_address = models.CharField(max_length=300, null=True, blank=True, verbose_name='لینک مشاهده آدرس در map')
     phone = models.CharField(max_length=200, null=True, blank=True, verbose_name='تلفن')
     fax = models.CharField(max_length=200, null=True, blank=True, verbose_name='فکس')
     email = models.CharField(max_length=200, null=True, blank=True, verbose_name='ایمیل')

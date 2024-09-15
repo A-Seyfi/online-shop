@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, JsonResponse, Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views import View
@@ -42,6 +42,13 @@ class UserPanelDashboardPage(View):
 def favorites_list(request):
     favorites = Favorite.objects.filter(user=request.user).select_related('product')
     return render(request, 'user_panel_module/favorite_list.html', {'favorites': favorites})
+
+
+@login_required
+def remove_favorite(request, product_id):
+    favorite = get_object_or_404(Favorite, user=request.user, product_id=product_id)
+    favorite.delete()
+    return redirect('favorites_list')
 
 
 @method_decorator(login_required, name='dispatch')
