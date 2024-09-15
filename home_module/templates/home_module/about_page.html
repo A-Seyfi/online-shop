@@ -30,10 +30,12 @@
                     <h3>آدرس ما</h3>
                     <p>{{ site_setting.address }}</p>
                 </div>
-                <div class="google-map">
-                    <img src="../../../static/images/home/Map.jpg" alt="">
-                    <a href="">مشاهده در Google Mapp</a>
-                </div>
+                {% if site_setting.map_address %}
+                    <div class="google-map">
+                        <img src="../../../static/images/home/Map.jpg" alt="">
+                        <a href="{{ site_setting.map_address }}">مشاهده در Google Mapp</a>
+                    </div>
+                {% endif %}
             </div>
 
             <div class="support">

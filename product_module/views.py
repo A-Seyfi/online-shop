@@ -258,8 +258,11 @@ def add_product_comment(request: HttpRequest):
         product_id = request.GET.get('product_id')
         product_comment = request.GET.get('product_comment')
         parent_id = request.GET.get('parent_id')
-        new_comment = ProductComment(product_id=product_id, text=product_comment, user_id=request.user.id, parent_id=parent_id)
-        new_comment.save()
+
+        if product_comment is not "":
+            new_comment = ProductComment(product_id=product_id, text=product_comment, user_id=request.user.id, parent_id=parent_id)
+            new_comment.save()
+
         context = {
             'comments': ProductComment.objects.filter(product_id=product_id, parent=None).order_by('-create_date').prefetch_related('productcomment_set'),
             'comments_count': ProductComment.objects.filter(product_id=product_id).count()
