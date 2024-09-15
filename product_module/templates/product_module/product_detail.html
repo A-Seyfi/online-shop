@@ -139,10 +139,9 @@
                                         </div>
                                     </div>
                                 </div>
-
-                            </div><!--/product-information-->
+                            </div>
                         </div>
-                    </div><!--/product-details-->
+                    </div>
 
 
                     {% if related_products %}
@@ -182,7 +181,7 @@
                                 <div class="tab-pane fade active in" id="details"><!--  detail tab -->
                                     <h3>مشخصات کالا</h3>
                                     <ul id="detail_list">
-                                        <li>دسته بندی : <span>{{ product.category }}</span></li>
+                                        <li>دسته بندی : <span>{{ product.category.title }}</span></li>
                                         <li>برند : <span>{{ product.brand }}</span></li>
                                         <li>ابعاد : <span>{{ product.dimensions }}</span></li>
                                         <li>وزن : <span>{{ product.weight }}</span></li>
@@ -249,15 +248,18 @@
                                                     <div class="media-body">
                                                         <ul class="sinlge-post-meta">
                                                             <li><i class="fa fa-user"></i>{{ comment.user }}</li>
-                                                            <li><i class="fa fa-clock-o"></i> {{ comment.create_date | time }}</li>
-                                                            <li>
-                                                                <i class="fa fa-calendar"></i> {{ comment.create_date|show_jalali_date }}
-                                                            </li>
                                                         </ul>
                                                         <p>
                                                             {{ comment.text }}
                                                         </p>
-                                                        <a class="btn btn-primary" onclick="fillParentId({{ comment.id }})">پاسـخ<i class="fa fa-reply"></i></a>
+                                                        <div class="comment-time">
+                                                            <ul>
+                                                                <li><i class="fa fa-clock-o"></i> {{ comment.create_date | time }}</li>
+                                                                <li><i class="fa fa-calendar"></i> {{ comment.create_date|show_jalali_date }}</li>
+                                                            </ul>
+
+                                                            <a class="btn btn-primary" onclick="fillParentId({{ comment.id }})">پاسـخ<i class="fa fa-reply"></i></a>
+                                                        </div>
                                                     </div>
                                                 </li>
 
@@ -266,15 +268,17 @@
                                                         <div class="media-body">
                                                             <ul class="sinlge-post-meta">
                                                                 <li><i class="fa fa-user"></i>{{ sub_comment.user }}</li>
-                                                                <li><i class="fa fa-clock-o"></i> {{ sub_comment.create_date | time }}
-                                                                </li>
-                                                                <li>
-                                                                    <i class="fa fa-calendar"></i> {{ sub_comment.create_date|show_jalali_date }}
-                                                                </li>
                                                             </ul>
                                                             <p>
                                                                 {{ sub_comment.text }}
                                                             </p>
+
+                                                            <div class="comment-time">
+                                                                <ul>
+                                                                    <li><i class="fa fa-clock-o"></i> {{ comment.create_date | time }}</li>
+                                                                    <li><i class="fa fa-calendar"></i> {{ comment.create_date|show_jalali_date }}</li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </li>
                                                 {% endfor %}

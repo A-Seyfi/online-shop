@@ -89,3 +89,21 @@ if(lastDiv){
       },1)
    }
 }
+
+
+
+
+const panel_menu = document.getElementById('panel_menu')
+const panel_list_menu = document.getElementById('panel_list_menu')
+let menu = -1
+
+panel_menu.addEventListener('click', ()=>{
+   menu = -menu
+   
+   if(menu > 0){
+      panel_list_menu.style.right = '0'
+   }
+   else{
+      panel_list_menu.style.right = '-100%'
+   }
+})

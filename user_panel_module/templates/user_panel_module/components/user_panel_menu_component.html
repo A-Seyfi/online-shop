@@ -1,9 +1,14 @@
-<ul class="list-group">
+<div class="panel-menu-con">
+    <div id="panel_menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+        <h4>پنل کاربری</h4>
+    </div>
+    <div class="logout-menu"><a href="{% url 'logout_page' %}">خروج از حساب کاربری</a></div>
+</div>
+
+<ul id="panel_list_menu" class="list-group">
     <li id="first_item" class="list-group-item user_panel_cat">
         <a href="{% url 'profile_page' %}">اطلاعات کاربری</a>
-    </li>
-    <li class="list-group-item user_panel_cat">
-        <a href="">آدرس ها</a>
     </li>
     <li class="list-group-item user_panel_cat">
         <a href="{% url 'favorites_list' %}">لیست علاقه مندی ها</a>
@@ -14,7 +19,7 @@
     <li class="list-group-item user_panel_cat">
         <a href="{% url 'change_password_page' %}">تغییر کلمه عبور</a>
     </li>
-    <li class="list-group-item user_panel_cat">
+    <li id="logout" class="list-group-item user_panel_cat">
         <a href="{% url 'logout_page' %}">خروج از حساب کاربری</a>
     </li>
 </ul>

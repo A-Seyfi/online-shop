@@ -631,8 +631,9 @@ ul.sub-menu {
     border: 4px solid #d81921;
 }
 .brands-slider-con .brands-slider-title{
-    width: 15%;
+    width: fit-content;
     height: auto;
+    padding: 0 10px;
     margin: 0;
     white-space: nowrap;
     align-content: center;
@@ -642,7 +643,7 @@ ul.sub-menu {
 }
 
 .brand-slides-con{
-    width: 85%;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -1028,6 +1029,7 @@ ul.sub-menu {
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
+    padding-top: 5px;
 }
 
 .shop-header{
@@ -2388,11 +2390,44 @@ h2.title {
     font-size: 15px;
 }
 
+.panel-menu-con{
+    width: 100%;
+    display: none;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.panel-menu-con #panel_menu{
+    display: flex;
+    align-items: center;
+}
+.panel-menu-con #panel_menu svg{
+    margin-left: 5px;
+}
+.panel-menu-con #panel_menu h4{
+    margin: 0;
+    height: 100%;
+    align-content: center;
+}
+.panel-menu-con .logout-menu{
+    padding: 10px;
+    background-color: #d81921;
+    border-radius: 10px;
+}
+.panel-menu-con .logout-menu a{
+    color: white;
+}
+
+
 .user-panel-dashboard ul{
+    width: 100%;
     height: 360px;
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
+    transition: all 0.7s;
 }
 .user-panel-dashboard ul li{
     height: 25%;
@@ -2417,7 +2452,7 @@ h2.title {
 
 
 .prof-temp{
-    width: 70%;
+    width: 80%;
     padding: 0 15px;
 }
 
@@ -2620,6 +2655,10 @@ h2.title {
 
 #order-detail-content #cart_items{
     width: 65%;
+}
+
+#order-detail-content #cart_items .alert{
+    font-size: 18px;
 }
 
 #order-detail-content #cart_items .container{
@@ -3531,8 +3570,7 @@ h2.title {
     font-size: 18px;
     color: black;
     white-space: normal;
-    margin-top: 40px;
-    /* font-weight: 600; */
+    margin-top: 10px;
 }
 
 .media-heading {
@@ -3606,7 +3644,7 @@ h2.title {
 
 .response-area .media {
     border: 1px solid #d81921;
-    padding: 18px;
+    padding: 10px;
     margin-bottom: 20px;
     background-color: #ececeb;
     border-radius: 10px;
@@ -3620,10 +3658,24 @@ h2.title {
 }
 
 .response-area .second-media {
-    width: 95%;
-    margin-right: 5%;
+    width: 90%;
+    margin-right: auto;
+    border: 4px solid #d81921;
 }
 
+.media .comment-time{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.media .comment-time ul{
+    display: flex;
+}
+.media .comment-time ul li{
+    align-content: end;
+    margin-left: 20px;
+    color: black;
+}
 
 .sinlge-post-meta {
     overflow: hidden;
@@ -3633,10 +3685,9 @@ h2.title {
 
 
 .sinlge-post-meta li {
-    background: #F0F0E9;
     color: #363432;
     float: right;
-    font-size: 10pt;
+    font-size: 8pt;
     font-weight: 400;
     margin-left: 10px;
     padding: 0 0 0 10px;
@@ -3713,10 +3764,13 @@ h2.title {
     background: #d81921;
     border: 0 none;
     border-radius: 0;
-    margin-top: 16px;
     padding: 5px 10px;
     font-size: 15px;
     border-radius: 10px;
+}
+
+.text-area .btn-primary{
+    margin-top: 10px;
 }
 
 .media .btn-primary i{
