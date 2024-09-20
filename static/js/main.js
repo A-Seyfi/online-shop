@@ -1,8 +1,91 @@
 $('#sl2').slider();
-
 	var RGBChange = function() {
 	  $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
 	};	
+
+
+
+let slider = document.getElementById('slider');
+let items = document.querySelectorAll('.main-slider .list .item');
+let next = document.getElementById('next');
+let prev = document.getElementById('prev');
+let thumbnails = document.querySelectorAll('.slider-thumbnail .item');
+
+let countItem = items.length;
+let itemActive = 0;
+
+let startX;
+
+if(slider){
+   next.onclick = function(){
+       itemActive = itemActive + 1;
+       if(itemActive >= countItem){
+           itemActive = 0;
+       }
+       showSlider();
+   }
+   
+   prev.onclick = function(){
+       itemActive = itemActive - 1;
+       if(itemActive < 0){
+           itemActive = countItem - 1;
+       }
+       showSlider();
+   }
+   
+   let refreshInterval = setInterval(() => {
+       next.click();
+   }, 4000)
+   function showSlider(){
+       let itemActiveOld = document.querySelector('.main-slider .list .item.active');
+       let thumbnailActiveOld = document.querySelector('.slider-thumbnail .item.active');
+       itemActiveOld.classList.remove('active');
+       thumbnailActiveOld.classList.remove('active');
+   
+       items[itemActive].classList.add('active');
+       thumbnails[itemActive].classList.add('active');
+   
+       
+       clearInterval(refreshInterval);
+       refreshInterval = setInterval(() => {
+           next.click();
+       }, 4000)
+   }
+   
+   
+   slider.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+   });
+   slider.addEventListener('touchmove', (e) => {
+      const moveX = e.touches[0].clientX;
+      const diffX = startX - moveX;
+   
+      if (diffX > 10) {
+        itemActive = itemActive + 1;
+        if(itemActive >= countItem){
+            itemActive = 0;
+        }
+        showSlider();
+        startX = null;
+      }
+      if (diffX < 10) {
+         itemActive = itemActive - 1;
+         if(itemActive < 0){
+             itemActive = countItem - 1;
+         }
+         showSlider();
+        startX = null;
+      }
+   });
+   
+   
+   thumbnails.forEach((thumbnail, index) => {
+       thumbnail.addEventListener('click', () => {
+           itemActive = index;
+           showSlider();
+       })
+   })
+}
 		
 
 
@@ -92,18 +175,30 @@ if(lastDiv){
 
 
 
-
 const panel_menu = document.getElementById('panel_menu')
 const panel_list_menu = document.getElementById('panel_list_menu')
 let menu = -1
 
-panel_menu.addEventListener('click', ()=>{
-   menu = -menu
-   
-   if(menu > 0){
-      panel_list_menu.style.right = '0'
-   }
-   else{
-      panel_list_menu.style.right = '-100%'
-   }
-})
+if (panel_menu) {
+   panel_menu.addEventListener('click', ()=>{
+      menu = -menu
+      
+      if(menu > 0){
+         panel_list_menu.style.right = '0'
+      }
+      else{
+         panel_list_menu.style.right = '-100%'
+      }
+   })
+}
+
+
+
+const product_val = document.querySelectorAll('.laptop-detail div span')
+if (product_val) {
+   product_val.forEach(val => {
+      if (val.innerHTML == 'None' || val.innerHTML == ''){
+         val.innerHTML = '-'
+      }
+   });
+}

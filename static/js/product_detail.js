@@ -158,7 +158,7 @@ function createOptionColor() {
             div.className = 'custom-option';
             div.textContent = option.text;
             div.dataset.value = option.value;
-
+            
             if(option.value == 1){
                 div.click();
                 div.classList.add('active-custom')
@@ -173,7 +173,7 @@ function createOptionColor() {
                 id_color.value = option.value;
                 div.classList.add('active-custom')
             });
-    
+            
             custom_color.appendChild(div);
         }
     });
@@ -184,6 +184,7 @@ createOptionColor();
 
 const id_warranty = document.getElementById('id_warranty');
 const custom_warranty = document.getElementById('custom_warranty');
+const warranty_val = document.getElementById('warranty_val');
 
 function createOptionWarranty() {
     Array.from(id_warranty.options).forEach(option => {
@@ -196,6 +197,7 @@ function createOptionWarranty() {
             if(option.value == 1){
                 div.click();
                 div.classList.add('active-custom')
+                warranty_val.innerText = option.text;
                 id_warranty.value = option.value;
             }
             
@@ -205,6 +207,7 @@ function createOptionWarranty() {
                     clicked_option.classList.remove('active-custom')
                 })
                 id_warranty.value = option.value;
+                warranty_val.innerText = option.text;
                 div.classList.add('active-custom')
             });
     

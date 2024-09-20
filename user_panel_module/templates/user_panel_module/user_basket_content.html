@@ -47,8 +47,6 @@
                                     <h4>{{ options.ram }}</h4>
                                     <h4>{{ options.storage }}</h4>
                                     <h4>{{ options.warranty }}</h4>
-                                {% else %}
-                                <h2>سبد خرید خالی است</h2>
                                 {% endif %}
                             </td>
                         </tr>
@@ -77,7 +75,7 @@
                             </td>
                         </tr>
                     </tbody>
-                    {% endfor %}
+                {% endfor %}
                 </table>
             </div>
         </div>
@@ -89,7 +87,7 @@
                     <div class="total_area">
                         <ul>
                             <li>قیمت کالاها<span class="product-count"> ({{ total_items.orderdetail_set.count }})</span><span>{{ sum|three_digits_currency }}</span></li>
-                            <li>مبلغ قابل پرداخت<span>38,308,00 تومان</span></li>
+                            <li>مبلغ قابل پرداخت<span>{{ sum|three_digits_currency }}</span></li>
                         </ul>
                         <a class="btn btn-default check_out" href="{% url 'request_payment' %}">پرداخت</a>
                     </div>

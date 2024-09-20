@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+import os
 
 
 class SiteSetting(models.Model):
@@ -49,7 +51,6 @@ class FooterLink(models.Model):
 class Slider(models.Model):
     title = models.CharField(max_length=200, verbose_name='عنوان')
     url = models.URLField(max_length=500, verbose_name='لینک')
-    url_title = models.CharField(max_length=200, verbose_name='عنوان لینک')
     description = models.TextField(verbose_name='توضیحات اسلایدر')
     image = models.ImageField(upload_to='images/sliders', verbose_name='تصویر اسلایدر')
     is_active = models.BooleanField(default=True, verbose_name='فعال / غیرفعال')
@@ -62,21 +63,21 @@ class Slider(models.Model):
         return self.title
 
 
-class SiteBanner(models.Model):
-    class SiteBannerPositions(models.TextChoices):
-        product_list = 'product_list', 'صفحه لیست محصولات',
-        product_detail = 'product_detail', 'صفحه ی جزییات محصولات',
-        about_us = 'about_us', 'درباره ما'
+def validate_svg_file(value):
+    ext = os.path.splitext(value.name)[1]
+    if ext != '.svg':
+        raise ValidationError('فقط فایل‌های SVG مجاز هستند.')
 
+class SiteBanner(models.Model):
     title = models.CharField(max_length=200, verbose_name='عنوان بنر')
     url = models.URLField(max_length=400, null=True, blank=True, verbose_name='آدرس بنر')
+    icon = models.FileField(upload_to='static/images/icons/', verbose_name='آیکون بنر', validators=[validate_svg_file])
     image = models.ImageField(upload_to='images/banners', verbose_name='تصویر بنر')
     is_active = models.BooleanField(verbose_name='فعال / غیرفعال')
-    position = models.CharField(max_length=200, choices=SiteBannerPositions.choices, verbose_name='جایگاه نمایشی')
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = 'بنر تبلیغاتی'
-        verbose_name_plural = 'بنرهای تبلیغاتی'
+        verbose_name = 'بنر‌های صفحه اصلی'
+        verbose_name_plural = 'بنرهای صفحه اصلی'

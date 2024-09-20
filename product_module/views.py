@@ -4,9 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 from django.contrib.auth.decorators import login_required
-from site_module.models import SiteBanner
 from utils.http_service import get_client_ip
-from utils.convertors import group_list
 from .models import Product, ProductCategory, ProductBrand, ProductVisit, ProductGallery, Favorite, ProductComment
 from .forms import LaptopSelectionForm
 from fuzzywuzzy import process
@@ -28,7 +26,6 @@ class ProductListView(ListView):
         context['db_max_price'] = db_max_price
         context['start_price'] = self.request.GET.get('start_price') or 0
         context['end_price'] = self.request.GET.get('end_price') or db_max_price
-        context['banners'] = SiteBanner.objects.filter(is_active=True, position__iexact=SiteBanner.SiteBannerPositions.product_list)
         return context
 
     def get_queryset(self):
@@ -79,13 +76,12 @@ class ProductDetailView(DetailView):
         favorite_product_id = request.session.get("product_favorites")
         context['form'] = LaptopSelectionForm(product_id=self.object.id)
         context['is_favorite'] = favorite_product_id == str(loaded_product.id)
-        context['banners'] = SiteBanner.objects.filter(is_active=True, position__iexact=SiteBanner.SiteBannerPositions.product_detail)
         galleries = list(ProductGallery.objects.filter(product_id=loaded_product.id).all())
         galleries.insert(0, loaded_product)
         context['comments'] = ProductComment.objects.filter(product_id=self.object.id, parent=None).order_by('-create_date').prefetch_related('productcomment_set')
         context['comments_count'] = ProductComment.objects.filter(product_id=self.object.id).count()
         context['product_galleries'] = ProductGallery.objects.all()
-        context['related_products'] = group_list(list(Product.objects.filter(brand_id=loaded_product.brand_id).exclude(pk=loaded_product.id).all()[:12]), 3)
+        context['related_products'] = Product.objects.filter(brand_id=loaded_product.brand_id).exclude(pk=loaded_product.id).all()[:4]
         user_ip = get_client_ip(self.request)
         user_id = None
         if self.request.user.is_authenticated:
@@ -139,7 +135,6 @@ class CompareListView(ListView):
         context = super(CompareListView, self).get_context_data()
         query = Product.objects.all()
         product: Product = query.order_by('-price').first()
-        context['banners'] = SiteBanner.objects.filter(is_active=True, position__iexact=SiteBanner.SiteBannerPositions.product_list)
         return context
 
     def get_queryset(self):

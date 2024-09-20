@@ -104,7 +104,7 @@
                                         <div class="pd-price">
                                             <div class="warranty">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.995 6.9a.998.998 0 0 0-.548-.795l-8-4a1 1 0 0 0-.895 0l-8 4a1.002 1.002 0 0 0-.547.795c-.011.107-.961 10.767 8.589 15.014a.987.987 0 0 0 .812 0c9.55-4.247 8.6-14.906 8.589-15.014zM12 19.897C5.231 16.625 4.911 9.642 4.966 7.635L12 4.118l7.029 3.515c.037 1.989-.328 9.018-7.029 12.264z"/><path d="m11 12.586-2.293-2.293-1.414 1.414L11 15.414l5.707-5.707-1.414-1.414z"/></svg>
-                                                <span>گارانتی 18 ماهه امرتات</span>
+                                                <span id="warranty_val"></span>
                                             </div>
 
                                             <div class="p-count">
@@ -145,24 +145,73 @@
 
 
                     {% if related_products %}
-                        <div class="product_items">
-                            <h2 class="title text-center">محصولات مرتبط</h2>
-                            <div id="related-item-carousel" class="product-item-carousel carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    {% for group in related_products %}
-                                        <div class="item {% if forloop.first %}active{% endif %}">
-                                            {% for product in group %}
-                                                {% include 'includes/product_item_partial.html' with product=product col_size=4 %}
-                                            {% endfor %}
+                        <div class="features">
+                            <div class="wrapper">
+                              <div class="sectop flexitem">
+                                <h2><span>محصولات مرتبط</span><span class="circle"></span></h2>
+                              </div>
+                              <div class="column">
+                                <div class="products main flexwrap">
+                                  {% for product in related_products %}
+                                  <div class="item">
+                                    <div class="media">
+                                      <div class="thumbnail object-cover">
+                                        <a href="{{ product.get_absolute_url }}">
+                                          {% if product.image %}
+                                            {% thumbnail product.image "268x250" quality=90 crop='center' as im %}
+                                              <img src="{{ im.url }}">
+                                            {% endthumbnail %}
+                                          {% else %}
+                                            <img src="/static/images/shop/product.jpg" alt="">
+                                          {% endif %}
+                                        </a>
+                                      </div>
+                                      <div class="hoverable">
+                                        <ul>
+                                          <li class="active">
+                                              <form action="{% url 'add_to_favorites' product.id %}" method="post">
+                                                  {% csrf_token %}
+                                                  <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"/></svg></button>
+                                              </form>
+                                          </li>
+                                          <li>
+                                            <a href="{{ product.get_absolute_url }}"><i class="fa fa-eye"></i></a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                    <div class="content">
+                                      <div class="laptop-detail">
+                                        <div>
+                                            <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" fill="#000000" width="128" height="128" viewBox="0 0 20 20">
+                                                <path d="M6.987 10.987l-2.931 3.031L2 11.589V18h6.387l-2.43-2.081 3.03-2.932-2-2zM11.613 2l2.43 2.081-3.03 2.932 2 2 2.931-3.031L18 8.411V2h-6.387z"/>
+                                            </svg>
+                                            <span>{{ product.screen_size }}</span>
                                         </div>
-                                    {% endfor %}
-                                </div>
-                                <a class="left recommended-item-control" href="#related-item-carousel" data-slide="prev">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                                <a class="right recommended-item-control" href="#related-item-carousel" data-slide="next">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
+                                        <div>
+                                            <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 1024 1024" class="icon">
+                                                <path fill="#000000" d="M320 256a64 64 0 00-64 64v384a64 64 0 0064 64h384a64 64 0 0064-64V320a64 64 0 00-64-64H320zm0-64h384a128 128 0 01128 128v384a128 128 0 01-128 128H320a128 128 0 01-128-128V320a128 128 0 01128-128z"/>
+                                                <path fill="#000000" d="M512 64a32 32 0 0132 32v128h-64V96a32 32 0 0132-32zm160 0a32 32 0 0132 32v128h-64V96a32 32 0 0132-32zm-320 0a32 32 0 0132 32v128h-64V96a32 32 0 0132-32zm160 896a32 32 0 01-32-32V800h64v128a32 32 0 01-32 32zm160 0a32 32 0 01-32-32V800h64v128a32 32 0 01-32 32zm-320 0a32 32 0 01-32-32V800h64v128a32 32 0 01-32 32zM64 512a32 32 0 0132-32h128v64H96a32 32 0 01-32-32zm0-160a32 32 0 0132-32h128v64H96a32 32 0 01-32-32zm0 320a32 32 0 0132-32h128v64H96a32 32 0 01-32-32zm896-160a32 32 0 01-32 32H800v-64h128a32 32 0 0132 32zm0-160a32 32 0 01-32 32H800v-64h128a32 32 0 0132 32zm0 320a32 32 0 01-32 32H800v-64h128a32 32 0 0132 32z"/>
+                                            </svg>
+                                            <span>{{ product.cpu }}</span>
+                                        </div>
+                                        <div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 22c3.976 0 8-1.374 8-4V6c0-2.626-4.024-4-8-4S4 3.374 4 6v12c0 2.626 4.024 4 8 4zm0-2c-3.722 0-6-1.295-6-2v-1.268C7.541 17.57 9.777 18 12 18s4.459-.43 6-1.268V18c0 .705-2.278 2-6 2zm0-16c3.722 0 6 1.295 6 2s-2.278 2-6 2-6-1.295-6-2 2.278-2 6-2zM6 8.732C7.541 9.57 9.777 10 12 10s4.459-.43 6-1.268V10c0 .705-2.278 2-6 2s-6-1.295-6-2V8.732zm0 4C7.541 13.57 9.777 14 12 14s4.459-.43 6-1.268V14c0 .705-2.278 2-6 2s-6-1.295-6-2v-1.268z"/></svg>
+                                            <span>{{ product.internal_memory }}</span>
+                                        </div>
+                                    </div>
+
+                                      <h3>
+                                        <a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                                      </h3>
+                                      <div class="price">
+                                        <span class="current">{{ product.price|three_digits_currency }}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  {% endfor %}
+                                </div>  
+                              </div>
                             </div>
                         </div>
                     {% endif %}

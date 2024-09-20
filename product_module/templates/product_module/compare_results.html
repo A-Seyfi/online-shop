@@ -57,7 +57,7 @@
     
             {% if products|length < 4 %}
                 <div class="more-product-c compared-product-link">
-                    <a href="{{ product.get_absolute_url }}">مقایسه محصولات بیشتر <span class="fa fa-arrow-left"></span></a>
+                    <a href="{% url 'compare_products' %}">مقایسه محصولات بیشتر <span class="fa fa-arrow-left"></span></a>
                 </div>
             {% endif %}
         </div>

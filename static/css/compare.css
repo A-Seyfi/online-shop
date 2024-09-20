@@ -40,7 +40,7 @@
     margin: 0 auto;
     padding: 10px 5px;
     border: 2px solid #b2b2b2;
-    border-radius: 0.5vw;
+    border-radius: 10px;
 }
 
 .products-compare{
@@ -58,18 +58,20 @@
 }
 .compared-product-image-wrapper{
     margin: 0;
-    height: 340px;
+    height: fit-content;
     border-radius: 0.5vw;
     background-color: white;
     box-shadow: 0px 0px 6px -2.5px black;
 }
 .compared-productinfo{
-    height: 100%;
+    height: fit-content;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
 }
 
 .compared-productinfo h2 {
-    font-family: 'BYekan', sans-serif;
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -96,8 +98,7 @@
 }
 
 .compared-productinfo p {
-    height: 15%;
-    font-family: 'BYekan', sans-serif;
+    height: 60px;
     font-size: 10pt;
     font-weight: 400;
     color: #000;
@@ -106,9 +107,9 @@
 	text-align: start;
 }
 .compared-productinfo img {
-    width: 190px;
-    height: 160px;
-    margin-top: 10px;
+    width: 230px;
+    height: 200px;
+    margin: 0 auto;
 }
 .compared-productinfo .laptop-detail{
     width: 100%;
@@ -146,18 +147,7 @@
     font-size: 15px;
 }
 
-.product-image-wrapper {
-    height: 460px;
-}
-@media (max-width: 991px) {
-    .product-image-wrapper {
-        height: 220px;
-    }
-    .mobile-mode-detail h2 {
-        margin: 0;
-        margin-top: 10px;
-    }
-}
+
 
 .compare-detail-section{
     width: 98%;
@@ -216,11 +206,21 @@
 }
 
 
-
+@media (max-width:1200px){
+    .compared-productinfo img {
+        width: 200px;
+        height: 170px;
+    }
+}
 
 @media (max-width: 991px) {
     #header {
         position: relative;
+    }
+    
+    .mobile-mode-detail h2 {
+        margin: 0;
+        margin-top: 10px;
     }
 
     .product-menu{
@@ -237,7 +237,7 @@
         width: fit-content;
     }
 
-
+    
     .compare-con{
         width: 96%;
         overflow-x: auto;
@@ -260,6 +260,7 @@
         border-radius: 1vw;
     }    
     
+
     .more-product-c a {
         width: 234px;
         display: block;

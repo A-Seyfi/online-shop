@@ -10,7 +10,7 @@ class SliderAdmin(admin.ModelAdmin):
     list_editable = ['url', 'is_active']
 
 class SiteBannerAdmin(admin.ModelAdmin):
-    list_display = ['title', 'url', 'position']
+    list_display = ['title', 'url']
 
 
 admin.site.register(models.SiteSetting)

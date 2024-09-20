@@ -101,7 +101,7 @@ class Product(models.Model):
     
     alternative_name = models.CharField(max_length=255, verbose_name='نام دیگر', null=True, blank=True)
 
-    slug = models.SlugField(default="", null=False, db_index=True, blank=True, max_length=200, unique=True, verbose_name='عنوان در url')
+    slug = models.SlugField(null=False, db_index=True, blank=False, max_length=200, unique=True, verbose_name='عنوان در url')
     is_active = models.BooleanField(default=False, verbose_name='فعال / غیرفعال')
     is_delete = models.BooleanField(verbose_name='حذف شده / نشده')
 

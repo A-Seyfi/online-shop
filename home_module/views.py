@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from product_module.models import Product, ProductCategory
 from order_module.models import Order
+from site_module.models import SiteBanner
 from site_module.models import SiteSetting, FooterLinkBox, Slider
-from utils.convertors import group_list
 
 
 class HomeView(TemplateView):
@@ -14,10 +14,11 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         sliders = Slider.objects.filter(is_active=True)
         context['sliders'] = sliders
-        latest_products = Product.objects.filter(is_active=True, is_delete=False).order_by('-id')[:12]
-        most_visit_products = Product.objects.filter(is_active=True, is_delete=False).annotate(visit_count=Count('productvisit')).order_by('-visit_count')[:12]
-        context['latest_products'] = group_list(latest_products)
-        context['most_visit_products'] = group_list(most_visit_products)
+        context['banners'] = SiteBanner.objects.filter(is_active=True)
+        latest_products = Product.objects.filter(is_active=True, is_delete=False).order_by('-id')[:8]
+        most_visit_products = Product.objects.filter(is_active=True, is_delete=False).annotate(visit_count=Count('productvisit')).order_by('-visit_count')[:8]
+        context['latest_products'] = latest_products
+        context['most_visit_products'] = most_visit_products
         categories = list(ProductCategory.objects.annotate(products_count=Count('product_categories')).filter(is_active=True, is_delete=False, products_count__gt=0)[:6])
         categories_products = []
         for category in categories:
@@ -29,12 +30,6 @@ class HomeView(TemplateView):
             categories_products.append(item)
 
         context['categories_products'] = categories_products
-
-        most_bought_products = Product.objects.filter(orderdetail__order__is_paid=True).annotate(order_count=Sum(
-            'orderdetail__count'
-        )).order_by('-order_count')[:12]
-
-        context['most_bought_products'] = group_list(most_bought_products)
 
         return context
 
