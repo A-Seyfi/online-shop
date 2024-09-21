@@ -38,6 +38,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='images/products', null=True, blank=True, verbose_name='تصویر محصول')
     brand = models.ForeignKey(ProductBrand, on_delete=models.CASCADE, verbose_name='برند', null=True, blank=True)
     price = models.IntegerField(verbose_name='قیمت')
+    stock = models.IntegerField(verbose_name='تعداد موجودی محصول', null=True, blank=True)
     customization = models.BooleanField(verbose_name='قابل کاستوم شدن', default=False)
     short_description = models.CharField(max_length=360, db_index=True, null=True, verbose_name='توضیحات کوتاه')
     description = models.TextField(verbose_name='توضیحات اصلی', db_index=True)

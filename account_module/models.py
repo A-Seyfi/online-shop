@@ -4,8 +4,8 @@ from django.db import models
 
 
 class User(AbstractUser):
-    email_active_code = models.CharField(max_length=100, verbose_name='کد فعالسازی ایمیل')
-    about_user = models.TextField(null=True, blank=True, verbose_name='درباره شخص')
+    email_active_code = models.CharField(null=True, blank=True, max_length=100, verbose_name='کد فعالسازی ایمیل')
+    phone_number = models.IntegerField(null=True, blank=True, verbose_name='شماره تلفن')
     address = models.TextField(null=True, blank=True, verbose_name='آدرس')
     post_code = models.CharField(null=True, blank=True, max_length=10, verbose_name='کد پستی')
 

@@ -5,12 +5,12 @@ from .models import ContactUs
 class ContactUsModelForm(forms.ModelForm):
     class Meta:
         model = ContactUs
-        fields = ['full_name', 'email', 'title', 'message']
+        fields = ['full_name', 'phone_number', 'title', 'message']
         widgets = {
             'full_name': forms.TextInput(attrs={
                 'class': 'form-control'
             }),
-            'email': forms.TextInput(attrs={
+            'phone_number': forms.NumberInput(attrs={
                 'class': 'form-control'
             }),
             'title': forms.TextInput(attrs={
@@ -25,7 +25,7 @@ class ContactUsModelForm(forms.ModelForm):
 
         labels = {
             'full_name': 'نام و نام خانوادگی شما',
-            'email': 'ایمیل شما'
+            'phone_number': 'شماره تلفن شما'
         }
 
         error_messages = {

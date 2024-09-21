@@ -11,7 +11,7 @@
             </div>
 
             <div class="alert alert-warning">
-                قبل از تایید خرید از  <a href="">اطلاعات کاربری</a> خود مطمئن شوید.
+                قبل از تایید خرید از  <a href="{% url 'profile_page' %}">اطلاعات کاربری</a> خود مطمئن شوید.
             </div>
 
             <div class="table-responsive cart_info">
@@ -86,7 +86,7 @@
                 <div class="col-sm-6">
                     <div class="total_area">
                         <ul>
-                            <li>قیمت کالاها<span class="product-count"> ({{ total_items.orderdetail_set.count }})</span><span>{{ sum|three_digits_currency }}</span></li>
+                            <li>قیمت کالاها<span class="product-count"> ({{ total_items.orderdetail_set.count }})</span><span>{{ first_price|three_digits_currency }}</span></li>
                             <li>مبلغ قابل پرداخت<span>{{ sum|three_digits_currency }}</span></li>
                         </ul>
                         <a class="btn btn-default check_out" href="{% url 'request_payment' %}">پرداخت</a>
