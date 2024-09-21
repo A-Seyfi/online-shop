@@ -31,5 +31,8 @@ class ContactUsModelForm(forms.ModelForm):
         error_messages = {
             'full_name': {
                 'required': 'نام و نام خانوادگی اجباری می باشد. لطفا وارد کنید'
+            },
+            'phone_number':{
+                'required': 'شماره تلفن اجباری می باشد. لطفا وارد کنید'
             }
         }
