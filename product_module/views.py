@@ -126,9 +126,13 @@ class CompareListView(ListView):
     paginate_by = 16
     products = Product.objects.all()
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         selected_products = request.POST.getlist('products')
         request.session['selected_products'] = selected_products[:4]  # maximum 4 product
+        # i now, i have to di it!
+        cat = request.POST.get('cat')
+        brand = request.POST.get('brand')
+        
         return redirect('compare_result')
     
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -143,6 +147,13 @@ class CompareListView(ListView):
         brand_name = self.kwargs.get('brand')
         request: HttpRequest = self.request
 
+        
+        if brand_name is not None:
+            query = query.filter(brand__url_title__iexact=brand_name)
+
+        if category_name is not None:
+            query = query.filter(category__url_title__iexact=category_name)
+            
         sort_by = self.request.GET.get('sort')
         if sort_by == 'cheap':
             return query.order_by('price')
@@ -253,8 +264,11 @@ def add_product_comment(request: HttpRequest):
         product_id = request.GET.get('product_id')
         product_comment = request.GET.get('product_comment')
         parent_id = request.GET.get('parent_id')
-        new_comment = ProductComment(product_id=product_id, text=product_comment, user_id=request.user.id, parent_id=parent_id)
-        new_comment.save()
+
+        if product_comment is not "":
+            new_comment = ProductComment(product_id=product_id, text=product_comment, user_id=request.user.id, parent_id=parent_id)
+            new_comment.save()
+
         context = {
             'comments': ProductComment.objects.filter(product_id=product_id, parent=None).order_by('-create_date').prefetch_related('productcomment_set'),
             'comments_count': ProductComment.objects.filter(product_id=product_id).count()

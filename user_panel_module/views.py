@@ -4,9 +4,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views import View
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from account_module.models import User
 from product_module.models import Favorite
+from contact_module.models import ContactUs
 from order_module.models import Order, OrderDetail
 from .forms import EditProfileModelForm, ChangePasswordForm
 from django.contrib.auth import logout
@@ -93,11 +94,17 @@ class MyShopping(ListView):
 def user_panel_menu_component(request: HttpRequest):
     return render(request, 'user_panel_module/components/user_panel_menu_component.html')
 
+@login_required
+def contact_response(request):
+    responses = ContactUs.objects.filter(phone_number=request.user.phone_number)
+    return render(request, 'user_panel_module/contact_response.html', {'responses': responses})
+
 
 @login_required
 def user_basket(request: HttpRequest):
     current_order, created = Order.objects.prefetch_related('orderdetail_set').get_or_create(is_paid=False, user_id=request.user.id)
     total_amount = current_order.calculate_total_price()
+    amount = current_order.calculate_price()
     if current_order.orderdetail_set.exists():
        for item in current_order.orderdetail_set.all():
            options, created = OrderDetail.objects.get_or_create(
@@ -110,6 +117,7 @@ def user_basket(request: HttpRequest):
 
     context = {
         'order': current_order,
+        'first_price': amount,
         'sum': total_amount,
         'options' : options,
     }

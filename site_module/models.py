@@ -1,4 +1,5 @@
 from django.db import models
+from product_module.models import ProductCategory
 from django.core.exceptions import ValidationError
 import os
 
@@ -62,15 +63,15 @@ class Slider(models.Model):
     def __str__(self):
         return self.title
 
-
 def validate_svg_file(value):
     ext = os.path.splitext(value.name)[1]
     if ext != '.svg':
         raise ValidationError('فقط فایل‌های SVG مجاز هستند.')
 
+
 class SiteBanner(models.Model):
     title = models.CharField(max_length=200, verbose_name='عنوان بنر')
-    url = models.URLField(max_length=400, null=True, blank=True, verbose_name='آدرس بنر')
+    category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, verbose_name='دسته بندی مرتبط', null=True, blank=True)
     icon = models.FileField(upload_to='static/images/icons/', verbose_name='آیکون بنر', validators=[validate_svg_file])
     image = models.ImageField(upload_to='images/banners', verbose_name='تصویر بنر')
     is_active = models.BooleanField(verbose_name='فعال / غیرفعال')

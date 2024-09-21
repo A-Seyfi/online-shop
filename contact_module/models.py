@@ -3,7 +3,7 @@ from django.db import models
 
 class ContactUs(models.Model):
     title = models.CharField(max_length=300, verbose_name='عنوان')
-    email = models.EmailField(max_length=300, verbose_name='ایمیل')
+    phone_number = models.IntegerField(null=True, blank=True, verbose_name='شماره تلفن')
     full_name = models.CharField(max_length=300, verbose_name='نام و نام خانوادگی')
     message = models.TextField(verbose_name='متن تماس با ما')
     created_date = models.DateTimeField(verbose_name='تاریخ ایجاد', auto_now_add=True)

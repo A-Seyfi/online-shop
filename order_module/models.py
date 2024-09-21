@@ -16,8 +16,6 @@ class Order(models.Model):
         total_amount = 0
         if self.is_paid:
             for order_detail in self.orderdetail_set.all():
-                print(type(order_detail.color), order_detail.color)
-            for order_detail in self.orderdetail_set.all():
                 total_amount += (int(order_detail.final_price) * int(order_detail.count) +
                                  int(order_detail.color.price_increase) + 
                                  int(order_detail.ram.price_increase) + 
@@ -30,6 +28,17 @@ class Order(models.Model):
                                  int(order_detail.ram.price_increase) + 
                                  int(order_detail.storage.price_increase) + 
                                  int(order_detail.warranty.price_increase))
+
+        return total_amount
+
+    def calculate_price(self):
+        total_amount = 0
+        if self.is_paid:
+            for order_detail in self.orderdetail_set.all():
+                total_amount += (int(order_detail.final_price) * int(order_detail.count))
+        else:
+            for order_detail in self.orderdetail_set.all():
+                total_amount += (int(order_detail.product.price) * int(order_detail.count))
 
         return total_amount
 

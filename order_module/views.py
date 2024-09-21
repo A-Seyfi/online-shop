@@ -46,6 +46,13 @@ def add_product_to_order(request: HttpRequest):
     if request.user.is_authenticated:
         product = Product.objects.filter(id=product_id, is_active=True, is_delete=False).first()
         if product is not None:
+            if count > product.stock:
+                return JsonResponse({
+                    'status': 'out_of_stock',
+                    'text': 'متاسفانه موجودی کافی برای این محصول وجود ندارد',
+                    'confirm_button_text': 'باشه ممنونم',
+                    'icon': 'warning'
+                })
             current_order, created = Order.objects.get_or_create(is_paid=False, user_id=request.user.id)
             current_order_detail = current_order.orderdetail_set.filter(product_id=product_id).first()
             if current_order_detail is not None:

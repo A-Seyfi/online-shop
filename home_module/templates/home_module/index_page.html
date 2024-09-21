@@ -85,7 +85,7 @@
       <div class="sectop flexitem">
         <h2><span>جدیدترین محصولات</span><span class="circle"></span></h2>
         <div class="second-links">
-          <a href="#" class="view-all"
+          <a href="{% url 'product-list' %}?sort=latest" class="view-all"
             >مشاهده همه<i class="fa fa-chevron-left"></i
           ></a>
         </div>
@@ -162,7 +162,7 @@
         <div class="row">
           <div class="item">
             <div class="text-content flexcol">
-              <a href="{{ banner.url }}">
+              <a href="{% url 'product-categories-list' cat=banner.category.url_title %}">
                 <h4>
                   {% if banner.icon %}
                     <img src="{{ banner.icon }}">
@@ -186,7 +186,7 @@
       <div class="sectop flexitem">
         <h2><span>پر بازدید ترین محصولات</span><span class="circle"></span></h2>
         <div class="second-links">
-          <a href="#" class="view-all"
+          <a href="{% url 'product-list' %}?sort=most_visit" class="view-all"
             >مشاهده همه<i class="fa fa-chevron-left"></i
           ></a>
         </div>
