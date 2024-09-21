@@ -4,7 +4,7 @@
 {% load poll_extras %}
 
 {% block title %}
-    لیست خرید های من
+    پیام ها
 {% endblock %}
 
 {% block content %}
@@ -18,11 +18,22 @@
                 <div class="features_items">
                     {% if responses %}
                         {% for response in responses %}
-                        <p><strong>عنوان:</strong> {{ response.title }}</p>
-                        <p><strong>نام و نام خانوادگی:</strong> {{ response.full_name }}</p>
-                        <p><strong>ایمیل:</strong> {{ response.phone_number }}</p>
-                        <p><strong>پیام:</strong> {{ response.message }}</p>
-                        <p><strong>پاسخ ادمین:</strong> {{ response.response }}</p>
+                            <div class="response-con">
+                                <div class="r-title-con">
+                                    <div class="r-name"><strong>نام و نام خانوادگی:</strong> <div>{{ response.full_name }}</div></div>
+
+                                    <div class="r-email"><strong>شماره تلفن:</strong> <div>{{ response.phone_number }}</div></div>
+                                </div>
+
+                                <div class="r-title"><strong>عنوان:</strong> <div>{{ response.title }}</div></div>
+
+                                <div class="r-message-response-con">
+                                    <div class="r-message"><strong>پیام:</strong> <div>{{ response.message }}</div></div>
+    
+                                    <div class="r-response"><strong>پاسخ ادمین:</strong> <div>{{ response.response }}</div></div>
+                                </div>
+                            </div>
+                        
                         {% endfor %}
                     {% else %}
                         <div class="alert alert-warning">

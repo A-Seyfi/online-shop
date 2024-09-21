@@ -7,7 +7,7 @@ from account_module.models import User
 class EditProfileModelForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'address', 'phone_number', 'post_code']
+        fields = ['first_name', 'last_name', 'phone_number', 'post_code', 'address']
         widgets = {
             'first_name': forms.TextInput(attrs={
                 'class': 'form-control'
@@ -15,24 +15,24 @@ class EditProfileModelForm(forms.ModelForm):
             'last_name': forms.TextInput(attrs={
                 'class': 'form-control'
             }),
-            'address': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 3,
-            }),
             'phone_number': forms.TextInput(attrs={
                 'class': 'form-control',
             }),
             'post_code': forms.TextInput(attrs={
                 'class': 'form-control',
+            }),
+            'address': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
             })
         }
 
         labels = {
             'first_name': 'نام',
             'last_name': 'نام خانوادگی',
-            'address': 'آدرس',
             'phone_number': 'شماره تلفن',
             'post_code': 'کد پستی',
+            'address': 'آدرس'
         }
 
 

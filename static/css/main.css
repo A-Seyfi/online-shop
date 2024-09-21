@@ -2733,6 +2733,7 @@ h2.title {
 }
 .container-user-panel .row{
     height: 100%;
+    margin: 0;
 }
 
 .user-panel-dashboard{
@@ -2809,7 +2810,7 @@ h2.title {
 
 
 .profile-detail {
-    padding: 10px 20px;
+    padding: 10px 10px !important;
     background-color: white;
     border-radius: 10px;
     margin-right: 10px;
@@ -2823,16 +2824,10 @@ h2.title {
     border: 1px solid;
     border-radius: 10px;
 }
-.profile-detail form p:nth-child(2){
+.profile-detail form p{
     width: 45%;
 }
-.profile-detail form p:nth-child(3){
-    width: 45%;
-}
-.profile-detail form p:nth-child(4){
-    width: 100%;
-}
-.profile-detail form p:nth-child(5){
+.profile-detail form p:nth-child(6){
     width: 100%;
 }
 .profile-detail .btn{
@@ -3358,6 +3353,11 @@ h2.title {
 #do_action .total_area li{
     background:none;
     opacity: 75%;
+}
+#do_action .total_area li:first-child{
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #727272;
 }
 
 
@@ -4275,4 +4275,77 @@ h2.title {
     text-align: right;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+}
+
+
+
+.container-user-panel .features_items{
+    padding-top: 0;
+}
+
+.response-con{
+    width: 100%;
+    padding: 20px 10px;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.response-con .r-title-con{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 10px;
+    border: 3px solid;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.response-con .r-message-response-con{
+    width: 100%;
+    display: flex;
+}
+
+.response-con div.r-name, .response-con div.r-email{
+    display: flex;
+    width: 50%;
+    align-items: center;
+}
+.response-con div.r-title, .response-con div.r-message,.response-con div.r-response{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.response-con strong{
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.response-con div.r-name div, .response-con div.r-email div{
+    margin-right: 5px;
+}
+.response-con div.r-title div, .response-con div.r-message div, .response-con div.r-response div{
+    margin-top: 10px;
+    border: 1px solid;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 5px 10px;
+    line-height: normal;
+}
+
+.r-title div{
+    width: 40%;
+}
+.r-message div{
+    width: 80%;
+    height: 100px;
+}
+.r-response div{
+    width: 80%;
+    height: 100px;
 }

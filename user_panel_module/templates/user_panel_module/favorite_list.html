@@ -25,7 +25,7 @@
                                             <div class="productinfo text-center">
                                                 <form action="{% url 'remove_favorite' favorite.product.id %}" method="post">
                                                     {% csrf_token %}
-                                                    <button type="submit"><span class=" fa fa-trash-o"></span>حذف از فهرست</button>
+                                                    <button type="submit"><span class=" fa fa-trash-o"></span>حذف از لیست</button>
                                                 </form>
                                                 {% if favorite.product.image %}
                                                     {% thumbnail favorite.product.image "268x250" quality=90 crop='center' as im %}

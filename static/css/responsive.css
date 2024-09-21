@@ -777,21 +777,36 @@
 	}
 
 
+	
+	.container-user-panel .shop-products-container{
+	    padding-right: 0;
+	}
+	.response-con .r-title-con {
+		flex-direction: column;
+	}
+	.response-con .r-title-con .r-name{
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.response-con .r-title-con .r-email{
+		width: 100%;
+	}
+
+	.response-con .r-message-response-con {
+		flex-direction: column;
+	}
 
 	.container-user-panel .row {
 		flex-direction: column;
 	}
-
 	.profile-detail {
 		width: 100%;
 		margin-right: 0;
 	}
-	
 	.prof-temp {
 		width: 100%;
 		padding: 0;
-	}	
-
+	}
 	.user-panel-dashboard {
 		width: 100%;
     }
@@ -804,7 +819,6 @@
 	#logout{
 		display: none;
 	}
-	
     .panel-menu-con{
         display: flex;
     }
@@ -1263,10 +1277,12 @@
 
 
 	/* profile */
-	.profile-detail form p:nth-child(2){
+	.profile-detail form p{
 		width: 100%;
 	}
-	.profile-detail form p:nth-child(3){
+
+
+	.response-con div.r-name div, .response-con div.r-email div, .response-con div.r-title div, .response-con div.r-message div, .response-con div.r-response div {
 		width: 100%;
 	}
 }
