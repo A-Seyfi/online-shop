@@ -14,6 +14,10 @@
 
                             {#{{ register_form }}#}
 
+
+                            {{ register_form.phone_number.label_tag }}
+                            {{ register_form.phone_number }}
+                            {{ register_form.phone_number.errors }}
                             {{ register_form.email.label_tag }}
                             {{ register_form.email }}
                             {{ register_form.email.errors }}

@@ -94,6 +94,7 @@ class MyShopping(ListView):
 def user_panel_menu_component(request: HttpRequest):
     return render(request, 'user_panel_module/components/user_panel_menu_component.html')
 
+
 @login_required
 def contact_response(request):
     responses = ContactUs.objects.filter(phone_number=request.user.phone_number)
@@ -123,6 +124,12 @@ def user_basket(request: HttpRequest):
     }
     
     return render(request, 'user_panel_module/user_basket.html', context)
+
+
+def remove_basket(request):
+    order = get_object_or_404(Order, user=request.user)
+    order.delete()
+    return redirect('user_basket_page')
 
 
 @login_required

@@ -8,6 +8,7 @@ class User(AbstractUser):
     phone_number = models.IntegerField(null=True, blank=True, verbose_name='شماره تلفن')
     address = models.TextField(null=True, blank=True, verbose_name='آدرس')
     post_code = models.CharField(null=True, blank=True, max_length=10, verbose_name='کد پستی')
+    reset_code = models.CharField(null=True, blank=True, max_length=100, verbose_name='کد بازیابی کلمه عبور')
 
     class Meta:
         verbose_name = 'کاربر'

@@ -12,3 +12,7 @@ typing-extensions
 django_widget_tweeks
 fuzzywuzzy 
 python-Levenshtein
+zeep
+aiohttp
+asyncio
+melipayamak

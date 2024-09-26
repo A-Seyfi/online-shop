@@ -12,6 +12,13 @@ class RegisterForm(forms.Form):
             validators.EmailValidator,
         ]
     )
+    phone_number = forms.CharField(
+        label='شماره تلفن',
+        widget=forms.NumberInput(),
+        validators=[
+            validators.MaxLengthValidator(11),
+        ]
+    )
     password = forms.CharField(
         label='کلمه عبور',
         widget=forms.PasswordInput(),
@@ -55,13 +62,16 @@ class LoginForm(forms.Form):
     )
 
 
+class ActivationCodeForm(forms.Form):
+    activation_code = forms.CharField(label='کد فعال‌سازی', max_length=72)
+
+
 class ForgotPasswordForm(forms.Form):
-    email = forms.EmailField(
-        label='ایمیل',
-        widget=forms.EmailInput(),
+    phone_number = forms.CharField(
+        label='شماره تلفن',
+        widget=forms.NumberInput(),
         validators=[
-            validators.MaxLengthValidator(100),
-            validators.EmailValidator
+            validators.MaxLengthValidator(11),
         ]
     )
 
