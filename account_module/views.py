@@ -5,7 +5,7 @@ from .models import User
 from django.utils.crypto import get_random_string
 from django.http import Http404, HttpRequest
 from django.contrib.auth import login, logout
-from utils.email_service import send_email
+from utils.sms_service import send_sms
 
 from account_module.forms import RegisterForm, LoginForm, ForgotPasswordForm, ResetPasswordForm
 
@@ -24,6 +24,7 @@ class RegisterView(View):
         if register_form.is_valid():
             user_email = register_form.cleaned_data.get('email')
             user_password = register_form.cleaned_data.get('password')
+            user_phone = register_form.cleaned_data.get('phone_number')
             user: bool = User.objects.filter(email__iexact=user_email).exists()
             if user:
                 register_form.add_error('email', 'ایمیل وارد شده تکراری می باشد')
@@ -31,23 +32,31 @@ class RegisterView(View):
                 new_user = User(
                     email=user_email,
                     email_active_code=get_random_string(72),
-                    is_active=False,
-                    username=user_email)
+                    is_active=True,
+                    username=user_email,
+                    phone_number=user_phone,
+                )
                 new_user.set_password(user_password)
                 new_user.save()
-                send_email('فعالسازی حساب کاربری', new_user.email, {'user': new_user}, 'emails/activate_account.html')
+
+                # activation_code = new_user.email_active_code
+                # send_sms(str(user_phone), str(activation_code), int(252794))
+
                 return redirect(reverse('login_page'))
 
         context = {
             'register_form': register_form
         }
-
         return render(request, 'account_module/register.html', context)
 
 
 class ActivateAccountView(View):
-    def get(self, request, email_active_code):
-        user: User = User.objects.filter(email_active_code__iexact=email_active_code).first()
+    def get(self, request):
+        return render(request, 'account_module/activate_account.html')
+
+    def post(self, request):
+        activation_code = request.POST.get('activation_code')
+        user: User = User.objects.filter(email_active_code__iexact=activation_code).first()
         if user is not None:
             if not user.is_active:
                 user.is_active = True
@@ -66,7 +75,6 @@ class LoginView(View):
         context = {
             'login_form': login_form
         }
-
         return render(request, 'account_module/login.html', context)
 
     def post(self, request: HttpRequest):
@@ -91,7 +99,6 @@ class LoginView(View):
         context = {
             'login_form': login_form
         }
-
         return render(request, 'account_module/login.html', context)
 
 
@@ -104,39 +111,41 @@ class ForgetPasswordView(View):
     def post(self, request: HttpRequest):
         forget_pass_form = ForgotPasswordForm(request.POST)
         if forget_pass_form.is_valid():
-            user_email = forget_pass_form.cleaned_data.get('email')
-            user: User = User.objects.filter(email__iexact=user_email).first()
+            user_phone = forget_pass_form.cleaned_data.get('phone_number')
+            user: User = User.objects.filter(phone_number__iexact=user_phone).first()
             if user is not None:
-                send_email('بازیابی کلمه عبور', user.email, {'user': user}, 'emails/forgot_password.html')
-                return redirect(reverse('home_page'))
+                reset_code = get_random_string(6, allowed_chars='0123456789')
+                send_sms(str(user_phone), str(reset_code), int(252794))
+
+                user.reset_code = reset_code
+                user.save()
+
+                return redirect(reverse('reset_password_page'))
 
         context = {'forget_pass_form': forget_pass_form}
         return render(request, 'account_module/forgot_password.html', context)
 
 
 class ResetPasswordView(View):
-    def get(self, request: HttpRequest, active_code):
-        user: User = User.objects.filter(email_active_code__iexact=active_code).first()
-        if user is None:
-            return redirect(reverse('login_page'))
-
+    def get(self, request: HttpRequest):
         reset_pass_form = ResetPasswordForm()
-
         context = {
             'reset_pass_form': reset_pass_form,
-            'user': user
         }
         return render(request, 'account_module/reset_password.html', context)
 
-    def post(self, request: HttpRequest, active_code):
+    def post(self, request: HttpRequest):
         reset_pass_form = ResetPasswordForm(request.POST)
-        user: User = User.objects.filter(email_active_code__iexact=active_code).first()
+        reset_code = request.POST.get('reset_code')
+        user: User = User.objects.filter(reset_code__iexact=reset_code).first()
+
         if reset_pass_form.is_valid():
             if user is None:
                 return redirect(reverse('login_page'))
+
             user_new_pass = reset_pass_form.cleaned_data.get('password')
             user.set_password(user_new_pass)
-            user.email_active_code = get_random_string(72)
+            user.reset_code = get_random_string(72)
             user.is_active = True
             user.save()
             return redirect(reverse('login_page'))

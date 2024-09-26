@@ -208,7 +208,6 @@ def fuzzy_search(query, threshold=15):
     product_scores.sort(key=lambda x: x[1], reverse=True)
     sorted_products = [product for product, score in product_scores]
 
-    print(filtered_products)
     return sorted_products
 
 
