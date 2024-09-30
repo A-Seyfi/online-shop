@@ -26,7 +26,6 @@ INSTALLED_APPS = [
     'product_module',
     'contact_module',
     'site_module',
-    'article_module',
     'user_panel_module',
     'order_module',
     'polls',
