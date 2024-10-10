@@ -9,10 +9,11 @@ sorl-thumbnail
 sqlparse
 requests
 typing-extensions
-django_widget_tweeks
+django_widget_tweaks
 fuzzywuzzy 
 python-Levenshtein
 zeep
 aiohttp
 asyncio
-melipayamak
+mymelipayamak
+melipayamakwebservice
