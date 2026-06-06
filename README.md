@@ -104,30 +104,30 @@ Add products to your cart with selected variants, review your order, and proceed
 
 ```
 online-shop/
-├── eshop_project/          # Main project configuration
-│   ├── settings.py         # Django settings
-│   ├── urls.py             # URL routing
-│   ├── wsgi.py             # WSGI configuration
-│   └── asgi.py             # ASGI configuration
+├── eshop_project/
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+│   └── asgi.py
 │
-├── account_module/         # User authentication and profiles
-├── product_module/         # Product catalog and management
-├── order_module/           # Order processing
-├── user_panel_module/      # User dashboard
-├── home_module/            # Homepage and site navigation
-├── contact_module/         # Contact and messaging
-├── site_module/            # Site-wide settings
-├── polls/                  # Polling functionality
+├── account_module/
+├── product_module/
+├── order_module/
+├── user_panel_module/
+├── home_module/
+├── contact_module/
+├── site_module/
+├── polls/
 │
-├── templates/              # HTML templates
-│   ├── emails/             # Email templates
-│   └── shared/             # Shared template components
+├── templates/
+│   ├── emails/
+│   └── shared/
 │
-├── static/                 # CSS, JavaScript, and images
-├── uploads/                # User-uploaded media
-├── db.sqlite3              # Database file
-├── manage.py               # Django CLI
-└── req.txt                 # Python dependencies
+├── static/
+├── uploads/
+├── db.sqlite3
+├── manage.py
+└── req.txt
 ```
 
 ## Configuration
