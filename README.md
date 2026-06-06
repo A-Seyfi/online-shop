@@ -153,27 +153,6 @@ Key models in the application:
 - **Favorite:** User's saved products
 - **ProductVisit:** Analytics tracking
 
-## Contributing
-
-Contributions are welcome! To get started:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/your-feature`)
-3. Make your changes
-4. Commit with clear messages (`git commit -m 'Add feature: ...'`)
-5. Push to your branch (`git push origin feature/your-feature`)
-6. Open a pull request
-
-When contributing, please follow Django best practices and ensure backward compatibility with existing modules.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-## Support
-
-For issues, questions, or suggestions, please open an issue on the GitHub repository.
-
 ---
 
 **Last Updated:** October 2024
